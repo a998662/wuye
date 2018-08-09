@@ -1,0 +1,161 @@
+<!DOCTYPE html><!--[if IE 9]>
+<html class="ie9 no-focus" lang="en"> <![endif]--><!--[if gt IE 9]><!-->
+<html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+	{include file="meta"/}
+</head>
+<body>
+<!-- Page Container -->
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+	<!-- Sidebar -->
+	{include file="sidebar"/}
+	<!-- END Sidebar -->
+
+	<!-- Header -->
+	{include file="header"/}
+	<!-- END Header -->
+
+	<!-- Main Container -->
+	<main id="main-container" style="min-height: 304px;">
+		<div class="bg-gray-lighter">
+			<ol class="breadcrumb">
+				{$breadcrumb|raw}
+			</ol>
+		</div>
+		<!-- END Page Header -->
+
+		<!-- Page Content -->
+		<div class="content animated">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="block">
+						<div class="block-header bg-gray-lighter">
+							<ul class="block-options">
+								<li>
+									<button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo">
+										<i class="si si-refresh"></i></button>
+								</li>
+								<li>
+									<button type="button" data-toggle="block-option" data-action="fullscreen_toggle">
+										<i class="si si-size-fullscreen"></i></button>
+								</li>
+							</ul>
+							<h3 class="block-title">采集设置</h3>
+						</div>
+						<div class="block-content tab-content">
+							<div class="tab-pane active">
+								<div class="row data-table-toolbar">
+									<div class="col-sm-12">
+									<form class="form-horizontal" action="" method="post">
+										<table class="table table-builder" style="width: auto">
+											<tr>
+												<td width="80px">
+													节点名称
+												</td>
+												<td width="300px">
+													<input class="form-control form-control1" value="{$info.name}" type="text" disabled>
+												</td>
+												<td width="80px">
+													所属栏目
+												</td>
+												<td width="300px">
+													<input class="form-control form-control1" value="{:getValue('category',['id'=>$info.cid],'name')}" type="text" disabled>
+												</td>
+											</tr>
+											<tr>
+												<td width="80px">
+													列表页URL
+												</td>
+												<td colspan="3" width="680px">
+													<input class="form-control form-control1" name="list_url" value="{$info.list_url}" type="text" >
+												</td>
+											</tr>
+											<tr>
+												<td width="80px">
+													开始页码
+												</td>
+												<td width="300px">
+													<input class="form-control form-control1 start_page" value="{:input('start_page')}" type="text" name="start_page" >
+												</td>
+												<td width="80px">
+													结束页码
+												</td>
+												<td width="300px">
+													<input class="form-control form-control1 end_page" value="{:input('end_page')}" type="text" name="end_page" >
+												</td>
+											</tr>
+										</table>
+									</form>
+									</div>
+									<div class="col-sm-12">
+										<div class="toolbar-btn-action">
+											<a title="采集" class="btn btn-primary" onclick="on_start()"><i class="fa fa-plus-circle"></i> 采集</a>
+											<a title="采集记录" class="btn btn-success" href="{:url('/results/index',['id'=>input('id'),'cid'=>$info['cid']])}"><i class="fa fa-fw fa-list"></i> 采集记录</a>
+											<a title="节点列表" class="btn btn-warning" href="{:url('/collect/index')}"><i class="fa fa-fw fa-list"></i> 节点列表</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="block">
+						<div class="block-header bg-gray-lighter">
+							<ul class="block-options">
+								<li>
+									<button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo">
+										<i class="si si-refresh"></i></button>
+								</li>
+								<li>
+									<button type="button" data-toggle="block-option" data-action="fullscreen_toggle">
+										<i class="si si-size-fullscreen"></i></button>
+								</li>
+							</ul>
+							<h3 class="block-title">采集结果</h3>
+						</div>
+						<div class="block-content tab-content">
+							<div class="tab-pane active">
+								<div class="row data-table-toolbar">
+									<div class="col-sm-12" id="msg">
+										页码设置成功后按采集进行采集~
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END Page Content -->
+	</main>
+	<!-- END Main Container -->
+	<!-- Footer -->
+    <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix">
+        <div class="pull-right">
+            Crafted with <i class="fa fa-heart text-city"></i> by <a class="font-w600" href="//97langren.com" target="_blank">97langren.com</a>
+        </div>
+        <div class="pull-left">
+            <a class="font-w600" href="//97langren.com" target="_blank">OneUI 3.1</a> &copy; <span class="js-year-copy"></span>
+        </div>
+    </footer>
+	<!-- END Footer -->
+</div>
+<!-- END Page Container -->
+
+{include file="footer"/}
+
+<script src="/static/js/plugins/bootstrap3-editable/js/bootstrap-editable.js"></script>
+<script src="/admin/js/table.js"></script>
+
+<script>
+	function on_start(){
+		$.post('/collect/getres',function(res){
+			if(res.code){
+				var start_page = $('.start_page').val();
+				var end_page = $('.end_page').val();
+				$('.form-horizontal').submit();
+			}
+		})
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html class="ie9 no-focus" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+    {include file="meta"/}
+    <link rel="stylesheet" href="/static/js/plugins/magnific-popup/magnific-popup.min.css">
+
+
+</head>
+<body>
+<!-- Page Container -->
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+    <!-- Sidebar -->
+    {include file="sidebar"/}
+    <!-- END Sidebar -->
+
+    <!-- Header -->
+    {include file="header"/}
+    <!-- END Header -->
+
+    <!-- Main Container -->
+    <main id="main-container" style="min-height: 304px;">
+
+        <!-- Page Content -->
+        <div class="content">
+            <div class="row" style="padding: 0 15px 20px">
+                <iframe style="background: #fff" allowtransparency="true" frameborder="0" width="100%" height="98" scrolling="no" src="//tianqi.2345.com/plugin/widget/index.htm?s=2&z=1&t=1&v=0&d=5&bd=0&k=&f=808080&ltf=009944&htf=cc0000&q=1&e=1&a=1&c=54511&w=875&h=98&align=center"></iframe>
+            </div>
+
+            <div class="row">
+                {if $count}
+                {foreach $count as $v}
+                <div class="col-sm-6 col-md-2">
+                    <a class="block block-link-hover3 text-center" href="">
+                        <div class="block-content block-content-full">
+                            <div class="h1 font-w700 text-primary" data-toggle="countTo" data-to="{$v.total}">{$v.total}</div>
+                        </div>
+                        <div class="block-content block-content-full block-content-mini bg-gray-lighter text-muted font-w600">{$v.name}</div>
+                    </a>
+                </div>
+                {/foreach}
+                {/if}
+            </div>
+            <!-- Dashboard Charts -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block block-rounded block-opt-refresh-icon8">
+                        <div class="block-header">
+                            <ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">用户注册对比</h3>
+                        </div>
+                        <div class="block-content block-content-full bg-gray-lighter text-center">
+                            <!-- Chart.js Charts (initialized in js/pages/week_user_reg_count.js), for more examples you can check out http://www.chartjs.org/docs/ -->
+                            <div style="height: 340px;"><canvas class="js-dash-chartjs-earnings"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+    <!-- Footer -->
+    <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix">
+        <div class="pull-right">
+            Crafted with <i class="fa fa-heart text-city"></i> by
+            <a class="font-w600" href="//97langren.com" target="_blank">97langren.com</a>
+        </div>
+        <div class="pull-left">
+            <a class="font-w600" href="//97langren.com" target="_blank">OneUI 3.1</a> &copy;
+            <span class="js-year-copy"></span>
+        </div>
+    </footer>
+    <!-- END Footer -->
+</div>
+<!-- END Page Container -->
+
+{include file="footer"/}
+
+<script>
+    jQuery(function () {
+        // Init page helpers (Appear + CountTo + Magnific Popup plugins)
+        App.initHelpers(['appear', 'appear-countTo', 'magnific-popup']);
+
+    });
+    var thisWeek = {$thisWeek};
+    var lastWeek = {$lastWeek};
+</script>
+
+<script src="/static/js/plugins/chartjs/Chart.min.js"></script>
+<script src="/admin/js/week_user_reg_count.js"></script>
+</body>
+</html>

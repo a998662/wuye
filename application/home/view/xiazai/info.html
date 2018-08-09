@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {include file="meta"/}
+    <script>var id = '{$id}', alias = '{$alias}';</script>
+</head>
+<body><!--百度熊掌号改造-->
+{include file="header"/}
+<div class="container main">
+    <div class="row">
+        <div class="col-md-9 col-sm-12 hy-main-content">
+            <div class="hy-video-details clearfix">
+                <div class="item clearfix">
+                    <dl class="content">
+                        <dt>
+                            <a class="videopic lazy" href="javascript:;" title="{$title}" style="background: url({$thumb})  no-repeat; background-position:50% 50%; background-size: cover;" data-original="{$thumb}">
+                                </span><span class="note textbg">{$tags}</span>
+                            </a>
+                        </dt>
+                        <dd class="clearfix">
+                            <div class="head"><h3>{$title}</h3></div>
+                            <div class="score">
+                                <div class="star"><span class="star-cur" id="score"></span></div>
+                                <span class="branch">{:number_format($score,1)}</span>
+                                <script type="text/javascript">
+                                    var str                                      = "{:number_format($score,1)}%"
+                                    document.getElementById("score").style.width = (str.replace(".", ""))
+                                </script>
+                            </div>
+                            <ul>
+                                <li class="">
+                                    <span class="text-muted">类型：</span><a href="/{$alias}/list-{$tags}}.html" title="{$tags}">{$tags}</a>
+                                </li>
+                                <li class=""><span class="text-muted">时间：</span>{:date('Y-m-d H:i:s',$insert_time)}</li>
+                                <li class="pull-bottom">
+                                    <a class="btn btn-sm btn-default clickGood" href="javascript:;">
+                                        <i class="icon iconfont icon-agree"></i> 点赞
+                                    </a>
+                                    <a class="btn btn-sm btn-default addFav {$active}" href="javascript:;"> <i class="icon iconfont icon-collection"></i> 收藏</a>
+                                    <a class="btn btn-sm btn-default btn-share" href="javascript:;"> <i class="icon iconfont icon-share"></i> 分享</a>
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+            </div><!-- 内容相关提示begin -->
+
+            <div class="hy-layout active clearfix">
+                <div class="hy-switch-tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#list1" data-toggle="tab" title="影片下载"><i class="icon iconfont icon-download"></i> 影片下载</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="hy-play-list tab-pane fade in active" id="list1">
+                        <div class="item" id="downlist">
+                            <div class="panel">
+                                <div id="downlist1" class="downlist collapse in">
+                                    <span class="down-help">
+                                        <a href="/help/ios.html" target="_top">【苹果手机教程】</a>
+                                        <a href="/help/anzuo.html" target="_top">【安卓手机教程】</a>
+                                        <a href="/help/pc.html" target="_top">【电脑版教程】</a>
+                                    </span>
+                                    <table class="table">
+                                        <tbody>
+                                        <tr class="app_hide">
+                                            <td width="75%">
+                                                <script src="/home/js/clipboard.min.js"></script>
+                                                <input type="text" data-clipboard-text="{:str_replace('http://666.maomixia666.com:888','http://down.maomixia.com:888',$down_url)}" id="lin1k0" class="form-control input-sm copy_btn" value="{:str_replace('http://666.maomixia666.com:888','http://down.maomixia.com:888',$down_url)}">
+                                            </td>
+                                            <td width="25%" align="right">
+                                                <a href="{:str_replace('http://666.maomixia666.com:888','http://down.maomixia.com:888',$down_url)}" class="btn btn-sm btn-default downlink_btn">普通下载</a> &nbsp
+                                                <a href="{:Thunder($down_url)}" class="btn btn-sm btn-default hidden-xs" title="迅雷影音" target="_self">迅雷影音</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="75%">
+                                                <script src="/home/js/clipboard.min.js"></script>
+                                                <input type="text" data-clipboard-text="{:Thunder($down_url)}" id="lin1k1" class="form-control input-sm copy_btn app_disable" value="{:Thunder($down_url)}">
+                                            </td>
+                                            <td width="25%" align="right">
+                                                <a href="{:Thunder($down_url)}" class="btn btn-sm btn-default downlink_btn">迅雷下载</a> &nbsp;
+                                                <a href="{:Thunder($down_url)}" class="btn btn-sm btn-default hidden-xs" title="迅雷影音" target="_self">迅雷影音</a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--相关-->
+
+            <div class="hy-layout clearfix">
+                <div class="hy-video-head"><h3 class="margin-0"><i class="icon iconfont icon-comment text-color"></i>影片评论</h3></div>
+                <div id="comment_list"></div>
+            </div><!--end 评论-->
+        </div>
+        {include file="right"/}
+    </div>
+</div>
+</div>
+<script>
+    var vid = {$id};
+    $(function () {
+        $.post(api_host+'/api/comments',{id:vid},function (res) {
+            $('#comment_list').html(res);
+        })
+    })
+    $('#comment_list .hy-page a').click(function () {
+        var link = $(this).attr('href');
+        $.post(link,{id:vid},function (res) {
+            $('#comment_list').html(res);
+        })
+    })
+</script>
+
+{include file="footer" /}
+</body>
+</html>

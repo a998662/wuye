@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html class="ie9 no-focus" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+
+<html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+    <link rel="stylesheet" href="/static/js/plugins/jquery-tags-input/jquery.tagsinput.css">
+    {include file="meta"/}
+    <style>
+        .col-md-7 label {
+            font-weight: 200;
+            margin-right: 10px;
+            line-height: 20px;
+            margin-bottom: 0
+        }
+
+        .col-md-7 a {
+            font-weight: 200;
+            margin-right: 10px;
+            line-height: 20px;
+            margin-bottom: 0
+        }
+
+    </style>
+</head>
+<body>
+<!-- Page Container -->
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+    <!-- Sidebar -->
+    {include file="sidebar"/}
+    <!-- END Sidebar -->
+
+    <!-- Header -->
+    {include file="header"/}
+    <!-- END Header -->
+
+    <!-- Main Container -->
+    <main id="main-container" style="min-height: 310px;">
+        <!-- Page Header -->
+
+        <div class="bg-gray-lighter">
+            <ol class="breadcrumb">
+                {$breadcrumb|raw}
+            </ol>
+        </div>
+
+        <!-- END Page Header -->
+
+        <!-- Page Content -->
+        <div class="content animated">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <div class="block-header bg-gray-lighter">
+                            <ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo">
+                                        <i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="fullscreen_toggle">
+                                        <i class="si si-size-fullscreen"></i></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">{$action == 'add' ? '添加消息' : '编辑消息'}</h3>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <div class="block-content">
+                                    <form class="form-horizontal form-builder row" action="" name="form-builder" method="post">
+                                        <input value="{$id}" type="hidden" name="id" id="id">
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" for="title">发送人<span class="text-danger"></span></label>
+                                            <div class="col-md-8">
+                                                <div class="input-group" style="width: 100%">
+                                                    <table width="100%" data-index="index2">
+                                                        <tr>
+                                                            <td width="80px">
+                                                                <span class="input-group-btn conditoin-btn">
+                                                                    <button class="btn btn-default btn-sm" type="button">
+                                                                        <label style="margin: 2.5px 0 2px;" class="css-input css-radio css-radio-primary css-radio-sm">
+                                                                            <input {if $username}checked{/if} type="radio" class="condition index1" name="condition" /><span></span> 用 户 名
+                                                                        </label>
+                                                                    </button>
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <input class="js-tags-input form-control form-control1" type="text" id="tags" placeholder="请输入用户名，多名用户请敲击回车键再添加" name="username" value="{$username}" data-default="请输入用户名，多名用户请敲击回车键再添加">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+
+                                                <div class="input-group" style="margin-top: 5px">
+                                                    <table data-index="index1">
+                                                        <tr>
+                                                            <td>
+                                                                <span class="input-group-btn conditoin-btn">
+                                                                    <button class="btn btn-default btn-sm" type="button"><label style="margin: 2.5px 0 2px;" class="css-input css-radio css-radio-primary css-radio-sm">
+                                                                        <input {if !$username && $id}checked{/if} class="condition index2" name="condition" type="radio" /><span></span> 注册时间
+                                                                    </label></button>
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <input class="form-control input-text Wdate laydate-icon" type="text" id="s_date" name="s_date" value="{$s_date}" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'});$(this).parent().parent().parent().click()">
+                                                            </td>
+                                                            <td>-</td>
+                                                            <td>
+                                                                <input class="form-control input-text Wdate laydate-icon" type="text" id="e_date" name="e_date" value="{$e_date}" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'});$(this).parent().parent().parent().click()">
+                                                            </td>
+                                                            <td style="padding-left: 5px;">
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-default btn-sm" type="button"><label style="margin: 2.5px 0 2px;" class="css-input css-radio css-radio-primary css-radio-sm">
+                                                                        <span></span> 用户组
+                                                                    </label></button>
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <div style="border: 1px solid #e6e6e6;padding-left: 5px;height: 34px">
+                                                                    <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                                                                        <input id="vip_level_-1" {if $vip_level == 0}checked{/if} type="radio" value="0" name="vip_level">
+                                                                        <span></span> 所有
+                                                                    </label>
+                                                                    <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                                                                        <input id="vip_level_0" {if $vip_level == 1}checked{/if} type="radio" value="1" name="vip_level">
+                                                                        <span></span> 非VIP
+                                                                    </label>
+                                                                    <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                                                                        <input id="vip_level_1" {if $vip_level == 2}checked{/if} type="radio" value="1" name="vip_level">
+                                                                        <span></span> VIP
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" for="title">消息标题
+                                                <span class="text-danger">*</span></label>
+                                            <div class="col-md-7">
+                                                <input class="form-control form-control1" value="{$title}" type="text" id="title" name="title" placeholder="请输入消息标题">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label ">消息内容
+                                                <span class="text-danger">*</span></label>
+                                            <div class="col-md-10">
+                                                <textarea id="editor" style="width:100%;height:400px;">{$content}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-7 col-md-offset-1">
+                                                <button class="btn btn-primary submit" data-href="{:url('/messages/'.$action)}" type="submit">保存草稿</button>
+                                                <button class="btn btn-primary submit" data-href="{:url('/messages/sendDirect',['id'=>$info['id']])}" type="submit">发送消息</button>
+                                                <button class="btn btn-danger submit" type="reset">取消</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+    <!-- Footer -->
+    <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix">
+        <div class="pull-right">
+            Crafted with <i class="fa fa-heart text-city"></i> by
+            <a class="font-w600" href="//97langren.com" target="_blank">97langren.com</a>
+        </div>
+        <div class="pull-left">
+            <a class="font-w600" href="//97langren.com" target="_blank">OneUI 3.1</a> &copy;
+            <span class="js-year-copy"></span>
+        </div>
+    </footer>
+    <!-- END Footer -->
+</div>
+<!-- END Page Container -->
+<script>
+    tagsDefaultText = '请输入用户名，多名用户请敲击回车键再添加';
+</script>
+{include file="footer"/}
+<script type="text/javascript" src="/static/js/plugins/jquery-tags-input/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/uploadify/api-uploadify.js"></script>
+<script type="text/javascript" src="/static/js/plugins/ueditor/1.4.3/umeditor.config.js"></script>
+<script type="text/javascript" src="/static/js/plugins/ueditor/1.4.3/ueditor.all.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="/static/js/plugins/layer/laydate/laydate.js"></script>
+<script type="application/javascript">
+    /***实例化ueditor*/
+    var ue = UE.getEditor('editor');
+    jQuery(function () {
+        App.initHelpers(["tags-inputs", 'ckeditor-inline']);
+    });
+
+    var rules = {
+        title      : {
+            required: true
+        },
+        editorValue: {
+            required: true
+        },
+    };
+    var messages = {
+        title      : {
+            required: "消息标题不能为空"
+        },
+        editorValue: {
+            required: "消息标题不能为空"
+        },
+    };
+
+    formCheck(rules, messages);
+    var prevUrl = '{$prevUrl}';
+    var action = '';
+    function sub() {
+        /*var form = $('.form-horizontal');
+        var form_data = form.serialize();*/
+        var data = {};
+        data['id']=$('#id').val();
+        data['username']=$('#username').val();
+        data['s_date']=$('#s_date').val();
+        data['e_date']=$('#e_date').val();
+        data['vip_level'] =$("input[name='vip_level']:checked").val();
+        data['title']=$('#title').val();
+        data['editorValue']=ue.getContent();
+
+        //console.log(action);return;
+        pageLoader();
+        jQuery.post(action,{data:data,prevUrl:prevUrl} ).success(function (res) {
+            pageLoader('hide');
+            var msg = res.msg;
+            console.log(res);
+            if (res.code) {
+                if (res.url) {
+                    msg += "， 页面即将自动跳转~";
+                }
+                tips(msg, 'success');
+                setTimeout(function () {
+                    return res.url ? location.href = res.url : '';
+                }, 4000);
+            } else {
+                console.log(res);
+                tips(msg, 'danger');
+            }
+        }).fail(function () {
+            pageLoader('hide');
+            tips('服务器发生错误~', 'danger');
+            self.attr("autocomplete", "on").prop("disabled", false);
+        });
+    }
+
+    /**
+     * 获取表单提交操作url
+     */
+    $('button[type=submit]').click(function () {
+        action = $(this).data('href');
+    })
+
+    /**
+     * 优化条件选择体验
+     */
+    $('.input-group table').click(function () {
+        var index = $(this).data('index');
+        $('.input-group table').removeClass('checked');
+        $(this).addClass('checked');
+        $('.input-group table input.'+index).attr('checked',false);
+        $('.checked').find('.condition').attr('checked',true);
+        var btn = $(this).find('.conditoin-btn').html();
+        $(this).find('.conditoin-btn').html(btn);
+    })
+/*
+
+    $('#tags_tagsinput').css({
+        'padding'      : '4px 12px 1px',
+        'border-color' : '#e6e6e6',
+        'border-radius': '0',
+        'min-height'   : '34px',
+        'height'       : '34px'
+    })
+*/
+
+</script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+    <link href="/home/favicon.ico" type="image/x-icon" rel="icon">
+    <link href="/home/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <!--[if lt IE 9]>
+    <script src="https://10rrbb.com/home/js/html5shiv.min.js"></script>
+    <script src="https://10rrbb.com/home/js/respond.min.js"></script><![endif]-->
+    <link href="/home/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/home/css/swiper.min.css" rel="stylesheet" type="text/css">
+    <link href="/home/css/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link href="/home/css/color.css" rel="stylesheet" type="text/css"/>
+    <link href="/home/css/style.min.css" rel="stylesheet" type="text/css"/>
+    <script src="/home/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/home/js/bootstrap.min.js"></script>
+    <!--<script src="/home/js/function.js"></script>-->
+    <script type='text/javascript' src="/home/js/LazyLoad.js"></script>
+    <script type='text/javascript' src="/home/js/swiper.min.js"></script>
+    <script type="text/javascript " src="/home/js/history.js "></script>
+    <?php if($action == 'detail' || $action == 'play')$tit = '-'.config('web_site_title'); ?>
+    <title>搜索页-狼人AV</title>
+    <meta name="keywords" content="{$keywords}{$tit}"/>
+    <meta name="description" content="{$description}{$tit}"/>
+    <script src="/home/js/config.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122332414-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-122332414-1');
+    </script>
+
+
+    <!-- Default Statcounter code for langren http://97langren.com -->
+    <script type="text/javascript">
+        var sc_project=11761535;
+        var sc_invisible=1;
+        var sc_security="eafc0300";
+        var sc_https=1;
+    </script>
+    <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+    <!-- End of Statcounter Code -->
+
+    <!-- Histats.com  START  (aync)-->
+    <script type="text/javascript">var _Hasync = _Hasync || [];
+    _Hasync.push(['Histats.start', '1,4103940,4,0,0,0,00010000']);
+    _Hasync.push(['Histats.fasi', '1']);
+    _Hasync.push(['Histats.track_hits', '']);
+    (function () {
+        var hs   = document.createElement('script');
+        hs.type  = 'text/javascript';
+        hs.async = true;
+        hs.src   = ('//s10.histats.com/js15_as.js');
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+    })();</script>
+    <noscript>
+        <a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?4103940&101" alt="free webpage hit counter" border="0"></a>
+    </noscript>
+    <!-- Histats.com  END  -->
+</head>
+<body><!--百度熊掌号改造-->
+{include file="header"/}
+<div class="container main">
+    <div class="row">
+        <div class="hy-layout clearfix">
+            <div class="hy-switch-tabs active clearfix">
+                <span class="text-muted pull-right hidden-xs">
+                    共有<span class="text-color num-total"></span>条数据,当前第<span class="text-color page-info"></span>页
+                </span>
+                <ul class="nav nav-tabs page-list page-order">
+                    <li class=" active">
+                        <a href="javascript:;" title="按时间">按时间</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="hy-video-list">
+                <div class="item">
+                    <ul class="clearfix ">
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hy-page clearfix page-tmp">
+                <p style="text-align: center;font-size: 20px">正在加载...</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var w = document.documentElement ? document.documentElement.clientWidth : document.body.clientWidth;
+    if (w > 640) {
+        $(".collapse").addClass("in");
+    }
+
+    function paginate(link) {
+        link     = link.replace('//', '');
+        var arr  = link.split('/');
+        var href = '/' + arr[1];
+        $.get(api_host + href, {active: 1}, function (res) {
+            var data = res.list;
+            var list = data.data;
+            $('.num-total').html("“" + data.total + "”")
+            $('.page-info').html("“" + data.current_page + "/" + data.last_page + "”")
+            if (data.total) {
+                $('.page-tmp').html(res.page)
+            }else{
+                $('.page-tmp').html('<p style="text-align: center;font-size: 20px">没有找到你想要的内容，请试试其他关键词...</p>')
+                return;
+            }
+
+            var tmp = '';
+            $('.hy-video-list ul').html('');
+            for (var i in list) {
+                tmp = '<li class="col-md-2 col-sm-3 col-xs-4">' +
+                      '<a class="videopic lazy" href="/' + list[i].channel + '/' + list[i].id + '.html" title="" data-original="' + list[i].thumb + '" style="background: url(' +img_host+ list[i].thumb + ') no-repeat; background-position:50% 50%; background-size: cover;">' +
+                      '<span class="play hidden-xs"></span><span class="score">' + list[i].score + '</span><span class="note textbg">' + list[i].name + '</span>' +
+                      '</a>' +
+                      '<div class="title">' +
+                      '<h5 class="text-overflow" title=""><a href="/' + list[i].channel + '/' + list[i].id + '.html">' + list[i].title + '</a></h5>' +
+                      '</div>' +
+                      '</li>';
+                $('.hy-video-list ul').append(tmp);
+            }
+        },'json')
+    }
+
+    $(function () {
+        var link = window.location.href;
+        paginate(link);
+    })
+
+</script>
+{include file="footer" /}
+</body>
+</html>

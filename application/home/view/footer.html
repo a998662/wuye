@@ -1,0 +1,103 @@
+<script>
+    var swiper = new Swiper('.hy-slide', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        autoplay: 3000,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+    });
+</script>
+<div class="hy-gototop hidden-sm hidden-xs">
+    <ul class="item clearfix">
+        <li><a href="/user/info.html" title="会员中心"><i class="icon iconfont icon-member1"></i></a></li>
+        <!--<li><a href="javascript:()" title="观看记录"><i class="icon iconfont icon-record1"></i></a>
+            <div class="history clearfix">
+                <div class="head"><h5 class="margin-0 text-muted">观看历史</h5></div>
+                <script type="text/javascript ">
+                    $MH.limit = 10;
+                    $MH.WriteHistoryBox(200, 170, 'font');
+                    $MH.recordHistory({
+                        name: '{playpage:name}',
+                        link: '{playpage:url}',
+                        pic: '{playpage:pic}'
+                    })
+                </script>
+            </div>
+        </li>-->
+        <li><a href="javascript:;" title="二维码"><i class="icon iconfont icon-code1"></i></a>
+            <div class="code clearfix">
+                <p class="margin-0">
+                    <img class="pic-responsive" width="150px" src="/erweima.png" alt="扫描二维码"/>
+                </p>
+            </div>
+        </li>
+        <li><a href="javascript:scroll(0,0)" title="返回顶部"><i class="icon iconfont icon-uparrow"></i></a></li>
+    </ul>
+</div>
+<div class="tabbar visible-xs">
+    <a target="_self" href="/" class="item {$alias == 'index' ?= 'active'}"><i class="icon iconfont icon-home"></i>
+        <p class="text">首页</p></a>
+    <a target="_self" href="/shipin/list.html" class="item {$alias == 'shipin' ?= 'active'}"><i
+            class="icon iconfont icon-film"></i>
+        <p class="text">视频 </p></a>
+    <a target="_self" href="/xiazai/list.html" class="item {$alias == 'xiazai' ?= 'active'}"><i
+            class="icon iconfont icon-download"></i>
+        <p class="text">下载 </p></a>
+    <a target="_self" href="/tupian/list.html" class="item {$alias == 'tupian' ?= 'active'}"><i
+            class="icon iconfont icon-file"></i>
+        <p class="text">图片 </p></a>
+    <a target="_self" href="/meinv/list.html" class="item {$alias == 'meinv' ?= 'active'}"><i
+            class="icon iconfont icon-mallanimation"></i>
+        <p class="text">写真 </p></a>
+    <a target="_self" href="/xiaoshuo/list.html" class="item {$alias == 'xiaoshuo' ?= 'active'}"><i
+            class="icon iconfont icon-comment"></i>
+        <p class="text">小说 </p></a>
+    <a target="_self" href="/mp3/list.html" class="item {$alias == 'mp3' ?= 'active'}"><i
+            class="icon iconfont icon-ic_mymatch_ranking"></i>
+        <p class="text">声音 </p></a>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="hy-footer clearfix"><p class="text-muted hidden-sm">
+            本网站内容收集于互联网，不承担任何由于内容的合法性及健康性所引起的争议和法律责任。 欢迎大家对网站内容侵犯版权等不合法和不健康行为进行监督和举报。</p>
+            <p class="margin-0 text-muted">Copyright © 2018</p>
+            <!--<p class="visible-xs"><a class="text-muted" href="/gbook.php" title="留言求片">留言求片</a></p>--></div>
+    </div>
+</div>
+
+<script src="/home/js/shareNative_ec.js"></script>
+
+<div class="shareBlock"></div>
+<script type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/plugins/layer/mobile/layer.js"></script>
+<script type="text/javascript" language="javascript" src="/home/js/footfumeiti.js"></script>
+<script src="/home/js/ad.js"></script>
+
+<!-- Default Statcounter code for Langren.com
+http://langren.com -->
+<script type="text/javascript">
+    var sc_project = 11785342;
+    var sc_invisible = 1;
+    var sc_security = "dc099b28";
+    var sc_https = 1;
+</script>
+<script type="text/javascript"
+        src="https://www.statcounter.com/counter/counter.js"
+        async></script>
+<noscript>
+    <div class="statcounter"><a title="real time web analytics" href="http://statcounter.com/" target="_blank">
+        <img class="statcounter" src="//c.statcounter.com/11785342/0/dc099b28/1/" alt="realtime web analytics"></a>
+    </div>
+</noscript>
+<!-- End of Statcounter Code -->
+
+<!-- Begin Web-Stat code v 6.3 -->
+<span id="wts1781005">&nbsp;</span><script>
+    var wts=document.createElement('script');wts.type='text/javascript';
+    wts.async=true;wts.src='https://wts.one/4/1781005/log6_2.js';
+    document.getElementById('wts1781005').appendChild(wts);
+</script><noscript><a href="https://www.web-stat.com">
+    <img src="//wts.one/6/4/1781005.gif"
+         style="border:0px;" alt="Web-Stat web tracking"></a></noscript>
+<!-- End Web-Stat code v 6.3 -->

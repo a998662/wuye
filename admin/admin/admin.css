@@ -1,0 +1,268 @@
+#loading {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 9990;
+    background: rgba(255, 255, 255, 0.16)
+}
+
+#loading .loading-box {
+    background-color: rgba(0, 0, 0, 0.62);
+    z-index: 999999;
+    position: fixed;
+    padding: 10px;
+    border-radius: 4px;
+    margin-left: -50px;
+    margin-top: -24px;
+    color: #FFF;
+    left: 50%;
+    top: 50%
+}
+/*翻页*/
+.cleafix{margin:20px 0;text-align:center}
+.cleafix li{display:inline-block;padding:0;margin-left:10px}
+.cleafix li .num,.cleafix li a{display:inline-block;padding:8px 15px;border-radius:4px}
+.cleafix li a, .cleafix li .num {
+    border: 1px solid #999;
+    background-color: #f5f5f5;
+    color: #999;
+}
+.cleafix li a:hover, .cleafix li .active {
+    background-color: #09BB07;
+    color: #fff;
+}
+#loading
+i {
+    float: left;
+    margin-right: 5px
+}
+
+#loading .loding-text {
+    margin-top: 3px;
+    display: inline-block
+}
+
+/* 时间段搜索 */
+.toolbar-btn-action .time-filter {
+    display: inline-block;
+}
+.toolbar-btn-action .input-daterange {
+    width: 250px;
+}
+/* 表格 */
+.data-table-toolbar {
+    margin-bottom: 10px;
+}
+.table-hover > tbody > tr > td.active:hover,
+.table-hover > tbody > tr > th.active:hover,
+.table-hover > tbody > tr.active:hover > td,
+.table-hover > tbody > tr:hover > .active,
+.table-hover > tbody > tr.active:hover > th,
+.table-hover > tbody > tr:hover {
+    background-color: #FFFCEF;
+}
+.js-table-checkable tbody tr, .js-table-sections-header > tr {
+    cursor: default;
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th {
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px;
+    background-color: #f5fafe;
+    font-family: "Microsoft Yahei", "Source Sans Pro", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.table-builder .css-checkbox {
+    margin: 2px 0;
+}
+.table-builder .switch.switch-sm {
+    margin: 0;
+}
+.table-builder thead .fa {
+    padding-left: 5px;
+}
+.table-builder > tbody > tr > td {
+    vertical-align: middle;
+    padding: 8px;
+}
+.table-builder > tbody > tr > td .image {
+    height: 40px;
+}
+.css-checkbox input + span {
+    width: 16px;
+    height: 16px;
+}
+
+.css-checkbox input + span::after {
+    line-height: 16px;
+}
+.table-empty .empty-info{
+    background: #fff;
+    padding: 100px 0;
+    font-size: 20px;
+    color: #C7C7C7;
+}
+.data-table-toolbar{margin-bottom:10px}
+.search-bar{width:280px}
+/* 表单按钮 */
+.form-btn-parent {
+    margin-top: 22px;
+}
+.form-btn {
+    margin-bottom: 23px;
+}
+.col-md-12 > .form-btn-parent,
+.col-md-12 > .form-btn-parent > .form-btn{
+    margin: 0;
+}
+
+.breadcrumb {
+    padding:10px 14px;
+}
+
+@media screen and (min-width: 768px){
+    /* 面包屑导航 */
+    .breadcrumb {
+        padding: 10px 30px;
+    }
+}
+
+.form-control1, .form-control1 .select2-container--default .select2-selection, .form-control1 .input-group-addon {
+    border-radius: 0px;
+}
+
+
+.btn-group-sm>.btn, .btn-s {
+    padding: 4px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+.table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td{
+    font-size: 14px;
+}
+.table-builder > tbody > tr > td {
+    vertical-align: middle;
+    padding: 6px;
+}
+
+/* 图标选择 */
+.js-icon-picker .input-group-addon {
+    cursor: pointer;
+}
+#icon_search {
+    padding: 15px;
+}
+#icon_tab .nav-tabs {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0 15px;
+}
+#icon_tab i {
+    font-size: 1.5em;
+}
+.js-icon-list {
+    padding-left: 25px;
+    padding-bottom: 1px;
+    margin-bottom: 20px;
+    list-style: none;
+    overflow: hidden;
+}
+.js-icon-list li{
+    float: left;
+    width: 5%;
+    margin: 0 -1px -1px 0;
+    font-size: 12px;
+    line-height: 5rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+.js-icon-list li:hover {
+    background-color: #F5F5F5;
+}
+.js-icon-list li code {
+    display: none;
+}
+
+/* 菜单页面 */
+#menu_list {
+    margin-bottom: 20px;
+}
+.dd3-handle {
+    background: #ECECEC;
+    cursor: move;
+}
+.dd3-handle:before {
+    color: #A0A0A0;
+}
+.dd3-content {
+    background: #f9f9f9;
+    color: #5A5A5A;
+}
+.dd3-content:hover {
+    background: #ECECEC;
+    color: #5A5A5A;
+}
+.dd3-content .link {
+    margin-left: 10px;
+    font-weight: normal;
+}
+.dd3-content .action {
+    display: inline-block;
+    margin-left: 10px;
+}
+.dd3-content .list-icon{
+    color: #5A5A5A;
+    margin-left: 10px;
+    display: none;
+}
+.dd3-content .list-icon:hover,
+.dd-disable .list-icon:hover{
+    color: #9A9A9A;
+}
+.dd-disable .dd3-content{
+    background: #FFD5D0;
+    color: #D2847B;
+}
+.dd-disable .dd3-content:hover{
+    background: #FDC7C1;
+}
+.dd3-content:hover .list-icon{
+    display: inline;
+}
+.dd-disable .dd3-handle{
+    background: #FDC7C1;
+}
+.dd-disable .dd3-handle:hover{
+    background: #E49D9D;
+}
+.dd3-item > button[data-action="collapse"],
+.dd3-item > button[data-action="expand"] {
+    color: #5A5A5A;
+}
+.dd-placeholder,
+.dd-empty {
+    background: #FFFFF3;
+    border: 1px dashed #F3DDC6;
+}
+.connectedSortable {
+    overflow: hidden;
+}
+.connectedSortable .sortable-item {
+    border: 1px solid #DADADA;
+    margin-right: 10px;
+    padding: 8px 10px;
+    background: #F7F7F7;
+    cursor: move;
+}
+.connectedSortable .sortable-item:hover {
+    background: #EFEFEF;
+}
+/* 模块、插件 */
+.module-list h3 {
+    font-weight: 300;
+    font-size: 24px;
+}

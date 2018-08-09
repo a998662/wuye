@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!--[if IE 9]>         <html class="ie9 no-focus" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+    {include file="meta"/}
+</head>
+<body>
+<!-- Page Container -->
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+    <!-- Sidebar -->
+    {include file="sidebar"/}
+    <!-- END Sidebar -->
+
+    <!-- Header -->
+    {include file="header"/}
+    <!-- END Header -->
+
+    <!-- Main Container -->
+    <main id="main-container" style="min-height: 310px;">
+        <!-- Page Header -->
+
+        <div class="bg-gray-lighter">
+            <ol class="breadcrumb">
+                {$breadcrumb|raw}
+            </ol>
+        </div>
+
+        <!-- END Page Header -->
+
+        <!-- Page Content -->
+        <div class="content animated">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <div class="block-header bg-gray-lighter">
+                            <ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i class="si si-size-fullscreen"></i></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">{$action == 'add' ? '添加节点' : '编辑节点'}</h3>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <div class="block-content">
+                                    <form class="form-horizontal" action="" method="post">
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" for="module">所属模块 <span class="text-danger">*</span></label>
+                                            <div class="col-md-7 form-control1">
+                                                <select class="js-select2 form-control form-control1" id="module" name="module" style="width: 100%;" data-placeholder="请选择">
+                                                    <option value=""></option>
+                                                    <option {$info['module'] == 'admin'?='selected'} value="admin">系统</option>
+                                                    <option {$info['module'] == 'user'?='selected'} value="user">用户</option>
+                                                    <option {$info['module'] == 'cms'?='selected'} value="cms">内容</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" for="parent_id">所属节点 <span class="text-danger">*</span></label>
+                                            <div class="col-md-7 form-control1">
+                                                <select class="js-select2 form-control" id="parent_id" name="parent_id" style="width: 100%;" data-placeholder="请选择">
+                                                    <option></option><!-- Required for data-placeholder attribute to work with Select2 plugin -->
+                                                    <option value="根节点">根节点</option>
+                                                    {volist name="list" id="v"}
+                                                    <option {$info['parent_id'] == $v['id']?='selected'} value="{$v.id}">{$v.path}{$v.name}</option>
+                                                    {/volist}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" for="name">节点名称 <span class="text-danger">*</span></label>
+                                            <div class="col-md-7">
+                                                <input class="form-control form-control1" value="{$info.name}" type="text" id="name" name="name" placeholder="请输入节点名称">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" for="url">节点链接 <span class="text-danger">*</span></label>
+                                            <div class="col-md-7">
+                                                <input class="form-control form-control1" value="{$info.url}" type="text" id="url" name="url" placeholder="如：控制器/操作">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label">打开方式 <span class="text-danger">*</span></label>
+                                            <div class="col-md-7">
+                                                    <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                                                        <input type="radio" name="open_type" id="open_type1" value="page" {$info['open_type'] != 'pop'?'checked' : ''}>
+                                                        <span></span> 页面
+                                                    </label>
+                                                    <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r">
+                                                        <input type="radio" name="open_type" id="open_type2" value="pop" {$info['open_type']  == 'pop'?'checked':''}>
+                                                        <span></span> 弹窗
+                                                    </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label">是否系统节点 <span class="text-danger">*</span></label>
+                                            <div class="col-md-7">
+                                                <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                                                    <input type="radio" name="is_system" value="1" {if $info['is_system'] != 0 || !$info['id']}checked{/if}>
+                                                    <span></span> 是
+                                                </label>
+                                                <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r">
+                                                    <input type="radio" name="is_system" value="0" {if $info['is_system']==0 && $info['id']}checked{/if}>
+                                                    <span></span> 否
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label " for="params">参数 <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-7">
+                                                <input class="form-control form-control1" value="{$info.params}" type="text" id="params" name="params" placeholder="如：a=1&b=2">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" for="icon">图标 <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-7">
+                                                <div class="input-group js-icon-picker form-control1">
+                                                    <span class="input-group-addon icon" data-toggle="tooltip" data-placement="bottom" data-original-title="点击选择图标"><i class="fa fa-plus-circle"></i></span>
+                                                    <input class="form-control icon_input" value="{$info.icon}" type="text" id="icon" name="icon" value="" placeholder="请选择图标">
+                                                    <span class="input-group-addon delete-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="删除图标"><i class="fa fa-times"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label " for="sort">排序 <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-7">
+                                                <input class="form-control form-control1" value="{$info.sort}" type="text" id="sort" name="sort" placeholder="0">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" for="status">状态 <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-7">
+                                                <label class="css-input switch switch-sm switch-primary">
+                                                    <input type="checkbox" id="status" name="status" {if $info['status'] || !$info['id']}checked{/if}><span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-8 col-md-offset-1">
+                                                <button class="btn btn-primary submit" href="{:url('/index/edit')}" type="submit">提交</button>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="id" value="{$info.id}">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+    <!-- Footer -->
+    <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix">
+        <div class="pull-right">
+            Crafted with <i class="fa fa-heart text-city"></i> by <a class="font-w600" href="//97langren.com" target="_blank">97langren.com</a>
+        </div>
+        <div class="pull-left">
+            <a class="font-w600" href="//97langren.com" target="_blank">OneUI 3.1</a> &copy; <span class="js-year-copy"></span>
+        </div>
+    </footer>
+    <!-- END Footer -->
+</div>
+<!-- END Page Container -->
+{include file="footer"/}
+
+{include file="icons"/}
+<script src="/admin/js/form.js"></script>
+<!-- Page JS Code -->
+<script>
+    var rules = {
+        module: {
+            required: true
+        },
+        parent_id: {
+            required: true
+        },
+        name: {
+            required: true
+        },
+        url: {
+            required: true
+        }
+    };
+    var messages = {
+        module: {
+            required: "请选择所属模块"
+        },
+        parent_id: {
+            required: "请选择所属父节点"
+        },
+        name: {
+            required: "请输入节点名称"
+        },
+        url: {
+            required: "请输入节点链接"
+        }
+    };
+
+    formCheck(rules,messages);
+
+    function sub() {
+        var form = $('.form-horizontal');
+        var form_data = form.serialize();
+        pageLoader();
+        jQuery.post("{:url('/menu/'.$action)}", form_data).success(function (res) {
+            pageLoader('hide');
+            msg = res.msg;
+            
+            console.log(res);
+            if (res.code) {
+                if (res.url) {
+                    msg += "， 页面即将自动跳转~";
+                }
+                tips(msg, 'success');
+                setTimeout(function () {
+                    return res.url  ? location.href = res.url : '';
+                }, 4000);
+            } else {
+                console.log(res);
+                tips(msg, 'danger');
+            }
+        }).fail(function () {
+            pageLoader('hide');
+            tips('服务器发生错误~', 'danger');
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+
+<head>
+
+    <!-- player skin -->
+    <link rel="stylesheet" href="./skin/skin.css">
+
+    <!-- site specific styling -->
+    <style>
+        body {
+            font: 12px "Myriad Pro", "Lucida Grande", sans-serif;
+            text-align: center;
+            padding-top: 5%;
+        }
+
+        /* floating minimized container at bottom right of page */
+        .flowplayer.is-ready.is-floating {
+            border-radius: 2px;
+            bottom: 20px;
+            -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.9);
+            -moz-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.9);
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.9);
+            right: 20px;
+            position: fixed;
+            width: 300px;
+            z-index: 1;
+        }
+
+        /* prepare placeholder for responsiveness */
+        .fp-placeholder {
+            position: relative;
+            width: 100%;
+            max-height: 100%;
+        }
+
+        /* player and info text side by side */
+        .flowplayer {
+            /*background-image: url(https://demos.flowplayer.com/media/img/figsinwigs.jpg);*/
+            background-color: #111;
+            max-width: 70%;
+        }
+
+        .flowplayer .fp-waiting {
+            background: url(https://img.alicdn.com/imgextra/i3/4028991139/TB2ii72lSYTBKNjSZKbXXXJ8pXa_!!1-martrix_bbs.gif) no-repeat center center;
+            height: 100%;
+            display: none;
+        }
+        div.info {
+            display: inline-block;
+            margin-left: 1em;
+        }
+    </style>
+
+    <!-- for video tag based installs flowplayer depends on jQuery 1.7.2+ -->
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+    <!-- include flowplayer -->
+    <script src="./flowplayer.min.js"></script>
+    <!-- 加载Flowplayer hlsjs引擎（light），包括hls.light.js -->
+    <script src="./flowplayer.hlsjs.light.min.js"></script>
+
+    <script>
+
+    </script>
+</head>
+
+<body style="height: 2000px">
+
+
+<div class="flowplayer" id="hlsjsvod" data-float="true" data-splash="true" data-aspect-ratio="16:9">
+    <video loop></video>
+</div>
+<script>
+    var src = 'https://langren16.com/new/dm/2018-01/08/b7k57chv/b7k57chv.m3u8';
+    if(src.indexOf('m3u8')){
+        $(".flowplayer video").html('<source type="application/x-mpegurl" src="'+src+'">');
+        console.log(11111111111111);
+    }else {
+        $(".flowplayer video").html('<source type="video/mp4" src="'+src+'">')
+    }
+
+    flowplayer(function (api, root) {
+        if (!flowplayer.support.inlineVideo || !api.conf.float) {
+            return;
+        }
+        var bean           = flowplayer.bean,
+            common         = flowplayer.common,
+            isMinimal      = common.hasClass(root, "fp-minimal"),
+            scrolling      = false,
+            placeholder    = common.createElement("div", {
+                "class": "fp-placeholder"
+            }),
+
+            scrollCallback = function () {
+                if (scrolling) {
+                    return;
+                }
+                var scrollTop   = function () {
+                        var docElem = document.documentElement;
+
+                        return (window.pageYOffset || docElem.scrollTop) - (docElem.clientTop || 0);
+                    },
+                    floatPlayer = scrollTop() >= common.offset(placeholder).top + scrollTop();
+
+                common.toggleClass(root, "is-floating", floatPlayer);
+                if (!isMinimal) {
+                    common.toggleClass(root, "fp-minimal", floatPlayer);
+                }
+                // make placeholder responsive while player is floating
+                common.css(common.find("div", placeholder)[0],
+                    "padding-top", floatPlayer ? (api.conf.ratio * 100) + "%" : 0);
+                scrolling = true;
+                setTimeout(function () {
+                    scrolling = false;
+                }, 75);
+            };
+
+        // fine tune placeholder styling
+        [
+            "display",
+            "float",
+            "max-width",
+            "max-height",
+            "background-color",
+            "background-image",
+            "background-size"
+        ].forEach(function (style) {
+            common.css(placeholder, style, common.css(root, style));
+        });
+        // append a DIV acting like fp-ratio to make the placeholder responsive
+        common.append(placeholder, common.createElement('div'));
+        root.parentNode.insertBefore(placeholder, root);
+
+        var fsbutton = root.querySelector(".fp-fullscreen");
+
+        api.on("ready", function () {
+            bean.on(window, "scroll.fp-float", scrollCallback);
+            root.querySelector(".fp-controls").appendChild(fsbutton);
+        }).on("unload", function () {
+            bean.off(window, "scroll.fp-float");
+            common.css(common.find("div", placeholder)[0], "padding-top", 0);
+            common.removeClass(root, "is-floating");
+            if (!isMinimal) {
+                common.removeClass(root, "fp-minimal");
+            }
+        });
+    });
+
+</script>
+</body>

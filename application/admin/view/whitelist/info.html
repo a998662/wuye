@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!--[if IE 9]>         <html class="ie9 no-focus" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+    {include file="meta"/}
+    <style>
+        .form-horizontal .form-group label.control-label{text-align: left}
+    </style>
+</head>
+<body>
+<!-- Page Container -->
+<div class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+    <!-- Main Container -->
+    <main id="main-container" style="min-height: 310px; padding-top: 0">
+        <!-- Page Content -->
+        <div class="content animated">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <div class="block-header bg-gray-lighter">
+                            <ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i class="si si-size-fullscreen"></i></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">{$action == 'add' ? '添加白名单' : '编辑白名单'}</h3>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <div class="block-content">
+                                    <form class="form-horizontal" action="" method="post">
+                                        <div class="form-group">
+                                            <label class="col-md-12 control-label" for="name">名称 <span class="text-danger">*</span></label>
+                                            <div class="col-md-12">
+                                                <input class="form-control form-control1" value="{$info.name}" type="text" id="name" name="name" placeholder="请输入名称">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 control-label " for="type">类型 <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-12">
+                                                <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r">
+                                                    <input id="type" name="type" {if $info.type == '接口访问' }checked{/if} type="radio" value="1"><span></span> 接口访问
+                                                </label>
+                                                <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r">
+                                                    <input id="radio-2" name="type" {if $info.type == '后台访问'}checked{/if} type="radio" value="2" ><span></span> 后台访问
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 control-label" for="status">状态 <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-12">
+                                                <label class="css-input switch switch-sm switch-primary">
+                                                    <input type="checkbox" id="status" name="status" {if $info['status'] || !$info['id']}checked{/if}><span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <button class="btn btn-primary submit" href="{:url('/index/edit')}" type="submit">提交</button>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="id" value="{$info.id}">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+
+{include file="footer"/}
+{include file="icons"/}
+<script src="/admin/js/form.js"></script>
+<!-- Page JS Code -->
+<script>
+    var rules = {
+        name: {
+            required: true
+        }
+    };
+    var messages = {
+        name: {
+            required: "请输入节点名称"
+        }
+    };
+
+    formCheck(rules,messages);
+
+    function sub() {
+        var form = $('.form-horizontal');
+        var form_data = form.serialize();
+        pageLoader();
+        jQuery.post("{:url('/whitelist/'.$action)}", form_data).success(function (res) {
+            pageLoader('hide');
+            msg = res.msg;
+            console.log(res);
+            if (res.code) {
+                if (res.url) {
+                    msg += "， 页面即将自动跳转~";
+                }
+                tips(msg, 'success');
+                setTimeout(function () {
+                    return res.url  ? location.href = res.url : '';
+                }, 4000);
+            } else {
+                console.log(res);
+                tips(msg, 'danger');
+            }
+        }).fail(function () {
+            pageLoader('hide');
+            tips('服务器发生错误~', 'danger');
+        });
+    }
+</script>
+</body>
+</html>

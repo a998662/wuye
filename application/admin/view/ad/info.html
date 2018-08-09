@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--[if IE 9]>         <html class="ie9 no-focus" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+    {include file="meta"/}
+    <style>
+        .form-horizontal .form-group label.control-label{text-align: left}
+    </style>
+</head>
+<body>
+<!-- Page Container -->
+<div class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+    <!-- Main Container -->
+    <main id="main-container" style="min-height: 310px; padding-top: 0">
+        <!-- Page Content -->
+        <div class="content animated">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <div class="block-header bg-gray-lighter">
+                            <ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i class="si si-size-fullscreen"></i></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">{$action == 'add' ? '添加广告' : '编辑广告'}</h3>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <div class="block-content">
+                                    <form class="form-horizontal" action="" method="post">
+                                        <div class="form-group">
+                                            <label class="col-md-12 control-label" for="name">名称 <span class="text-danger">*</span></label>
+                                            <div class="col-md-12">
+                                                <input class="form-control form-control1" value="{$info.name}" type="text" id="name" name="name" placeholder="请输入名称">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 control-label " for="img_url">图片地址 <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-12">
+                                                <input class="form-control form-control1" value="{$info.img_url}" type="text" id="img_url" name="img_url" placeholder="请输入图片地址">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 control-label " for="redirect_url">跳转地址 <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-12">
+                                                <input class="form-control form-control1" value="{$info.redirect_url}" type="text" id="redirect_url" name="redirect_url" placeholder="请输入跳转地址">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 control-label" for="sort">排序 <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-12">
+                                                <input class="form-control form-control1" value="{$info.sort}" type="text" id="sort" name="sort" placeholder="请输入排序">
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <button class="btn btn-primary submit" href="{:url('/index/edit')}" type="submit">提交</button>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="id" value="{$info.id}">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+
+{include file="footer"/}
+{include file="icons"/}
+<script src="/admin/js/form.js"></script>
+<!-- Page JS Code -->
+<script>
+    var rules = {
+        name: {
+            required: true
+        },
+        img_url: {
+            required: true
+        },
+        redirect_url: {
+            required: true
+        }
+    };
+    var messages = {
+        name: {
+            required: "请输入广告名称"
+        },
+        img_url: {
+            required: "请输入图片地址"
+        },
+        redirect_url: {
+            required: "请输入跳转地址"
+        }
+    };
+
+    formCheck(rules,messages);
+
+    function sub() {
+        var form = $('.form-horizontal');
+        var form_data = form.serialize();
+        pageLoader();
+        jQuery.post("{:url('/ad/'.$action)}", form_data).success(function (res) {
+            pageLoader('hide');
+            msg = res.msg;
+            console.log(res);
+            if (res.code) {
+                if (res.url) {
+                    msg += "， 页面即将自动跳转~";
+                }
+                tips(msg, 'success');
+                setTimeout(function () {
+                    return res.url  ? location.href = res.url : '';
+                }, 4000);
+            } else {
+                console.log(res);
+                tips(msg, 'danger');
+            }
+        }).fail(function () {
+            pageLoader('hide');
+            tips('服务器发生错误~', 'danger');
+        });
+    }
+</script>
+</body>
+</html>

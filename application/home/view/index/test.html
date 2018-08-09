@@ -1,0 +1,90 @@
+<!doctype html>
+<head>
+    <!-- player skin -->
+    <link rel="stylesheet" href="/flowplayer/skin/skin.css">
+    <!-- site specific styling -->
+    <style>
+        body {
+            font: 12px "Myriad Pro", "Lucida Grande", sans-serif;
+            text-align: center;
+            padding: 0;
+            border: 0;
+            margin: 0;
+        }
+        #hlsjsvod {
+            background-image: url(//demos.flowplayer.com/media/img/figsinwigs.jpg);
+            background-color: #f60;
+        }
+    </style>
+
+    <!-- for video tag based installs flowplayer depends on jQuery 1.7.2+ -->
+    <script src="/jquery.min.js"></script>
+
+    <!-- include flowplayer -->
+    <script src="/flowplayer/flowplayer.min.js"></script>
+
+    <!-- 加载Flowplayer hlsjs引擎（light），包括hls.light.js -->
+    <script src="/flowplayer/flowplayer.hlsjs.light.min.js"></script>
+    <script>
+        flowplayer(function (api, root) {
+            var instanceId = root.getAttribute("data-flowplayer-instance-id"),
+                engineInfo = document.getElementById("engine" + instanceId),
+                vtypeInfo  = document.getElementById("vtype" + instanceId),
+                detail     = document.getElementById("detail" + instanceId);
+            api.on("ready", function (e, api, video) {
+                var engineName = api.engine.engineName;
+
+                engineInfo.innerHTML = engineName;
+                vtypeInfo.innerHTML  = video.type;
+                if (engineName === "flash") {
+                    detail.innerHTML = "video source: " + video.src;
+                }
+            }).on("progress", function (e, api) {
+                var hlsengine = api.engine.hlsjs,
+                    vtag      = api.engine.engineName === "html5" && root.querySelector(".fp-engine");
+                if (hlsengine) {
+                    var current = hlsengine.currentLevel, level   = hlsengine.levels[current], info;
+                    if (level) {
+                        info = api.conf.clip.live ? level.bitrate / 1000 + " kbps" : level.height + "p";
+                        detail.innerHTML = "HLS level " + (current > -1 ? current + ": " + info : "");
+                    }
+                } else if (vtag) {
+                    // native playback, less informative
+                    detail.innerHTML = "Resolution: " + vtag.videoWidth + "x" + vtag.videoHeight;
+                }
+            });
+
+        });
+        /* end global event listeners setup */
+
+        window.onload = function () {
+            flowplayer("#hlsjsvod", {
+                splash     : true,
+                aspectRatio: "16:9",
+
+                clip: {
+                    // enable hlsjs in desktop Safari for manual quality selection
+                    // CAVEAT: may cause decoding problems with some streams!
+                    hlsjs: {
+                        safari: true
+                    },
+                    sources: [
+                        {
+                            type: "application/x-mpegurl",
+                            src : "//sohu.zuida-163sina.com/20180613/d4p9FkSF/index.m3u8"
+                        },
+                        {
+                            type: "video/mp4",
+                            src : "//edge.flowplayer.org/cilla_black_bean_sauce.mp4"
+                        }
+                    ]
+                }
+
+            });
+        };
+    </script>
+</head>
+
+<body>
+
+</body>

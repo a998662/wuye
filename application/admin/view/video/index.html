@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html class="ie9 no-focus" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+    <link rel="stylesheet" href="/static/js/plugins/bootstrap3-editable/css/bootstrap-editable.css">
+    {include file="meta"/}
+    <style>
+        .soso{
+            display: block;
+            float: right;
+            margin-left: 15px;
+        }
+        .pull-right .col-md-3{
+            padding-left: 0;
+            padding-right: 0;
+        }
+    </style>
+</head>
+<body>
+<!-- Page Container -->
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+    <!-- Sidebar -->
+    {include file="sidebar"/}
+    <!-- END Sidebar -->
+
+    <!-- Header -->
+    {include file="header"/}
+    <!-- END Header -->
+
+    <!-- Main Container -->
+    <main id="main-container" style="min-height: 304px;">
+        <div class="bg-gray-lighter">
+            <ol class="breadcrumb">
+                {$breadcrumb|raw}
+            </ol>
+        </div>
+        <!-- END Page Header -->
+
+        <!-- Page Content -->
+        <div class="content animated">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <div class="block-header bg-gray-lighter">
+                            <ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i class="si si-size-fullscreen"></i></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">影视列表</h3>
+                        </div>
+                        <div class="block-content tab-content">
+                            <div class="tab-pane active">
+                                <div class="row data-table-toolbar">
+                                    <div class="col-sm-12">
+                                        <form class="pull-right col-md-7" method="get" action="{:url('/video/index')}" style="padding: 0">
+                                            <button class="btn btn-success soso" type="submit" href="#"><i class="fa fa-fw fa-search"></i> 搜索</button>
+                                            <div class="col-md-3 soso">
+                                                <input class="form-control form-control" type="text" id="title" name="title" placeholder="请输入标题、分类">
+                                            </div>
+                                            <div class="col-md-3 soso">
+                                                <select class="js-select2 form-control" id="cat_id" name="channel" style="width: 100%;" data-placeholder="请选择">
+                                                    <option value="0">根栏目</option>
+                                                    {volist name="$Channel" id="v"}
+                                                    <option {$channel == $v.alias ?= 'selected'} value="{$v.alias}">{$v.name}</option>
+                                                    {/volist}
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3 soso">
+                                                <select class="js-select2 form-control" id="status" name="status" style="width: 100%;" data-placeholder="请选择">
+                                                    <option {$status == '请选择审核状态' ?='selected'} value="请选择审核状态">请选择审核状态</option>
+                                                    <option {$status == 0 && is_numeric($status) ?='selected'} value="0">未审核</option>
+                                                    <option {$status == 1 ?='selected'} value="1">审核通过</option>
+                                                    <option {$status == -1 ?='selected'} value="-1">审核不通过</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                        <div class="toolbar-btn-action">
+                                            <a title="新增" icon="fa fa-plus-circle" class="btn btn-primary" href="{:url('/video/add')}"><i class="fa fa-plus-circle"></i> 新增</a>
+                                            <a title="推荐" icon="fa fa-check-circle-o" class="btn btn-primary ajax-post confirm" target-form="ids" href="{:url('/video/flag',['table'=>'video','flag'=>1])}"><i class="fa fa-check-circle-o"></i> 推荐</a>
+                                            <a title="置顶" icon="fa fa-check-circle-o" class="btn btn-primary ajax-post confirm" target-form="ids" href="{:url('/video/flag',['table'=>'video','flag'=>2])}"><i class="fa fa-check-circle-o"></i> 置顶</a>
+                                            <a title="启用" icon="fa fa-check-circle-o" class="btn btn-success ajax-post confirm" target-form="ids" href="{:url('/video/enable',['table'=>'video'])}"><i class="fa fa-check-circle-o"></i> 启用</a>
+                                            <a title="禁用" icon="fa fa-ban" class="btn btn-warning ajax-post confirm" target-form="ids" href="{:url('/video/disable',['table'=>'video'])}"><i class="fa fa-ban"></i> 禁用</a>
+                                            <a title="删除" icon="fa fa-times-circle-o" class="btn btn-danger ajax-post confirm" target-form="ids" href="{:url('/video/del',['table'=>'video'])}"><i class="fa fa-times-circle-o"></i> 删除</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-builder table-hover table-bordered table-striped js-table-checkable">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center" style="width: 50px;">
+                                                <label class="css-input css-checkbox css-checkbox-primary remove-margin-t remove-margin-b">
+                                                    <input id="check-all" type="checkbox"><span></span>
+                                                </label>
+                                            </th>
+                                            <th width="80">ID</th>
+                                            <th width="">
+                                                标题
+                                            </th>
+                                            <th width="80">分类</th>
+                                            <th width="150">添加时间</th>
+                                            <th width="80">播放次数</th>
+                                            <th width="80">点赞次数</th>
+                                            <th width="80">评论次数</th>
+                                            <th width="80">收藏次数</th>
+                                            <th width="60">状态</th>
+                                            <th width="90">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {notempty name="video"}
+                                            {foreach $video as $v}
+                                            <tr class="text-c">
+                                                <td class="text-center">
+                                                    <label class="css-input css-checkbox css-checkbox-primary">
+                                                        <input class="ids" name="ids[]" value="{$v.id}" type="checkbox"><span></span>
+                                                    </label>
+                                                </td>
+                                                <td>{$v.id}</td>
+                                                <td class="text-l">
+                                                    <a href="javascript:void(0);" >{$v.title}</a>
+                                                </td>
+                                                <td>{:getCatName($v['cat_id'])}</td>
+                                                <td>{:date('Y-m-d H:i:s',$v['insert_time'])}</td>
+                                                <td>{$v.play}</td>
+                                                <td>{$v.good}</td>
+                                                <td>{$v.comments}</td>
+                                                <td>{$v.like}</td>
+                                                <td>
+                                                    <label class="css-input switch switch-sm switch-primary" title="开启/关闭">
+                                                        <input data-id="{$v.id}" data-table="video" data-field="status" {if $v['status'] ==1}checked{/if} type="checkbox">
+                                                        <span></span>
+                                                    </label>
+                                                </td>
+                                                <td class="f-14 td-manage">
+                                                    <a title="" icon="fa fa-pencil" class="btn btn-s btn-default" href="{:url('/video/edit',['id'=>$v['id']])}" target="_self" data-toggle="tooltip" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
+                                                    <a title="" icon="fa fa-times" class="btn btn-s btn-default ajax-get confirm" href="{:url('/video/del',['table'=>'video','id'=>$v['id']])}" data-toggle="tooltip" data-original-title="删除"><i class="fa fa-times"></i></a>
+                                                </td>
+                                            </tr>
+                                            {/foreach}
+                                            <tr {$video->render() ? '' : 'style=display:none'}>
+                                                <td colspan="9" class="text-center">{$video->render()|raw}</td>
+                                            </tr>
+                                            {else}
+                                            <tr class="table-empty">
+                                                <td class="text-center empty-info" colspan="10">
+                                                    <i class="fa fa-database"></i> 暂无数据<br>
+                                                </td>
+                                            </tr>
+                                        {/notempty}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+    <!-- Footer -->
+    <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix">
+        <div class="pull-right">
+            Crafted with <i class="fa fa-heart text-city"></i> by <a class="font-w600" href="//97langren.com" target="_blank">97langren.com</a>
+        </div>
+        <div class="pull-left">
+            <a class="font-w600" href="//97langren.com" target="_blank">OneUI 3.1</a> &copy; <span class="js-year-copy"></span>
+        </div>
+    </footer>
+    <!-- END Footer -->
+</div>
+<!-- END Page Container -->
+{include file="footer"/}
+
+<script src="/static/js/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/js/plugins/bootstrap3-editable/js/bootstrap-editable.js"></script>
+<script src="/static/js/plugins/jquery-validation/additional-methods.js"></script>
+<script src="/admin/js/table.js"></script>
+</body>
+</html>

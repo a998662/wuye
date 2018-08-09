@@ -1,0 +1,195 @@
+<!DOCTYPE html><!--[if IE 9]>
+<html class="ie9 no-focus" lang="en"> <![endif]--><!--[if gt IE 9]><!-->
+<html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+	{include file="meta"/}
+	<style>
+		.soso{
+			display: block;
+			float: right;
+			margin-left: 15px;
+		}
+		.pull-right .col-md-3{
+			padding-left: 0;
+			padding-right: 0;
+		}
+	</style>
+</head>
+<body>
+<!-- Page Container -->
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+	<!-- Sidebar -->
+	{include file="sidebar"/}
+	<!-- END Sidebar -->
+
+	<!-- Header -->
+	{include file="header"/}
+	<!-- END Header -->
+
+	<!-- Main Container -->
+	<main id="main-container" style="min-height: 304px;">
+		<div class="bg-gray-lighter">
+			<ol class="breadcrumb">
+				{$breadcrumb|raw}
+			</ol>
+		</div>
+		<!-- END Page Header -->
+
+		<!-- Page Content -->
+		<div class="content animated">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="block">
+						<div class="block-header bg-gray-lighter">
+							<ul class="block-options">
+								<li>
+									<button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo">
+										<i class="si si-refresh"></i></button>
+								</li>
+								<li>
+									<button type="button" data-toggle="block-option" data-action="fullscreen_toggle">
+										<i class="si si-size-fullscreen"></i></button>
+								</li>
+							</ul>
+							<h3 class="block-title">采集记录</h3>
+						</div>
+						<div class="block-content tab-content">
+							<div class="tab-pane active">
+								<div class="row data-table-toolbar">
+									<div class="col-sm-12">
+										<form class="pull-right col-md-7" method="get" action="{:url('index')}" style="padding: 0">
+											<button class="btn btn-success soso" type="submit" href="#"><i class="fa fa-fw fa-search"></i> 搜索</button>
+											<div class="col-md-3 soso">
+												<input class="form-control form-control" type="text" id="title" name="title" placeholder="请输入文章标题">
+											</div>
+											<div class="col-md-3 soso">
+												<select class="js-select2 form-control" id="cat_id" name="cat_id" style="width: 100%;" data-placeholder="请选择">
+													<option value="0">根栏目</option>
+													{volist name="category" id="v"}
+													<option {$cat_id == $v['id']?='selected'} value="{$v.id}">{$v.name}</option>
+													{/volist}
+												</select>
+											</div>
+										</form>
+										<div class="toolbar-btn-action">
+											<a title="切片" icon="fa fa-plus-circle" class="btn btn-primary ajax-post" target-form="ids" href="{:url('/results/_import')}"><i class="fa fa-plus-circle"></i> 切片</a>
+											<a title="删除" icon="fa fa-times-circle-o" class="btn btn-danger ajax-post confirm" target-form="ids" href="{:url('/results/del',['table'=>'result'])}"><i class="fa fa-times-circle-o"></i> 删除</a>
+										</div>
+									</div>
+								</div>
+								<div class="table-responsive">
+									<table class="table table-builder table-hover table-bordered table-striped js-table-checkable">
+										<thead>
+										<tr>
+											<th class="text-center" style="width: 50px;">
+												<label class="css-input css-checkbox css-checkbox-primary remove-margin-t remove-margin-b">
+													<input id="check-all" type="checkbox"><span></span>
+												</label>
+											</th>
+											<th width="80">ID
+												<a href="" class="pull-right" data-toggle="tooltip" data-original-title="排序"><i class="fa fa-sort text-muted"></i></a>
+											</th>
+											<th>
+												节点名称
+												<span class="pull-right">
+                                                    <a href="javascript:void(0);" data-map='{"is_admin":1}' class="field-filter" data-filter="username" data-list="" data-type="checkbox" data-options="" data-field-display="username" data-field="username" data-table="user" data-toggle="tooltip" data-original-title="筛选">
+                                                        <i class="fa fa-filter {if !strpos('--'.input('_filter'),'username')}text-muted{/if}"></i>
+                                                    </a>
+                                                </span>
+											</th>
+											<th>所属栏目</th>
+											<th>文章标题</th>
+											<th>采集时间</th>
+											<th>是否导入</th>
+											<th width="120">操作</th>
+										</tr>
+										</thead>
+										<tbody>
+										{notempty name="list"}
+										{foreach $list as $v}
+										<tr class="text-c">
+											<td class="text-center">
+												<label class="css-input css-checkbox css-checkbox-primary">
+													<input class="ids" name="ids[]" value="{$v.id}" type="checkbox"><span></span>
+												</label>
+											</td>
+											<td>{$v.id}</td>
+											<td>{$v.col_name}</td>
+											<td>{:getValue('category',['id'=>$v.cat_id],'name')}</td>
+											<td>{$v.title}</td>
+											<td>{:date('Y-m-d H:i:s',$v['insert_time'])}</td>
+											<td>
+												{if $v['status'] ==1}
+												<button type="button" title="已切片" class="btn btn-s btn-success">已导入</button>
+												{else /}
+												<button type="button" title="未切片" class="btn btn-s btn-danger">未导入</button>
+												{/if}
+											</td>
+											<td class="f-14 td-manage">
+												<div class="btn-group">
+													<a title="" icon="fa fa-pencil" class="btn btn-s btn-default" href="{:url('/results/edit',['id'=>$v['id']])}" target="_self" data-toggle="tooltip" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
+													<a title="" icon="fa fa-fw fa-cloud-download" ids="{$v.id}" class="btn btn-s btn-default js-import-post" href="javascript:;" target="_self" data-toggle="tooltip" data-original-title="开始切片"><i class="fa fa-fw fa-cloud-download"></i></a>
+													<a title="" icon="fa fa-times" class="btn btn-s btn-default ajax-get confirm" href="{:url('/results/del',['table'=>'result','id'=>$v['id']])}" data-toggle="tooltip" data-original-title="删除"><i class="fa fa-times"></i></a>
+												</div>
+											</td>
+										</tr>
+										{/foreach}
+										<tr {$list->render() ? '' : 'style=display:none'}>
+											<td colspan="9" class="text-center">
+												<div class="hy-page clearfix">
+												{$list->render()|raw}
+												</div>
+											</td>
+										</tr>
+										{else}
+										<tr class="table-empty">
+											<td class="text-center empty-info" colspan="10">
+												<i class="fa fa-database"></i> 暂无数据<br>
+											</td>
+										</tr>
+										{/notempty}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END Page Content -->
+	</main>
+	<!-- END Main Container -->
+	<!-- Footer -->
+    <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix">
+        <div class="pull-right">
+            Crafted with <i class="fa fa-heart text-city"></i> by <a class="font-w600" href="//97langren.com" target="_blank">97langren.com</a>
+        </div>
+        <div class="pull-left">
+            <a class="font-w600" href="//97langren.com" target="_blank">OneUI 3.1</a> &copy; <span class="js-year-copy"></span>
+        </div>
+    </footer>
+	<!-- END Footer -->
+</div>
+<!-- END Page Container -->
+
+{include file="footer"/}
+<script src="/static/js/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/js/plugins/bootstrap3-editable/js/bootstrap-editable.js"></script>
+<script src="/admin/js/table.js"></script>
+<script>
+	$('.js-import-post').click(function () {
+		var id = $(this).attr('ids'),ids = {};
+		ids[0] = id;
+		console.log(ids);
+		$.post('/results/_import',{ids:ids},function (res) {
+			tips(res.msg+'页面开始跳转','success');
+			setTimeout(function () {
+                location.reload()
+            },1000)
+        })
+    })
+</script>
+
+</body>
+</html>

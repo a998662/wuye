@@ -1,0 +1,14 @@
+<form>
+    <select style="width: 200px;height: 31px" name="cid" id="cat_id" class="cid select" name="cid" data-am-selected required>
+        <option value="0">全部分类</option>
+        {foreach $list as $v}
+        <option {php} echo input('cid') == $v['id'] ? 'selected' : '';{/php} value="{$v.id}">{$v.path} {$v.name}</option>
+        {/foreach}
+    </select>
+    日期范围：
+    <input type="text" name="s_time" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" class="input-text Wdate laydate-icon" style="width:180px;">
+    -
+    <input type="text" name="e_time" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" class="input-text Wdate laydate-icon" style="width:180px;">
+    <input type="text" name="key" value="{:input('key')}" placeholder=" 资讯名称" style="width:250px" class="input-text">
+    <button name="" class="btn btn-success " type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+</form>

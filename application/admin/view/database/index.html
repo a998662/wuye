@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!--[if IE 9]>         <html class="ie9 no-focus" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+    {include file="meta"/}
+</head>
+<body>
+<!-- Page Container -->
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+    <!-- Sidebar -->
+    {include file="sidebar"/}
+    <!-- END Sidebar -->
+
+    <!-- Header -->
+    {include file="header"/}
+    <!-- END Header -->
+
+    <!-- Main Container -->
+    <main id="main-container" style="min-height: 304px;">
+        <!-- Page Header -->
+        <div class="bg-gray-lighter">
+            <ol class="breadcrumb">
+                {$breadcrumb|raw}
+            </ol>
+        </div>
+        <!-- END Page Header -->
+
+        <!-- Page Content -->
+        <div class="content">
+            <div class="row ">
+                <div class="col-md-12">
+                    <div class="block">
+                        <ul class="nav nav-tabs">
+                            <li class="{$group=='export'?='active'}">
+                                <a href="{:url('/database/index',['group'=>'export'])}">备份数据库</a>
+                            </li>
+                            <li class="{$group=='import'?='active'}">
+                                <a href="{:url('/database/index',['group'=>'import'])}">还原数据库</a>
+                            </li>
+                            <li class="pull-right">
+                                <ul class="block-options push-10-t push-10-r">
+                                    <li>
+                                        <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
+                                    </li>
+                                    <li>
+                                        <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i class="si si-size-fullscreen"></i></button>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="block-content tab-content">
+                            {if $group=='export'}
+                            <div class="tab-pane active">
+                                <div class="row data-table-toolbar">
+                                    <div class="col-sm-12">
+                                        <div class="toolbar-btn-action">
+                                            <a title="立即备份" class="btn btn-primary ajax-post confirm" target-form="ids" href="{:url('/database/export')}" icon="fa fa-fw fa-copy"><i class="fa fa-fw fa-copy"></i> 立即备份</a>
+                                            <a title="优化表" class="btn btn-success ajax-post" target-form="ids" href="{:url('/database/optimize')}" icon="fa fa-fw fa-cogs"><i class="fa fa-fw fa-cogs"></i> 优化表</a>
+                                            <a title="修复表" class="btn btn-success ajax-post" target-form="ids" href="{:url('/database/repair')}" icon="fa fa-fw fa-wrench"><i class="fa fa-fw fa-wrench"></i> 修复表</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-builder table-hover table-bordered table-striped js-table-checkable">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center" style="width: 70px;">
+                                                <label class="css-input css-checkbox css-checkbox-primary remove-margin-t remove-margin-b">
+                                                    <input id="check-all" type="checkbox"><span></span>
+                                                </label>
+                                            </th>
+                                            <th class="column-name "><span class="pull-right"></span>表名</th>
+                                            <th class="column-rows "><span class="pull-right"></span>行数</th>
+                                            <th class="column-data_length "><span class="pull-right"></span>大小</th>
+                                            <th class="column-data_free "><span class="pull-right"></span>冗余</th>
+                                            <th class="column-comment "><span class="pull-right"></span>备注</th>
+                                            <th class="column-right_button " style="width: 100px;"><span class="pull-right"></span>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {foreach $data_list as $v}
+                                        <tr class="">
+                                            <td class="text-center">
+                                                <label class="css-input css-checkbox css-checkbox-primary">
+                                                    <input class="ids" type="checkbox" name="ids[]" value="{$v.name}"><span></span>
+                                                </label>
+                                            </td>
+                                            <td class="">{$v.name}</td>
+                                            <td class="">{$v.rows}</td>
+                                            <td class="">{$v.data_length}B</td>
+                                            <td class="">{$v.data_free}B</td>
+                                            <td class="">{$v.comment}</td>
+                                            <td class="">
+                                                <div class="btn-group">
+                                                    <a title="" icon="fa fa-fw fa-cogs" class="btn btn-s btn-default ajax-get" href="{:url('/database/optimize/ids/dp_admin_access')}" _tag="custom" data-toggle="tooltip" data-original-title="优化表"><i class="fa fa-fw fa-cogs"></i></a>
+                                                    <a title="" icon="fa fa-fw fa-wrench" class="btn btn-s btn-default ajax-get" href="{:url('/database/repair/ids/dp_admin_access.')}" _tag="custom" data-toggle="tooltip" data-original-title="修复表"><i class="fa fa-fw fa-wrench"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {/foreach}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        {else}
+                        <div class="tab-pane active">
+                            <div class="table-responsive">
+                                <table class="table table-builder table-hover table-bordered table-striped js-table-checkable">
+                                    <thead>
+                                    <tr>
+                                        <th class="column-name "><span class="pull-right"></span>备份名称</th>
+                                        <th class="column-rows "><span class="pull-right"></span>卷数</th>
+                                        <th class="column-data_length "><span class="pull-right"></span>压缩</th>
+                                        <th class="column-data_free "><span class="pull-right"></span>数据大小</th>
+                                        <th class="column-comment "><span class="pull-right"></span>备份时间</th>
+                                        <th class="column-right_button " style="width: 100px;"><span class="pull-right"></span>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {foreach $data_list as $v}
+                                    <tr class="">
+                                        <td class="">{$v.name}</td>
+                                        <td class="">{$v.part}</td>
+                                        <td class="">{$v.compress}</td>
+                                        <td class="">{$v.size}KB</td>
+                                        <td class="">{$v.time}</td>
+                                        <td class="">
+                                            <div class="btn-group">
+                                                <div class="btn-group">
+                                                    <a title="" icon="fa fa-fw fa-reply" class="btn btn-s btn-default ajax-get confirm" href="{:url('/database/import',['ids'=>$v['name']])}" _tag="import" data-toggle="tooltip" data-original-title="还原"><i class="fa fa-fw fa-reply"></i></a>
+                                                    <a title="" icon="fa fa-times" class="btn btn-s btn-default ajax-get confirm" href="{:url('/database/delete',['ids'=>$v['name']])}" _tag="delete" data-toggle="tooltip" data-original-title="删除"><i class="fa fa-times"></i></a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {/foreach}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+    <!-- Footer -->
+    <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix">
+        <div class="pull-right">
+            Crafted with <i class="fa fa-heart text-city"></i> by <a class="font-w600" href="//97langren.com" target="_blank">97langren.com</a>
+        </div>
+        <div class="pull-left">
+            <a class="font-w600" href="//97langren.com" target="_blank">OneUI 3.1</a> &copy; <span class="js-year-copy"></span>
+        </div>
+    </footer>
+    <!-- END Footer -->
+</div>
+<!-- END Page Container -->
+{include file="footer"/}
+
+<script src="/static/js/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/js/plugins/bootstrap3-editable/js/bootstrap-editable.js"></script>
+<script src="/static/js/plugins/jquery-validation/additional-methods.js"></script>
+<script src="/admin/js/table.js"></script>
+
+</body>
+</html>

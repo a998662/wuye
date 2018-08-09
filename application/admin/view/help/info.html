@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html class="ie9 no-focus" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+    <link rel="stylesheet" href="/static/js/plugins/jquery-tags-input/jquery.tagsinput.css">
+    {include file="meta"/}
+    <style>
+        .col-md-7 label {
+            font-weight: 200;
+            margin-right: 10px;
+            line-height: 20px;
+            margin-bottom: 0
+        }
+
+        .col-md-7 a {
+            font-weight: 200;
+            margin-right: 10px;
+            line-height: 20px;
+            margin-bottom: 0
+        }
+    </style>
+</head>
+<body>
+<!-- Page Container -->
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+    <!-- Sidebar -->
+    {include file="sidebar"/}
+    <!-- END Sidebar -->
+
+    <!-- Header -->
+    {include file="header"/}
+    <!-- END Header -->
+
+    <!-- Main Container -->
+    <main id="main-container" style="min-height: 310px;">
+        <!-- Page Header -->
+
+        <div class="bg-gray-lighter">
+            <ol class="breadcrumb">
+                {$breadcrumb|raw}
+            </ol>
+        </div>
+
+        <!-- END Page Header -->
+
+        <!-- Page Content -->
+        <div class="content animated">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <div class="block-header bg-gray-lighter"> 
+                            <ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i class="si si-size-fullscreen"></i></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">{$action == 'add' ? '添加文章' : '编辑文章'}</h3>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <div class="block-content">
+                                    <form class="form-horizontal form-builder row" action="" name="form-builder" method="post">
+                                        <input value="{$info.id}" type="hidden" name="id">
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" for="title">文章标题 <span class="text-danger">*</span></label>
+                                            <div class="col-md-7">
+                                                <input class="form-control form-control1" value="{$info.title}" type="text" id="title" name="title" placeholder="请输入文章标题">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" for="cat_id">所属栏目 <span class="text-danger">*</span></label>
+                                            <div class="col-md-7 form-control1">
+                                                <select class="js-select2 form-control " id="cat_id" name="cat_id" style="width: 100%;" data-placeholder="所属栏目">
+                                                    <option value="0">顶级栏目</option>
+                                                    {foreach $category as $v}
+                                                    <option {eq name="$info['cat_id']" value="$v['id']" }selected{/eq} value="{$v.id}">{$v.path} {$v.name}</option>
+                                                    {/foreach}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label ">文章内容 <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-10"><textarea id="editor" style="width:100%;height:400px;">{$info.content}</textarea></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-7 col-md-offset-1">
+                                                <button class="btn btn-primary submit" href="{:url('/help/add')}" type="submit">提交</button>
+                                                <button class="btn btn-danger submit" type="reset">取消</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+    <!-- Footer -->
+    <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix">
+        <div class="pull-right">
+            Crafted with <i class="fa fa-heart text-city"></i> by <a class="font-w600" href="//97langren.com" target="_blank">97langren.com</a>
+        </div>
+        <div class="pull-left">
+            <a class="font-w600" href="//97langren.com" target="_blank">OneUI 3.1</a> &copy; <span class="js-year-copy"></span>
+        </div>
+    </footer>
+    <!-- END Footer -->
+</div>
+<!-- END Page Container -->
+{include file="footer"/}
+<script type="text/javascript" src="/static/js/plugins/jquery-tags-input/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/uploadify/api-uploadify.js"></script>
+<script type="text/javascript" src="/static/js/plugins/ueditor/1.4.3/umeditor.config.js"></script>
+<script type="text/javascript" src="/static/js/plugins/ueditor/1.4.3/ueditor.all.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="/static/js/plugins/layer/laydate/laydate.js"></script>
+<script type="application/javascript">
+     /***实例化ueditor*/
+     UE.getEditor('editor');
+     jQuery(function () {
+	     App.initHelpers(["tags-inputs", 'ckeditor-inline']);
+     });
+
+
+     $('#cat_id').change(function () {
+         var cat_id = $("#cat_id").val();
+         var tags = '{$info.keywords}';
+         $.post('/article/get_tag', {tags: tags, cat_id: cat_id}, function (data) {
+             $("#taglist").html(data);
+         })
+     })
+
+     function set_link() {
+         $('#url').toggle();
+     }
+
+     /**
+      * 以下是图片上传方法
+      */
+     // 上传商品图片成功回调函数
+     function call_back(fileurl_tmp) {
+         $("#thumb").val(fileurl_tmp);
+         $("#thumb2").attr('src', fileurl_tmp);
+     }
+
+     /**
+      * 上传之后删除组图input
+      * @access   public
+      * @val      string  删除的图片input
+      */
+     function ClearPicArr2(obj, path) {
+         $.ajax({
+             type   : 'GET',
+             url    : "{:url('/upload/delupload')}",
+             data   : {action: "del", filename: path},
+             success: function () {
+                 $(obj).parent().remove(); // 删除完服务器的, 再删除 html上的图片
+             }
+         });
+         // 删除数据库记录
+         $.ajax({
+             type   : 'GET',
+             url    : "{:url('/article/del_goods_images')}",
+             data   : {filename: path},
+             success: function () {
+                 //
+             }
+         });
+     }
+
+     var rules = {
+         username : {
+             required: true
+         },
+         seo_title: {
+             required: true
+         },
+        /* password : {
+             required: true
+         },
+         role_id  : {
+             required: true
+         },
+         email    : {
+             required: true
+         }*/
+     };
+     var messages = {
+         username : {
+             required: "用户名不能为空."
+         },
+         seo_title: {
+             required: "SEO标题不能为空."
+         },
+        /* password : {
+             required: "密码不能为空."
+         },
+         role_id  : {
+             required: "角色不能为空."
+         },
+         email    : {
+             required: "邮箱不能为空."
+         }*/
+     };
+
+     formCheck(rules, messages);
+
+     function sub() {
+         var form = $('.form-horizontal');
+         var form_data = form.serialize();
+         pageLoader();
+         jQuery.post("{:url('/help/'.$action)}", form_data).success(function (res) {
+             pageLoader('hide');
+             var msg = res.msg;
+             console.log(res);
+             if (res.code) {
+                 if (res.url) {
+                     msg += "， 页面即将自动跳转~";
+                 }
+                 tips(msg, 'success');
+                 setTimeout(function () {
+                     return res.url ? location.href = res.url : '';
+                 }, 4000);
+             } else {
+                 console.log(res);
+                 tips(msg, 'danger');
+             }
+         }).fail(function () {
+             pageLoader('hide');
+             tips('服务器发生错误~', 'danger');
+             self.attr("autocomplete", "on").prop("disabled", false);
+         });
+     }
+     
+</script>
+</body>
+</html>

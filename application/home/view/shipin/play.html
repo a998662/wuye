@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {include file="meta"/}
+    <link rel="stylesheet" href="/flowplayer/skin/skin.css">
+    <script>var id = '{$id}', alias = '{$alias}';</script>
+    <style>
+        .fp-loading-rounded-fill {
+            display: none !important;
+        }
+    </style>
+</head>
+<body><!--百度熊掌号改造-->
+{include file="header" /}
+<div class="container main">
+    <div class="row">
+        <div class="col-md-9 col-sm-12 hy-main-content">
+            <div class="hy-player clearfix">
+                <div class="item">
+                    <div class="info clearfix">
+                        <div class="flowplayer fp-outlined no-buffer fp-fat" id="hlsjsvod" data-hlsQualities="false" data-native_fullscreen="true" data-float="true" data-splash="true">
+                            <video loop></video>
+                        </div>
+                        <div style="display: none;overflow: hidden"><a class="videopic lazy" style="background: url({$thumb})  no-repeat; background-position:50% 50%; background-size: cover;"></a></div>
+                    </div>
+                    <div class="footer clearfix">
+                        <span class="text-muted">正在播放：</span><a href="/shipin/{$id}.html" title="{$title}">{$title}</a>
+                        <ul class="cleafix">
+                            <li class="cleafix-left">
+                                <a class="btn btn-sm btn-default clickGood" href="javascript:;"><i class="icon iconfont icon-agree"></i> 点赞</a>
+                            </li>
+                            <li class="cleafix">
+                                <a class="btn btn-sm btn-default addFav {$active}" href="javascript:;"><i class="icon iconfont icon-collection"></i> 收藏</a>
+                            </li>
+                            <li class="cleafix-right">
+                                <a class="btn btn-sm btn-default" href="javascript:flowplayer('.flowplayer').fullscreen();"><i class="si si-size-fullscreen"></i> 点击进入全屏模式</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hy-layout active clearfix">
+                <div class="hy-switch-tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#list1" data-toggle="tab" title="播放线路"><i class="icon iconfont icon-play"></i> 播放线路</a>
+                        </li>
+                        <li>
+                            <a href="#list2" data-toggle="tab" title="影片下载"><i class="icon iconfont icon-download"></i> 影片下载</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="hy-play-list tab-pane fade in active" id="list1">
+                        <div class="item tyui" id="playlist">
+                            <div class="panel clearfix">
+                                <div id="playlist4" class="playlist collapse in">
+                                    <table class="playlistlink-4 list-15256 clearfix">
+                                        <tr>
+                                            <td>
+                                                <a class="btn btn-m btn-default" title='手机播放' href='/play/{$id}.html' target="_self">线路一</a>美国芝加哥节点 - 默认线路
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a class="btn btn-m btn-default" title='电脑播放' href='/play/{$id}.html?road=2' target="_self">线路二</a>全球加速节点 - 建议海外用户选用
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a class="btn btn-m btn-default" title='电脑播放' href='/play/{$id}.html?road=3' target="_self">线路三</a>全球备用节点 - 卡顿时首选
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hy-play-list tab-pane fade in" id="list2">
+                        <div class="item" id="downlist">
+                            <div class="panel">
+                                <div id="downlist1" class="downlist collapse in">
+                                    <span class="down-help">
+                                        <a href="/help/ios.html" target="_blank">【苹果手机教程】</a>
+                                        <a href="/help/anzuo.html" target="_blank">【安卓手机教程】</a>
+                                        <a href="/help/pc.html" target="_blank">【电脑版教程】</a>
+                                    </span>
+                                    <table class="table">
+                                        <tbody>
+                                        <tr class="app_hide">
+                                            <td width="75%">
+                                                <script src="/home/js/clipboard.min.js"></script>
+                                                <input type="text" data-clipboard-text="{$down_url}" id="lin1k0" class="form-control input-sm copy_btn" value="{$down_url}">
+                                            </td>
+                                            <td width="25%" align="right">
+                                                <a href="{$down_url}" class="btn btn-sm btn-default downlink_btn">普通下载</a> &nbsp
+                                                <a href="{:Thunder($down_url)}" class="btn btn-sm btn-default hidden-xs" title="迅雷影音" target="_self">迅雷影音</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="75%">
+                                                <script src="/home/js/clipboard.min.js"></script>
+                                                <input type="text" data-clipboard-text="{:Thunder($down_url)}" id="lin1k1" class="form-control input-sm copy_btn app_disable" value="{:Thunder($down_url)}">
+                                            </td>
+                                            <td width="25%" align="right">
+                                                <a href="{:Thunder($down_url)}" class="btn btn-sm btn-default downlink_btn">迅雷下载</a> &nbsp;
+                                                <a href="{:Thunder($down_url)}" class="btn btn-sm btn-default hidden-xs" title="迅雷影音" target="_self">迅雷影音</a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--相关-->
+            <div class="hy-layout clearfix">
+                <div class="hy-video-head"><h3 class="margin-0"><i class="icon iconfont icon-collect text-color"></i>播放小提示
+                </h3></div>
+                <div class="tishi">由于本站建立于美国，可能部分国家地区访问会出现卡顿！受您本地网络环境影响，如果默认线路(线路一）播放出现卡顿，请您手动切换至播放（线路二），如果线路二播放出现卡顿，请您手动切换至播放（线路二），您也可选择通过迅雷下载到手机进行观看！</div>
+            </div>
+            <div class="hy-layout clearfix">
+                <div class="hy-video-head"><h3 class="margin-0"><i class="icon iconfont icon-comment text-color"></i>影片评论
+                </h3></div>
+                <div id="comment_list"></div>
+            </div><!--end 评论-->
+        </div>
+        {include file="right"/}
+    </div>
+</div>
+{include file="footer"/}
+
+<script src="/home/js/jquery.min.js"></script>
+<!-- include flowplayer -->
+<script src="/flowplayer/flowplayer.min.js"></script>
+
+<!-- 加载Flowplayer hlsjs引擎（light），包括hls.light.js -->
+<script src="/flowplayer/flowplayer.hlsjs.light.min.js"></script>
+<script src="/flowplayer/flowplayer.speed-menu.min.js"></script>
+
+<script>
+    var vid   = '{$id}';
+    var video = '{$video_url}';
+
+
+    var src = m3u8_host + video;
+    if (src.indexOf('m3u8')) {
+        $(".flowplayer video").html('<source type="application/x-mpegurl" src="' + src + '">');
+    } else {
+        $(".flowplayer video").html('<source type="video/mp4" src="' + src + '">')
+    }
+
+    flowplayer(function (api, root) {
+        if (!flowplayer.support.inlineVideo || !api.conf.float) {
+            return;
+        }
+        var bean           = flowplayer.bean,
+            common         = flowplayer.common,
+            isMinimal      = common.hasClass(root, "fp-minimal"),
+            scrolling      = false,
+            placeholder    = common.createElement("div", {
+                "class": "fp-placeholder"
+            }),
+
+            scrollCallback = function () {
+                if (scrolling) {
+                    return;
+                }
+                var scrollTop   = function () {
+                        var docElem = document.documentElement;
+
+                        return (window.pageYOffset || docElem.scrollTop) - (docElem.clientTop || 0);
+                    },
+                    floatPlayer = scrollTop() >= common.offset(placeholder).top + scrollTop();
+
+                common.toggleClass(root, "is-floating", floatPlayer);
+                if (!isMinimal) {
+                    common.toggleClass(root, "fp-minimal", floatPlayer);
+                }
+                // make placeholder responsive while player is floating
+                common.css(common.find("div", placeholder)[0],
+                    "padding-top", floatPlayer ? (api.conf.ratio * 100) + "%" : 0);
+                scrolling = true;
+                setTimeout(function () {
+                    scrolling = false;
+                }, 75);
+            };
+
+        // fine tune placeholder styling
+        [
+            "display",
+            "float",
+            "max-width",
+            "max-height",
+            "background-color",
+            "background-image",
+            "background-size"
+        ].forEach(function (style) {
+            common.css(placeholder, style, common.css(root, style));
+        });
+        // append a DIV acting like fp-ratio to make the placeholder responsive
+        common.append(placeholder, common.createElement('div'));
+        root.parentNode.insertBefore(placeholder, root);
+
+        var fsbutton = root.querySelector(".fp-fullscreen");
+
+        api.on("ready", function () {
+            bean.on(window, "scroll.fp-float", scrollCallback);
+            root.querySelector(".fp-controls").appendChild(fsbutton);
+        }).on("unload", function () {
+            bean.off(window, "scroll.fp-float");
+            common.css(common.find("div", placeholder)[0], "padding-top", 0);
+            common.removeClass(root, "is-floating");
+            if (!isMinimal) {
+                common.removeClass(root, "fp-minimal");
+            }
+        });
+    });
+    window.onload = function () {
+        var vid = '{$id}';
+        $.post(api_host + '/api/comments', {id: vid}, function (res) {
+            $('#comment_list').html(res);
+        })
+    };
+
+</script>
+</body>
+</html>

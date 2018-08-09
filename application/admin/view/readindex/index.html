@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html class="ie9 no-focus" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+    {include file="meta"/}
+    <link rel="stylesheet" href="/static/js/plugins/magnific-popup/magnific-popup.min.css">
+
+
+</head>
+<body>
+<!-- Page Container -->
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+    <!-- Sidebar -->
+    {include file="sidebar"/}
+    <!-- END Sidebar -->
+
+    <!-- Header -->
+    {include file="header"/}
+    <!-- END Header -->
+
+    <!-- Main Container -->
+    <main id="main-container" style="min-height: 304px;">
+        <div class="bg-gray-lighter">
+            <ol class="breadcrumb">
+                {$breadcrumb|raw}
+            </ol>
+        </div>
+        <!-- END Page Header -->
+        <!-- Page Content -->
+        <div class="content">
+            <!-- Dashboard Charts -->
+            <div class="row">
+                <div class="block">
+                    <!-- Basic Info -->
+                    <div class="block-content text-center overflow-hidden">
+                        <div class="push-30-t push animated fadeInDown">
+                            <img class="img-avatar" src="assets/img/avatars/avatar10.jpg" alt="">
+                        </div>
+                        <div class="push-30 animated fadeInUp" data-original-title="确定生成">
+                            <button class="btn btn-primary btn-submit">
+                                <a href="javascript:;" style="color: #fff">确定生成 <i class="si si-note" data-toggle="tooltip" title=""></i></a>
+                            </button>
+                            <h3 class="h5 text-muted">&nbsp;</h3>
+                        </div>
+                    </div>
+                    <!-- END Basic Info -->
+
+                    <!-- Stats -->
+                    <div class="block-content text-center bg-gray-lighter">
+                        <div class="row items-push text-uppercase">
+                            <div class="col-xs-6 col-sm-3">
+                                <div class="font-w700 text-gray-darker animated fadeIn">生成首页</div>
+                                <a class="h2 font-w300 text-primary animated flipInX" href="/readindex/index"><i class="fa fa-home"></i></a>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-3">
+                                <div class="font-w700 text-gray-darker animated fadeIn">生成列表页</div>
+                                <a class="h2 font-w300 text-primary animated flipInX" href="/readlist/index"><i class="fa fa-list"></i></a>
+                            </div>
+                            <div class="col-xs-6 col-sm-3">
+                                <div class="font-w700 text-gray-darker animated fadeIn">生成内容页</div>
+                                <a class="h2 font-w300 text-primary animated flipInX" href="/readdetail/index"><i class="fa fa-file-text-o"></i></a>
+                            </div>
+                            <div class="col-xs-6 col-sm-3">
+                                <div class="font-w700 text-gray-darker animated fadeIn">生成用户页</div>
+                                <a class="h2 font-w300 text-primary animated flipInX" href="/readuser/index"><i class="fa fa-user"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END Stats -->
+                </div>
+            </div>
+        </div>
+        <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+    <!-- Footer -->
+    <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix">
+        <div class="pull-right">
+            Crafted with <i class="fa fa-heart text-city"></i> by
+            <a class="font-w600" href="//97langren.com" target="_blank">97langren.com</a>
+        </div>
+        <div class="pull-left">
+            <a class="font-w600" href="//97langren.com" target="_blank">OneUI 3.1</a> &copy;
+            <span class="js-year-copy"></span>
+        </div>
+    </footer>
+    <!-- END Footer -->
+</div>
+<!-- END Page Container -->
+
+{include file="footer"/}
+
+<script>
+    jQuery(function () {
+        // Init page helpers (Appear + CountTo + Magnific Popup plugins)
+        App.initHelpers(['appear', 'appear-countTo', 'magnific-popup']);
+
+    });
+    
+    $('.btn-submit').click(function () {
+        pageLoader();
+        $.post('/readindex/read',function (res) {
+            pageLoader('hide');
+            layer.alert(res.msg);
+        })
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html class="ie9 no-focus" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+    <link rel="stylesheet" href="/static/js/plugins/jquery-tags-input/jquery.tagsinput.css">
+    {include file="meta"/}
+    <style>
+        .col-md-7 label {
+            font-weight: 200;
+            margin-right: 10px;
+            line-height: 20px;
+            margin-bottom: 0
+        }
+
+        .col-md-7 a {
+            font-weight: 200;
+            margin-right: 10px;
+            line-height: 20px;
+            margin-bottom: 0
+        }
+
+        .am-table1 th {
+            list-style: none;
+            text-align: right;
+            font-size: 12px;
+            width: 50px;
+        }
+
+        .am-table1 td {
+            padding: 1px;
+        }
+
+        .am-table1 tr .first-child {
+            width: 150px;
+        }
+
+        .am-table1 tr .first-child1 {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<!-- Page Container -->
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+    <!-- Sidebar -->
+    {include file="sidebar"/}
+    <!-- END Sidebar -->
+
+    <!-- Header -->
+    {include file="header"/}
+    <!-- END Header -->
+
+    <!-- Main Container -->
+    <main id="main-container" style="min-height: 310px;">
+        <!-- Page Header -->
+
+        <div class="bg-gray-lighter">
+            <ol class="breadcrumb">
+                {$breadcrumb|raw}
+            </ol>
+        </div>
+
+        <!-- END Page Header -->
+
+        <!-- Page Content -->
+        <div class="content animated">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <ul class="nav nav-tabs">
+                            {foreach $Channel as $v}
+                            <li class="{$channel==$v['id'] ? 'active' : ''}">
+                                <a href="{:url('/results/'.$action,['channel'=>$v['id'],'id'=>$info.id])}">{$v.name}</a>
+                            </li>
+                            {/foreach}
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <div class="block-content">
+                                    <form class="form-horizontal" action="" method="post">
+                                        <input value="{$info.id}" id="id" type="hidden" name="id">
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" for="title">文章标题
+                                                <span class="text-danger">*</span></label>
+                                            <div class="col-md-7">
+                                                <input class="form-control form-control1" value="{$info.title}" type="text" id="title" name="title" placeholder="请输入文章标题">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" for="sub_title">文章副标题
+                                                <span class="text-danger">*</span></label>
+                                            <div class="col-md-7">
+                                                <input class="form-control form-control1" value="{$info.sub_title}" type="text" id="sub_title" name="title" placeholder="请输入文章副标题">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label " for="keywords">关键词
+                                                <span class="text-danger">*</span></label>
+                                            <div class="col-md-7">
+                                                <input class="form-control form-control1" value="{$info.keywords}" type="text" id="keywords" name="keywords" placeholder="请输入文章标题">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="form_group_upload_file_ext">
+                                            <label class="col-md-1 control-label" for="tags">分类
+                                                <span class="text-danger">*</span></label>
+                                            <div class="col-md-7">
+                                                <input class="js-tags-input form-control" type="text" id="tags" placeholder="添加标签" name="tags" value="{$info['tags']}" data-default="添加标签">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label ">缩略图
+                                                <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-7">
+                                                <div style="width:150px; text-align:center; margin: 5px; display:inline-block;" class="goods_xc">
+                                                    <input type="hidden" value="{$info.thumb}" id="thumb" name="thumb">
+                                                    <a onclick="" href="javascript:void(0);"><img id="thumb2" width="150" src="{$info['thumb'] ? $info['thumb'] : 'admin/img/noImg.jpg'}"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label " for="actor">演员
+                                                <span class="text-danger">*</span></label>
+                                            <div class="col-md-7">
+                                                <input class="form-control form-control1" value="{$info.actor}" type="text" id="actor" name="actor">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label " for="director">导演
+                                                <span class="text-danger">*</span></label>
+                                            <div class="col-md-7">
+                                                <input class="form-control form-control1" value="{$info.director}" type="text" id="director" name="director">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label " for="year">年代
+                                                <span class="text-danger">*</span></label>
+                                            <div class="col-md-3">
+                                                <select class="js-select2 form-control " id="year" name="year" style="width: 100%;">
+                                                    <?php for($i=date('Y')+1;$i>1990; $i--){?>
+                                                    <option {if $i== $info[
+                                                    'year']}selected{/if} value="{$i}">{$i}年</option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label">语言
+                                                <span class="text-danger">*</span></label>
+                                            <div class="col-md-7 lang">
+                                                <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                                                    <input {if $info['lang']== '国语'}checked{/if} type="radio" value="国语" name="lang">
+                                                    <span></span> 国语 </label>
+                                                <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                                                    <input {if $info['lang']== '粤语'}checked{/if} type="radio" value="粤语" name="lang">
+                                                    <span></span> 粤语 </label>
+                                                <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                                                    <input {if $info['lang']== '英语'}checked{/if} type="radio" value="英语" name="lang">
+                                                    <span></span> 英语 </label>
+                                                <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                                                    <input {if $info['lang']== '日语'}checked{/if} type="radio" value="日语" name="lang">
+                                                    <span></span> 日语 </label>
+                                                <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                                                    <input {if $info['lang']== '韩语'}checked{/if} type="radio" value="韩语" name="lang">
+                                                    <span></span> 韩语 </label>
+                                                <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                                                    <input {if $info['lang']== '其他'}checked{/if} type="radio" value="其他" name="lang">
+                                                    <span></span> 其他 </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label">地区
+                                                <span class="text-danger">*</span></label>
+                                            <div class="col-md-7 area"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label " for="play">播放数
+                                                <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control form-control1" id="play" name="play" value="{$info.play}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label " for="good">点赞数
+                                                <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control form-control1" name="good" id="good" value="{$info.good}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label " for="bad">点踩数
+                                                <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control form-control1" id="bad" name="bad" value="{$info.bad}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label " for="author">发布人
+                                                <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-4">
+                                                <input class="form-control form-control1" value="{$info.author}" type="text" id="author" name="author">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label " for="state">更新状态
+                                                <span class="text-danger">*</span></label>
+                                            <div class="col-md-3">
+                                                <input class="form-control form-control1" value="{$info.state}" type="text" id="state" name="state">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label ">内容简介
+                                                <span class="text-danger">*</span></label>
+                                            <div class="col-md-9">
+                                                <textarea id="editor" style="width:100%;height:200px;">{$info.content|raw}</textarea>
+                                            </div>
+                                        </div>
+                                        <!--<div class="form-group">
+                                            <div class="col-md-7 col-md-offset-1">
+                                                <button class="btn btn-primary submit" href="{:url('add')}" type="submit">提交</button>
+                                                <button class="btn btn-danger submit" type="reset">取消</button>
+                                            </div>
+                                        </div>-->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+    <!-- Footer -->
+    <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix">
+        <div class="pull-right">
+            Crafted with <i class="fa fa-heart text-city"></i> by
+            <a class="font-w600" href="//97langren.com" target="_blank">97langren.com</a>
+        </div>
+        <div class="pull-left">
+            <a class="font-w600" href="//97langren.com" target="_blank">OneUI 3.1</a> &copy;
+            <span class="js-year-copy"></span>
+        </div>
+    </footer>
+    <!-- END Footer -->
+</div>
+<!-- END Page Container -->
+{include file="footer"/}
+<script type="text/javascript" src="/static/js/plugins/jquery-tags-input/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/uploadify/api-uploadify.js"></script>
+<script type="text/javascript" src="/static/js/plugins/ueditor/1.4.3/umeditor.config.js"></script>
+<script type="text/javascript" src="/static/js/plugins/ueditor/1.4.3/ueditor.all.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="/static/js/plugins/layer/laydate/laydate.js"></script>
+<script type="application/javascript">
+    /***实例化ueditor*/
+    var ue = UE.getEditor('editor');
+    jQuery(function () {
+        App.initHelpers(["tags-inputs", 'ckeditor-inline']);
+    });
+
+    /**
+     * 以下是图片上传方法
+     */
+    // 上传商品图片成功回调函数
+    function call_back(fileurl_tmp) {
+        $("#thumb").val(fileurl_tmp);
+        $("#thumb2").attr('src', fileurl_tmp);
+    }
+
+    function call_back1(fileurl_tmp) {
+        $("#cover").val(fileurl_tmp);
+        $("#cover1").attr('src', fileurl_tmp);
+    }
+
+    /**
+     * 上传之后删除组图input
+     * @access   public
+     * @val      string  删除的图片input
+     */
+    function ClearPicArr2(obj, path) {
+        $.ajax({
+            type   : 'GET',
+            url    : "{:url('/upload/delupload')}",
+            data   : {action: "del", filename: path},
+            success: function () {
+                $(obj).parent().remove(); // 删除完服务器的, 再删除 html上的图片
+            }
+        });
+        // 删除数据库记录
+        $.ajax({
+            type   : 'GET',
+            url    : "{:url('/article/del_goods_images')}",
+            data   : {filename: path},
+            success: function () {
+                //
+            }
+        });
+    }
+
+    var rules    = {
+        title      : {required: true},
+        cat_id     : {required: true},
+        sub_tit    : {required: true},
+        keywords   : {required: true},
+        file_name  : {required: true},
+        tags       : {required: true},
+        actor      : {required: true},
+        director   : {required: true},
+        year       : {required: true},
+        lang       : {required: true},
+        area       : {required: true},
+        state      : {required: true},
+        editorValue: {required: true},
+    };
+    var messages = {
+        cat_id     : {required: "请选择频道."},
+        title      : {required: "标题不能为空."},
+        sub_tit    : {required: '副标题不能为空'},
+        keywords   : {required: "关键词不能为空."},
+        file_name  : {required: "文件名不能为空"},
+        tags       : {required: '分类不能为空'},
+        actor      : {required: '演员不能为空'},
+        director   : {required: '导演不能为空'},
+        year       : {required: '请选择年代'},
+        lang       : {required: '请选择语言'},
+        area       : {required: '请选择地区'},
+        state      : {required: '更新状态不能为空'},
+        editorValue: {required: '简介不能为空'},
+    };
+
+    formCheck(rules, messages);
+
+
+    function sub() {
+        var data = {};
+
+        data['id']        = $('#id').val();
+        data['title']     = $('#title').val();
+        data['sub_title'] = $('#sub_title').val();
+        data['name']      = $('#name').val();
+        data['cat_id']    = $('#cat_id').val();
+        data['tags']      = $('#tags').val();
+        data['state']     = $('#state').val();
+        data['thumb']     = $('#thumb').val();
+        data['cover_img'] = $('#cover').val();
+        data['actor']     = $('#actor').val();
+        data['year']      = $('#year').val();
+        data['play']      = $('#play').val();
+        data['good']      = $('#good').val();
+        data['author']    = $('#author').val();
+        data['bad']       = $('#bad').val();
+        data['hour_long'] = $('#hour_long').val();
+        data['director']  = $('#director').val();
+        data['content']   = ue.getContent();
+        data['keywords']  = $('#keywords').val();
+        $.each($('.area input:radio:checked'), function () {
+            data['area'] = $(this).val();
+        });
+        $.each($('.flag input:radio:checked'), function () {
+            data['flag'] = $(this).val();
+        });
+        $.each($('.lang input:radio:checked'), function () {
+            data['lang'] = $(this).val();
+        });
+
+
+        console.log(data);
+
+        var prevUrl = '{$prevUrl}';
+        pageLoader();
+        jQuery.post("{:url('/results/'.$action)}", {
+            data     : data,
+            play_info: play_info,
+            prevUrl  : prevUrl
+        }).success(function (res) {
+            pageLoader('hide');
+            var msg = res.msg;
+            console.log(res);
+
+            if (res.code) {
+                if (res.url) {
+                    msg += "， 页面即将自动跳转~";
+                }
+                tips(msg, 'success');
+                setTimeout(function () {
+                    return res.url ? location.href = res.url : '';
+                }, 3000);
+            } else {
+                console.log(res);
+                tips(msg, 'danger');
+            }
+        }).fail(function () {
+            pageLoader('hide');
+            tips('服务器发生错误~', 'danger');
+            self.attr("autocomplete", "on").prop("disabled", false);
+        });
+    }
+
+    getArea();
+    $('#cat_id').change(function () {
+        getArea();
+    })
+
+    function getArea() {
+        var cat_id = '{$channel}';
+        $.post("{:url('/publics/getarea')}", {cat_id: cat_id}, function (res) {
+            var radio = '', checked = '';
+            var data  = res.data;
+            console.log(data);
+            for (var i in data) {
+                if (data[i]['name'] == '{$info.area}') {
+                    checked = 'checked'
+                } else {
+                    checked = '';
+                }
+                radio += '<label class="css-input css-radio css-radio-primary css-radio-sm push-10-r"><input ' + checked + ' type="radio" value="' + data[i]['name'] + '" name="area"><span></span>' + data[i]['name'] + '</label>';
+            }
+
+            radio += '<label class="css-input css-radio css-radio-primary css-radio-sm push-10-r"><input ' + checked + ' type="radio" value="其他" name="area"><span></span>其他</label>';
+            $('.area').html(radio);
+        })
+    }
+</script>
+</body>
+</html>

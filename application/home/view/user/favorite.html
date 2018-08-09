@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file="meta"/}
+</head>
+<body>
+{include file="header"/}
+<div class="container main">
+    <div class="row">
+        <div class="hy-member hy-layout clearfix">
+            <div class="hy-switch-tabs">
+                <ul class="nav nav-tabs">
+                    <a class="text-muted pull-right hidden-xs btn-logout" href="javascript:;"><i class="icon iconfont icon-setting"></i> 退出账户</a>
+                    <li><a href="/user/info.html" title="播放线路">基本资料</a></li>
+                    <li class="active"><a href="/user/favorite.html" title="我的收藏">我的收藏</a></li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div class="item tab-pane fade in active">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="text-muted"> 视频</th>
+                            <th class="text-muted hidden-xs">收藏时间</th>
+                            <th class="text-muted"> 操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="fav-list" id="fav-list"></tbody>
+                    </table>
+                    <div class="hy-page clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="footer"/}
+
+<script>
+    jQuery(function () {
+        var user = gStorage('user');
+        if(!user){location.href = '/user/login.html'}
+        $.post(api_host + '/api/getfav', {user_id: user.id}, function (res) {
+            if (res.code == 1) {
+                var list = res.data.data;
+                for (var i in list) {
+                    $('#fav-list').append('<tr><td><a href="/' + list[i].channel + '/' + list[i].vid + '" target="_blank">' + list[i].title + '</a></td><td class="hidden-xs">' + timestampToTime(list[i].insert_time) + '</td><td><a onclick="cancelfav(' + list[i].id + ')" href="javascript:;">取消收藏</a></td></tr>')
+                }
+                $('.hy-page').html(res.page)
+            } else {
+                location.href = '/user/login.html'
+            }
+        }, 'json')
+    })
+    function cancelfav(id) {
+        if (!id) {
+            //信息框
+            layer.open({
+                content: '缺少參數'
+                , btn  : '我知道了'
+            });
+        }
+        //询问框
+        layer.open({
+            content: '您确定要取消收藏嗎？'
+            , btn  : ['確定', '不要']
+            , yes  : function (index) {
+                layer.close(index);
+                $.post(api_host + '/api/delfav', {id: id, user_id: user.id}, function (res) {
+                    if (res.code) {
+                        location.reload();
+                    } else {
+                        //信息框
+                        layer.open({
+                            content: res.msg
+                            , btn  : '我知道了'
+                        });
+                    }
+                }, 'json')
+            }
+        });
+    }
+</script>
+</body>
+</html>

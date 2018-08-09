@@ -1,0 +1,387 @@
+.comment_content {
+    margin-left: 40px;
+}
+
+.comment__body p {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.comment__footer {
+    line-height: 30px;
+}
+.comment__more_reply {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.comment__more_reply:hover {
+    cursor: pointer;
+    color: #999;
+}
+
+.comment_user_content {
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+.comment_user_img {
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.colorRed {
+    color: #e08181;
+}
+
+.good-add {
+    padding: 2px 0 0 0;
+}
+
+.textarea-item {}
+
+.reply-name {
+    width: 17px;
+    height: 17px;
+    /*background-image: url(../img/close.png);*/
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.theme-color{
+    color: #fe4159;
+}
+.comment__reply{
+    float: right;
+}
+.float-right{float: right}
+
+.full-width{
+    width: 100%;;
+}
+.border-gai {
+    margin: 1px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0px;
+}
+
+.border-gai1 {
+    display: none;
+}
+
+.border-gai20,
+.border-gai21,
+.border-gai22,
+.border-gai23,
+.border-gai24,
+.border-gai25,
+.border-gai26,
+.border-gai27,
+.border-gai28,
+.border-gai29,
+.border-gai210,
+.border-gai211,
+.border-gai212,
+.border-gai213,
+.border-gai214,
+.border-gai215,
+.border-gai216,
+.border-gai217,
+.border-gai218,
+.border-gai219,
+.border-gai220,
+.border-gai221,
+.border-gai222,
+.border-gai223,
+.border-gai224,
+.border-gai225,
+.border-gai226,
+.border-gai227,
+.border-gai228,
+.border-gai229,
+.border-gai230,
+.border-gai231,
+.border-gai232,
+.border-gai233,
+.border-gai234,
+.border-gai235,
+.border-gai236,
+.border-gai237,
+.border-gai238,
+.border-gai239 {
+    padding: 0px;
+    margin: 0px;
+    border: none;
+}
+
+.border-gai .comment_content1 {
+    margin-left: 10px;
+    min-height: 60px;
+}
+
+.leftx-a {
+    width: 50%;
+    text-align: left;
+    float: left;
+    /* line-height: 25px; */
+    margin-bottom: 10px;
+    color: #fe4159;
+}
+
+.leftx-a a {
+    color: #555;
+    font-size: 12px;
+}
+
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.b_size {
+    font-size: 1.2em;
+}
+
+.m_size {
+    font-size: 1em;
+}
+
+.s_size {
+    font-size: 0.75em;
+}
+
+.border_padding {
+    border: 1px solid;
+    padding: 3px 12px;
+}
+
+
+/**
+input style
+*/
+
+.black-theme {
+    background-color: #262626;
+    border: 1px solid #333;
+    color: #888;
+}
+
+.inline-row label {
+    width: 20%;
+    font-size: 0.75em;
+    color: #888;
+}
+
+.inline-row .text-box {
+    width: 69%;
+}
+
+.inline-row .group {
+    display: inline;
+}
+
+.rightx-a {
+    width: 50%;
+    text-align: right;
+    float: left;
+    line-height: 25px;
+    margin-bottom: 10px;
+    padding-right: 5px;
+    font-size: 12px;
+}
+
+#reply {}
+
+.compeletBuildModal {
+    position: absolute;
+    display: block;
+}
+
+.masking2 {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #000;
+    opacity: 0;
+    animation: maskingHide 2s;
+    -moz-animation: maskingHide 2s;
+    /* Firefox */
+    -webkit-animation: maskingHide 2s;
+    /* Safari and Chrome */
+    -o-animation: maskingHide 2s;
+    /* Opera */
+}
+
+.container2 {
+    position: absolute;
+    z-index: 10014;
+    /* top: 0; */
+    right: 0;
+    left: 0;
+    bottom: -607px;
+    animation: headerHide 2s;
+    -moz-animation: headerHide 2s;
+    /* Firefox */
+    -webkit-animation: headerHide 2s;
+    /* Safari and Chrome */
+    -o-animation: headerHide 2s;
+    /* Opera */
+}
+
+.box1 {
+    display: none;
+    position: absolute;
+    /* top: 0; */
+    left: 50vw;
+    width: 350px;
+    height: 45px;
+    transform: translateX(-50%);
+    text-align: center;
+    border-radius: 6px;
+    background: #888;
+    margin: auto;
+    animation: headerEnter 2s;
+    -moz-animation: headerEnter 2s;
+    /* Firefox */
+    -webkit-animation: headerEnter 2s;
+    /* Safari and Chrome */
+    -o-animation: headerEnter 2s;
+    /* Opera */
+}
+#comment_list{
+    background: rgba(1,1,1,0.2);
+    padding: 10px;
+}
+.cancelButton,
+.submitButton {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 50px;
+    font-size: 12px;
+    color: #14b3f2;
+    text-align: center;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0);
+}
+
+.comment_list_group {
+    margin: 20px 0px 0 0;
+}
+
+.comments__list {
+    padding-bottom: 0px;
+}
+
+.comment_list_more {
+    line-height: 50px;
+    border-bottom: 1px dotted;
+    padding: 1px;
+}
+
+.comment_list_more h3 {
+    text-align: center;
+    font-size: 16px;
+}
+
+.comment__header {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.comment {
+    /* border-top: 1px solid #888; */
+    margin-bottom: 0px;
+}
+
+.comment__body p {
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.comment__footer {
+    line-height: 30px;
+}
+
+/*.comment--reply {
+    background-color: #222;
+}*/
+
+.comment__more_reply {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.comment__more_reply:hover {
+    cursor: pointer;
+    color: #999;
+}
+
+.comment_user_img {
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.colorRed {
+    color: red;
+}
+
+.rate-video-comment {
+    background: url(../img/video_like.svg) no-repeat center;
+    background-size: 18px auto;
+}
+.good-inc{
+    cursor:pointer;
+}
+.rate-video__button-coment {
+    content: "";
+    /* position: absolute; */
+    width: 28px;
+    height: 26px;
+    /* top: 27px; */
+    /* left: 50%; */
+    margin-top: -2px;
+    transition: all 0.3s;
+    opacity: .615;
+    float: right;
+}
+
+.comment__body1 {
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+    font-size: 20px;
+}
+
+.commet_color {
+    color: #686868;
+}
+
+.rate-video-comment-bad {
+    background: url(../img/good.svg) no-repeat center;
+    background-size: 18px auto;
+}
+
+.rate-video-comment-good {
+    background: url(../img/good2.svg) no-repeat center;
+    background-size: 18px auto;
+}
+
+.comment__body a {
+    color: #686868 !important;
+}

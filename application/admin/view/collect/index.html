@@ -1,0 +1,171 @@
+<!DOCTYPE html><!--[if IE 9]>
+<html class="ie9 no-focus" lang="en"> <![endif]--><!--[if gt IE 9]><!-->
+<html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+	{include file="meta"/}
+</head>
+<body>
+<!-- Page Container -->
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+	<!-- Sidebar -->
+	{include file="sidebar"/}
+	<!-- END Sidebar -->
+
+	<!-- Header -->
+	{include file="header"/}
+	<!-- END Header -->
+
+	<!-- Main Container -->
+	<main id="main-container" style="min-height: 304px;">
+		<div class="bg-gray-lighter">
+			<ol class="breadcrumb">
+				{$breadcrumb|raw}
+			</ol>
+		</div>
+		<!-- END Page Header -->
+
+		<!-- Page Content -->
+		<div class="content animated">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="block">
+						<div class="block-header bg-gray-lighter">
+							<ul class="block-options">
+								<li>
+									<button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo">
+										<i class="si si-refresh"></i></button>
+								</li>
+								<li>
+									<button type="button" data-toggle="block-option" data-action="fullscreen_toggle">
+										<i class="si si-size-fullscreen"></i></button>
+								</li>
+							</ul>
+							<h3 class="block-title">节点列表</h3>
+						</div>
+						<div class="block-content tab-content">
+							<div class="tab-pane active">
+								<div class="row data-table-toolbar">
+									<div class="col-sm-12">
+										<form class="pull-right search-bar" method="get" action="{:url('/collect/index/')}" role="form">
+											<input type="hidden" name="search_field" id="search-field" value="username|b.name">
+											<div class="input-group">
+												<div class="input-group-btn">
+													<button class="btn btn-default" id="search-btn" data-toggle="dropdown" type="button" aria-expanded="false">
+														搜索 <span class="caret"></span>
+													</button>
+													<ul class="dropdown-menu">
+														<li>
+															<a tabindex="-1" href="javascript:void(0)" data-field="username|b.name">搜索</a>
+														</li>
+														<li>
+															<a tabindex="-1" href="javascript:void(0)" data-field="username">用户名</a>
+														</li>
+														<li>
+															<a tabindex="-1" href="javascript:void(0)" data-field="b.name">角色名</a>
+														</li>
+													</ul>
+												</div>
+												<input type="text" class="form-control" value="" name="keyword" placeholder="用户名/角色名">
+											</div>
+										</form>
+										<div class="toolbar-btn-action">
+											<a title="新增" icon="fa fa-plus-circle" class="btn btn-primary" href="{:url('/collect/add')}"><i class="fa fa-plus-circle"></i> 新增</a>
+											<a title="启用" icon="fa fa-check-circle-o" class="btn btn-success ajax-post confirm" target-form="ids" href="{:url('/collect/enable',['table'=>'user'])}"><i class="fa fa-check-circle-o"></i> 启用</a>
+											<a title="禁用" icon="fa fa-ban" class="btn btn-warning ajax-post confirm" target-form="ids" href="{:url('/collect/disable',['table'=>'user'])}"><i class="fa fa-ban"></i> 禁用</a>
+											<a title="删除" icon="fa fa-times-circle-o" class="btn btn-danger ajax-post confirm" target-form="ids" href="{:url('/collect/del',['table'=>'user'])}"><i class="fa fa-times-circle-o"></i> 删除</a>
+										</div>
+									</div>
+								</div>
+								<div class="table-responsive">
+									<table class="table table-builder table-hover table-bordered table-striped js-table-checkable">
+										<thead>
+										<tr>
+											<th class="text-center" style="width: 50px;">
+												<label class="css-input css-checkbox css-checkbox-primary remove-margin-t remove-margin-b">
+													<input id="check-all" type="checkbox"><span></span>
+												</label>
+											</th>
+											<th width="80">ID
+												<a href="" class="pull-right" data-toggle="tooltip" data-original-title="排序"><i class="fa fa-sort text-muted"></i></a>
+											</th>
+											<th>
+												节点名称
+												<span class="pull-right">
+                                                    <a href="javascript:void(0);" data-map='{"is_admin":1}' class="field-filter" data-filter="username" data-list="" data-type="checkbox" data-options="" data-field-display="username" data-field="username" data-table="user" data-toggle="tooltip" data-original-title="筛选">
+                                                        <i class="fa fa-filter {if !strpos('--'.input('_filter'),'username')}text-muted{/if}"></i>
+                                                    </a>
+                                                </span>
+											</th>
+											<th width="80">栏目</th>
+											<th>列表页URL</th>
+											<th>
+												文章页URL
+											</th>
+											<th width="120">操作</th>
+										</tr>
+										</thead>
+										<tbody>
+										{notempty name="collect"}
+										{foreach $collect as $v}
+										<tr class="text-c">
+											<td class="text-center">
+												<label class="css-input css-checkbox css-checkbox-primary">
+													<input class="ids" name="ids[]" value="{$v.id}" type="checkbox"><span></span>
+												</label>
+											</td>
+											<td>{$v.id}</td>
+											<td><a href="{:url('/results/index/id/'.$v['id'].'/cid/'.$v['cid'])}" data-toggle="tooltip" data-original-title="采集记录">{$v.name}</a></td>
+											<td>{:getCatName($v.cid)}</td>
+											<td>{$v.list_url}</td>
+											<td>{$v.test_url}</td>
+											<td class="f-14 td-manage">
+												<div class="btn-group">
+													<a title="" icon="fa fa-pencil" class="btn btn-s btn-default" href="{:url('/collect/edit',['id'=>$v['id']])}" target="_self" data-toggle="tooltip" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
+													<a title="" icon="fa fa-fw fa-cloud-download" class="btn btn-s btn-default" href="{:url('/collect/getres',['id'=>$v['id']])}" target="_self" data-toggle="tooltip" data-original-title="采集"><i class="fa fa-fw fa-cloud-download"></i></a>
+													<a title="" icon="fa fa-times" class="btn btn-s btn-default ajax-get confirm" href="{:url('/collect/del',['table'=>'user','id'=>$v['id']])}" data-toggle="tooltip" data-original-title="删除"><i class="fa fa-times"></i></a>
+												</div>
+											</td>
+										</tr>
+										{/foreach}
+										<tr {$collect->render() ? '' : 'style=display:none'}>
+											<td colspan="9" class="text-center">{$collect->render()}</td>
+										</tr>
+										{else}
+										<tr class="table-empty">
+											<td class="text-center empty-info" colspan="10">
+												<i class="fa fa-database"></i> 暂无数据<br>
+											</td>
+										</tr>
+										{/notempty}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END Page Content -->
+	</main>
+	<!-- END Main Container -->
+
+	<!-- Footer -->
+    <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix">
+        <div class="pull-right">
+            Crafted with <i class="fa fa-heart text-city"></i> by <a class="font-w600" href="//97langren.com" target="_blank">97langren.com</a>
+        </div>
+        <div class="pull-left">
+            <a class="font-w600" href="//97langren.com" target="_blank">OneUI 3.1</a> &copy; <span class="js-year-copy"></span>
+        </div>
+    </footer>
+	<!-- END Footer -->
+</div>
+<!-- END Page Container -->
+{include file="footer"/}
+
+<script src="/static/js/plugins/bootstrap3-editable/js/bootstrap-editable.js"></script>
+<script src="/admin/js/table.js"></script>
+
+</body>
+</html>

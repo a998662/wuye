@@ -1,0 +1,102 @@
+    <nav id="sidebar">
+        <!-- Sidebar Scroll Container -->
+        <div id="sidebar-scroll">
+            <!-- Sidebar Content -->
+            <!-- Adding .sidebar-mini-hide to an element will hide it when the sidebar is in mini mode -->
+            <div class="sidebar-content">
+                <!-- Side Header -->
+                <div class="side-header side-content bg-white-op">
+                    <!-- Layout API, functionality initialized in App() -> uiLayoutApi() -->
+                    <button class="btn btn-link text-gray pull-right hidden-md hidden-lg" type="button" data-toggle="layout" data-action="sidebar_close">
+                        <i class="fa fa-times"></i>
+                    </button>
+                    <!-- Themes functionality initialized in App() -> uiHandleTheme() -->
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-link text-gray dropdown-toggle" data-toggle="dropdown" type="button">
+                            <i class="si si-drop"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right font-s13 sidebar-mini-hide">
+                            <li>
+                                <a data-toggle="theme" data-theme="default" data-css="/static/css/themes/default.min.css" tabindex="-1" href="javascript:void(0)">
+                                    <i class="fa fa-circle text-default pull-right"></i> <span class="font-w600">Default</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-toggle="theme" data-theme="amethyst" data-css="/static/css/themes/amethyst.min.css" tabindex="-1" href="javascript:void(0)">
+                                    <i class="fa fa-circle text-amethyst pull-right"></i> <span class="font-w600">Amethyst</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-toggle="theme" data-theme="city" data-css="/static/css/themes/city.min.css" tabindex="-1" href="javascript:void(0)">
+                                    <i class="fa fa-circle text-city pull-right"></i> <span class="font-w600">City</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-toggle="theme" data-theme="flat" data-css="/static/css/themes/flat.min.css" tabindex="-1" href="javascript:void(0)">
+                                    <i class="fa fa-circle text-flat pull-right"></i> <span class="font-w600">Flat</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-toggle="theme" data-theme="modern" data-css="/static/css/themes/modern.min.css" tabindex="-1" href="javascript:void(0)">
+                                    <i class="fa fa-circle text-modern pull-right"></i> <span class="font-w600">Modern</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a data-toggle="theme" data-theme="smooth" data-css="/static/css/themes/smooth.min.css" tabindex="-1" href="javascript:void(0)">
+                                    <i class="fa fa-circle text-smooth pull-right"></i> <span class="font-w600">Smooth</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a class="h5 text-white" href="/">
+                        <i class="fa fa-circle-o-notch text-primary"></i> <span class="h4 font-w600 sidebar-mini-hide">ne</span>
+                    </a>
+                </div>
+                <!-- END Side Header -->
+
+                <!-- Side Content -->
+                <div class="side-content" id="sidebar-menu">
+                    <ul class="nav-main" id="nav-1">
+                        {notempty name="Menu")}
+                        {foreach $Menu as $v}
+                        {eq name="$v['parent_id']" value="$_location[1]['parent_id']"}
+                        <li class="open">
+                            <a class="nav-submenu" data-toggle="nav-submenu" href="javascript:void(0);"><i class="{$v.icon}"></i><span class="sidebar-mini-hide">{$v.name}</span></a>
+                            <ul>
+
+                                {foreach $Menu as $v1}
+                                {eq name="$v1['parent_id']" value="$v['id']"}
+                                <li><a <?php if($v1['id'] == $_location[2]["id"] || "/$controller/$action" == $v1['url']){echo 'class="active"';} ?> href="{:url($v1['url'])}" target="_self"><i class="{$v1.icon}"></i>{$v1.name}</a></li>
+                                {/eq}
+                                {/foreach}
+
+                            </ul>
+                        </li>
+                        {/eq}
+                        {/foreach}
+                        {/notempty}
+
+                        <!--<li class="open">
+                            <a class="nav-submenu" data-toggle="nav-submenu" href="javascript:void(0);"><i class="fa fa-fw fa-folder-open-o"></i><span class="sidebar-mini-hide">快捷操作</span></a>
+                            <ul>
+                                <li><a class="active" href="/" target="_self"><i class="fa fa-fw fa-tachometer"></i>后台首页</a></li>
+                                <li><a class="" href="{:url('/index/profile')}" target="_self"><i class="fa fa-fw fa-user"></i>个人设置</a></li>
+                                <li><a href="{:url('/index/clearcache')}" target="_self"><i class="fa fa-fw fa-trash-o"></i>清空缓存</a></li>
+                            </ul>
+                        </li>
+                        <li class="open">
+                            <a class="nav-submenu" data-toggle="nav-submenu" href="javascript:void(0);"><i class="fa fa-fw fa-folder-open-o"></i><span class="sidebar-mini-hide">内容管理</span></a>
+                            <ul>
+                                <li><a class="active" href="{:url('article/init')}" target="_self"><i class="fa fa-fw fa-tachometer"></i>普通文章</a></li>
+                                <li><a class="" href="{:url('/index/profile')}" target="_self"><i class="fa fa-fw fa-user"></i>个人设置</a></li>
+                                <li><a href="{:url('/index/clearcache')}" target="_self"><i class="fa fa-fw fa-trash-o"></i>清空缓存</a></li>
+                            </ul>
+                        </li>-->
+                    </ul>
+                </div>
+                <!-- END Side Content -->
+            </div>
+            <!-- Sidebar Content -->
+        </div>
+        <!-- END Sidebar Scroll Container -->
+    </nav>

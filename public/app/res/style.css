@@ -1,0 +1,371 @@
+html,
+body,
+ul,
+li,
+ol,
+dl,
+dd,
+dt,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+img,
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: "微软雅黑";
+    font-family: "Microsoft YaHei";
+}
+
+
+/* 默认 100% 为 16px ，62.5% 为 10px */
+
+html,
+body {
+    font-size: 100%;
+    font-size: 16px;
+    background: white;
+}
+
+ul,
+ul li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.main {
+    position: relative;
+    width: 100%;
+}
+
+.topImg {
+    position: relative;
+    overflow: hidden;
+}
+
+.topImg img {
+    width: 100%;
+}
+
+.m-nav {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    width: 100%;
+}
+
+.m-nav ul li {
+    float: left;
+    margin: 20px 0;
+    margin: 1.25rem 0;
+    width: 33.3%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.m-nav ul li p {
+    display: inline-block;
+    width: 100%;
+}
+
+.m-nav ul li p a {
+    font-size: 15px;
+    font-size: 0.9375rem;
+    color: #666;
+}
+
+.m-nav ul li p a:hover {
+    color: #3F3F3F;
+}
+
+.m-nav ul li p a span {
+    display: inline-block;
+    width: 100%;
+    height: 50px;
+    height: 3.125rem;
+}
+
+.m-nav ul li p.gw1Img a #gwxl1 {
+    background: transparent url('../img/gwxl1-1.png') no-repeat center center;
+    background-size: auto 45px;
+    background-size: auto 2.8125rem;
+}
+
+.m-nav ul li p.gw1Img a:hover #gwxl1 {
+    background: transparent url('../img/gwxl1.png') no-repeat center center;
+    background-size: auto 45px;
+    background-size: auto 2.8125rem;
+}
+
+.m-nav ul li p.gw2Img a #gwxl2 {
+    background: transparent url('../img/gwxl2-1.png') no-repeat center center;
+    background-size: auto 45px;
+    background-size: auto 2.8125rem;
+}
+
+.m-nav ul li p.gw2Img a:hover #gwxl2 {
+    background: transparent url('../img/gwxl2.png') no-repeat center center;
+    background-size: auto 45px;
+    background-size: auto 2.8125rem;
+}
+
+.m-nav ul li p.bdImg a #bdwp {
+    background: transparent url('../img/bdwp-1.png') no-repeat center center;
+    background-size: auto 45px;
+    background-size: auto 2.8125rem;
+}
+
+.m-nav ul li p.bdImg a:hover #bdwp {
+    background: transparent url('../img/bdwp.png') no-repeat center center;
+    background-size: auto 45px;
+    background-size: auto 2.8125rem;
+}
+
+.m-nav ul li p.wbImg a #wbyp {
+    background: transparent url('../img/wbyp-1.png') no-repeat center center;
+    background-size: auto 45px;
+    background-size: auto 2.8125rem;
+}
+
+.m-nav ul li p.wbImg a:hover #wbyp {
+    background: transparent url('../img/wbyp.png') no-repeat center center;
+    background-size: auto 45px;
+    background-size: auto 2.8125rem;
+}
+
+.m-nav ul li p.wypImg a #wyp {
+    background: transparent url('../img/wyp-1.png') no-repeat center center;
+    background-size: auto 45px;
+    background-size: auto 2.8125rem;
+}
+
+.m-nav ul li p.wypImg a:hover #wyp {
+    background: transparent url('../img/wyp.png') no-repeat center center;
+    background-size: auto 45px;
+    background-size: auto 2.8125rem;
+}
+
+.m-nav ul li p.wybImg a #wyb {
+    background: transparent url('../img/wyb-1.png') no-repeat center center;
+    background-size: auto 45px;
+    background-size: auto 2.8125rem;
+}
+
+.m-nav ul li p.wybImg a:hover #wyb {
+    background: transparent url('../img/wyb.png') no-repeat center center;
+    background-size: auto 45px;
+    background-size: auto 2.8125rem;
+}
+
+.m-nav ul li p.pgbImg a #pgb {
+    background: transparent url('../img/pgb-1.png') no-repeat center center;
+    background-size: auto 45px;
+    background-size: auto 2.8125rem;
+}
+
+.m-nav ul li p.pgbImg a:hover #pgb {
+    background: transparent url('../img/pgb.png') no-repeat center center;
+    background-size: auto 45px;
+    background-size: auto 2.8125rem;
+}
+
+.midImg {
+    position: relative;
+    overflow: hidden;
+}
+
+.midImg img {
+    width: 100%;
+}
+
+.btmImg {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 3.5rem 0 3.5rem;
+    text-align: center;
+    background: rgb(51, 51, 51);
+}
+
+.btmImg img {
+    width: 77%;
+}
+
+
+/* 响应式 屏幕小于768px 显示 手机页面 */
+
+@media only screen and (max-width: 768px) {
+    .topImg {
+        position: relative;
+        overflow: hidden;
+    }
+    .topImg img {
+        width: 100%;
+    }
+    .m-nav {
+        position: relative;
+        overflow: hidden;
+        margin: 0;
+        width: 100%;
+    }
+    .m-nav ul li {
+        float: left;
+        margin: 16px 0;
+        margin: 1rem 0;
+        width: 50%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+    .m-nav ul li p {
+        display: inline-block;
+        width: 100%;
+    }
+    .m-nav ul li p a {
+        font-size: 12px;
+        font-size: 0.75rem;
+        color: #666;
+    }
+    .m-nav ul li p a:hover {
+        color: #3F3F3F;
+    }
+    .m-nav ul li p a span {
+        display: inline-block;
+        width: 100%;
+        height: 32px;
+        height: 2rem;
+    }
+    .m-nav ul li p.gw1Img a #gwxl1 {
+        background: transparent url('../img/gwxl1-1.png') no-repeat center center;
+        background-size: auto 32px;
+        background-size: auto 2rem;
+    }
+    .m-nav ul li p.gw1Img a:hover #gwxl1 {
+        background: transparent url('../img/gwxl1.png') no-repeat center center;
+        background-size: auto 32px;
+        background-size: auto 2rem;
+    }
+    .m-nav ul li p.gw2Img a #gwxl2 {
+        background: transparent url('../img/gwxl2-1.png') no-repeat center center;
+        background-size: auto 32px;
+        background-size: auto 2rem;
+    }
+    .m-nav ul li p.gw2Img a:hover #gwxl2 {
+        background: transparent url('../img/gwxl2.png') no-repeat center center;
+        background-size: auto 32px;
+        background-size: auto 2rem;
+    }
+    .m-nav ul li p.bdImg a #bdwp {
+        background: transparent url('../img/bdwp-1.png') no-repeat center center;
+        background-size: auto 32px;
+        background-size: auto 2rem;
+    }
+    .m-nav ul li p.bdImg a:hover #bdwp {
+        background: transparent url('../img/bdwp.png') no-repeat center center;
+        background-size: auto 32px;
+        background-size: auto 2rem;
+    }
+    .m-nav ul li p.wbImg a #wbyp {
+        background: transparent url('../img/wbyp-1.png') no-repeat center center;
+        background-size: auto 32px;
+        background-size: auto 2rem;
+    }
+    .m-nav ul li p.wbImg a:hover #wbyp {
+        background: transparent url('../img/wbyp.png') no-repeat center center;
+        background-size: auto 32px;
+        background-size: auto 2rem;
+    }
+    .m-nav ul li p.wypImg a #wyp {
+        background: transparent url('../img/wyp-1.png') no-repeat center center;
+        background-size: auto 32px;
+        background-size: auto 2rem;
+    }
+    .m-nav ul li p.wypImg a:hover #wyp {
+        background: transparent url('../img/wyp.png') no-repeat center center;
+        background-size: auto 32px;
+        background-size: auto 2rem;
+    }
+    .m-nav ul li p.wybImg a #wyb {
+        background: transparent url('../img/wyb-1.png') no-repeat center center;
+        background-size: auto 32px;
+        background-size: auto 2rem;
+    }
+    .m-nav ul li p.wybImg a:hover #wyb {
+        background: transparent url('../img/wyb.png') no-repeat center center;
+        background-size: auto 32px;
+        background-size: auto 2rem;
+    }
+    .m-nav ul li p.pgbImg a #pgb {
+        background: transparent url('../img/pgb-1.png') no-repeat center center;
+        background-size: auto 32px;
+        background-size: auto 2rem;
+    }
+    .m-nav ul li p.pgbImg a:hover #pgb {
+        background: transparent url('../img/pgb.png') no-repeat center center;
+        background-size: auto 32px;
+        background-size: auto 2rem;
+    }
+    .midImg {
+        position: relative;
+        overflow: hidden;
+    }
+    .midImg img {
+        width: 100%;
+    }
+    .btmImg {
+        position: relative;
+        overflow: hidden;
+        margin: 0px;
+        padding: 1.1875rem 0 2rem;
+        text-align: center;
+        background: rgb(51, 51, 51);
+    }
+    .btmImg img {
+        width: 77%;
+    }
+    .headerAlert {
+        position: absolute;
+        top: 76vw;
+        font-size: 0.75rem;
+        color: #666;
+        padding: 0 58% 0 6%;
+    }
+    .topImg {
+        background-image: url("../res/middle.jpg");
+        width: 100vw;
+        height: 97vw;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .headerAlert {
+        position: absolute;
+        top: 47vw;
+        font-size: 0.75rem;
+        color: #666;
+        padding: 0 50% 0 10%;
+        background-size: 100% 100%;
+    }
+    .headerAlert p {
+        padding: 0 0 0 15%;
+    }
+    .topImg {
+        background-image: url("../res/banner.jpg");
+        width: 100vw;
+        height: 51vw;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+}

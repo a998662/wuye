@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html class="ie9 no-focus" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+    <link rel="stylesheet" href="/static/js/plugins/jquery-tags-input/jquery.tagsinput.css">
+    {include file="meta"/}
+    <style>
+        .col-md-7 label {
+            font-weight: 200;
+            margin-right: 10px;
+            line-height: 20px;
+            margin-bottom: 0
+        }
+
+        .col-md-7 a {
+            font-weight: 200;
+            margin-right: 10px;
+            line-height: 20px;
+            margin-bottom: 0
+        }
+    </style>
+</head>
+<body>
+<!-- Page Container -->
+<div class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+    <main id="main-container" style="min-height: 310px;">
+        <!-- END Page Header -->
+
+        <!-- Page Content -->
+        <div class="content animated">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <div class="block-header bg-gray-lighter"> 
+                            <ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i class="si si-size-fullscreen"></i></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">查看评论</h3>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <div class="block-content">
+                                    <form class="form-horizontal form-builder row" action="" name="form-builder" method="post">
+                                        <input value="{$info.id}" type="hidden" name="id">
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" for="title">文章标题 <span class="text-danger">*</span></label>
+                                            <div class="col-md-7">
+                                                <input class="form-control form-control1" value="{$info.title}" type="text" id="title" name="title">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" for="title">评论人 <span class="text-danger">*</span></label>
+                                            <div class="col-md-7">
+                                                <input class="form-control form-control1" value="{$info.nickname}" type="text" id="nickname" name="nickname">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label ">评论内容 <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-10"><textarea style="width:80%;height:200px;">{$info.content}</textarea></div>
+                                        </div>
+                                        <!--<div class="form-group">
+                                            <div class="col-md-7 col-md-offset-1">
+                                                <button class="btn btn-primary submit" href="{:url($action)}" type="submit">提交</button>
+                                            </div>
+                                        </div>-->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+    <!-- Footer -->
+    <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix">
+        <div class="pull-right">
+            Crafted with <i class="fa fa-heart text-city"></i> by <a class="font-w600" href="//97langren.com" target="_blank">97langren.com</a>
+        </div>
+        <div class="pull-left">
+            <a class="font-w600" href="//97langren.com" target="_blank">OneUI 3.1</a> &copy; <span class="js-year-copy"></span>
+        </div>
+    </footer>
+    <!-- END Footer -->
+</div>
+<!-- END Page Container -->
+{include file="footer"/}
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {include file="meta"/}
+</head>
+<body><!--百度熊掌号改造-->
+ {include file="header"/}
+<div class="container main">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 hy-main-content">
+            <div class="hy-layout active clearfix gonggao">
+                <div class="hy-switch-tabs">
+                    <ul class="nav nav-tabs">
+                        <li style="width: 100%;margin: 0;">
+                            <h1>{$title}</h1>
+                            <a class="btn-goods" data-id="{$id}" style="position: absolute;right: 5px;top: -4px;border-radius: 5px;" href="javascript:;">
+                                <i class="icon iconfont icon-agree"></i> 点赞
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="hy-play-list tab-pane fade in active" id="list1">
+                        <div class="item tyui" id="playlist">
+                            <div class="panel clearfix">
+                                <div id="playlist4" class="playlist collapse in" style="padding: 15px 5px;">
+                                    {$content|raw}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--相关-->
+        </div>
+
+    </div>
+</div>
+</div>
+
+{include file="footer" /}
+<script src=""></script>
+<script>
+    $('.btn-goods').click(function () {
+        var id = $(this).data('id');
+        $.post(api_host+'/api/clickgonggao',{id:id},function (res) {
+            layer.open({
+                shadeClose: false,
+                content   : res.msg
+                , btn     : '我知道了'
+            });
+        },'json')
+    })
+</script>
+</body>
+</html>

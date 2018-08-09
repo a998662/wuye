@@ -1,0 +1,26 @@
+<div class="col-md-3 col-sm-12 hy-main-side hidden-sm hidden-xs">
+    <div class="hy-layout clearfix">
+        {foreach $rightTop as $val}
+        <div class="hy-video-ranking side clearfix">
+            <div class="head">
+                {if $alias == 'mp3'}
+                    <a class="text-muted pull-right" href="/{$alias}/list.html" title="更多">更多<i class="icon iconfont icon-right"></i></a>
+                {else}
+                    <a class="text-muted pull-right" href="/{$alias}/list-{$val.name}.html" title="更多">更多<i class="icon iconfont icon-right"></i></a>
+                {/if}
+                <h4><i class="icon iconfont icon-top text-color"></i> {$val.name}排行榜</h4>
+            </div>
+            <div class="item">
+                <ul class="clearfix">
+                    {foreach $val['data'] as $k=>$v}
+                    <li>
+                        <span class="pull-right text-color">{:number_format($v.score,1)}</span>
+                        <a style="width: 90%;display: block" class="text-overflow" href="/{$v.channel}/{$v.id}.html" target="_self" title="{$v.title}"><em class="number {$k<3 ?= 'active'}">{$k+1}</em>{$v.title}</a>
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+        {/foreach}
+    </div>
+</div>

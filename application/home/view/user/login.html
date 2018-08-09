@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {include file="meta" /}
+</head>
+<body><!--百度熊掌号改造-->
+{include file="header" /}
+<div class="container main">
+    <div class="row">
+        <div class="hy-login">
+            <div class="head"><h3 class="text-center">
+                <a href="/"><img src="https://10rrbb.com/logo.png"/></a></h3>
+                <p class="text-muted text-center">用户登录</p></div>
+            <ul>
+                <form id="f_login" action="/user/login.html" method="post">
+                    <li><input type="input" name="username" class="form-control username" placeholder="邮箱"/></li>
+                    <li><input type="password" name="password" class="form-control password" placeholder="密码"/></li>
+                    <!--<li>
+                        <font id="tt_code" onclick="re_code()"></font>
+                        <input name="verify" type="text" placeholder="验证码" class="form-control verify"/>
+                    </li>-->
+                    <li>
+                        <button type="submit" class="btn btn-block btn-warning">登录</button>
+                    </li>
+                    <li class="text-center"><a class="text-muted a-link" href="javascript:;">没有账号，注册一个？</a></li>
+                </form>
+            </ul>
+        </div>
+    </div>
+</div>
+{include file="footer"/}
+
+<script>
+
+    var ref = getQueryString('ref');
+    $('.a-link').click(function () {
+        location.href = '/user/register.html?ref=' + ref;
+    })
+
+    //提交注册
+    $('#f_login').submit(function () {
+        var data = {
+            username: $('.username').val(),
+            password: $('.password').val(),
+            verify  : $('.verify').val(),
+            ref     : ref,
+        };
+
+        $.post(api_host + '/api/login', data, function (res) {
+            if (res.code == 0) {
+                layer.open({
+                    content: res.msg
+                    , btn  : '我知道了'
+                });
+                $('.verify').val('');
+                $('#tt_code img').attr('src', $('#tt_code img').attr('src') + '?');
+            } else {
+
+                console.log(res);
+                console.log(res.data);
+                sStorage('user', res.data);
+                location.href = res.ref ? res.ref : '/'
+            }
+        }, 'json')
+        return false;
+    })
+</script>
+</body>
+</html>

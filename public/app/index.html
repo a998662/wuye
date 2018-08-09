@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<!-- saved from url=(0027)https://www.maomiavapp.com/ -->
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>狼人APP官网</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="This is my page">
+    <link rel="bookmark" href="./res/app_icon_63.png">
+    <link rel="shortcut icon" href="./res/app_icon_63.png">
+    <script src="./res/hm.js"></script>
+    <script src="./res/jquery.min.js"></script>
+    <!-- bootstrap 文件 [ css ] -->
+    <link href="./res/bootstrap.min.css" rel="stylesheet">
+
+    <link href="./res/style.css" rel="stylesheet">
+    <script src="./res/main.js"></script>
+    <script src="./res/clipboard.min.js"></script>
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?3492d4e1730a79e97d14966e1888cf0b";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <style type="text/css">
+
+    </style>
+    <script type="text/javascript">
+        function chSize() {
+            var outWidth = $(window).outerWidth();
+            if (outWidth <= "768") {
+                $("div.topImg img").attr("src", "./res/middle.jpg");
+                // $("div.midImg img").attr("src", "./res/middle.png");
+                $("div.btmImg img").attr("src", "./res/banquan.png");
+            } else {
+                $("div.topImg img").attr("src", "./res/banner.jpg");
+                // $("div.midImg img").attr("src", "./res/middle.png");
+                $("div.btmImg img").attr("src", "./res/banquan1.png");
+            }
+        }
+
+        function isIE() {
+            var myNav = navigator.userAgent.toLowerCase();
+            return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
+        }
+
+        var gotoURL = "";
+        var passCode = "";
+
+        $(function() {
+
+            $(window).load(function() {
+                chSize();
+            });
+            $(window).resize(function() {
+                chSize();
+            });
+            // alert("近日各大杀毒软件提示猫声是恶意软件，因为猫声包含成人内容，请大家相信猫声社区，不会放恶意程序，本站有广告和收费VIP盈利，不会去破环用户手机，请大家安心使用！");
+            if (isIE() && isIE() < 9) {
+                idb9 = true;
+            } else {
+                var clipboard = new Clipboard('.copyBtn');
+                clipboard.on('success', function(e) {
+                    if (window.confirm("已成功复制密码到剪贴板，现在去下载吧！")) {
+                        window.location = gotoURL;
+                    }
+                });
+
+                clipboard.on('error', function(e) {
+                    if (window.confirm("抱歉，您的浏览器不支持此功能，请您手动输入密码: " + passCode + "。是否跳转去下载页面？")) {
+                        window.location = gotoURL;
+                    }
+                });
+            }
+        });
+
+        function changeURL(_url, _pass) {
+            gotoURL = _url;
+            passCode = _pass;
+        }
+    </script>
+    <style>
+        @media (max-width:738px) {
+            .virus-attention {}
+        }
+        
+        @media (min-width:738px) {
+            .virus-attention {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+
+
+<body>
+
+    <header>
+        <!-- 头部top -->
+        <div class="header">
+            <div class="topImg">
+                <!-- <img src="./res/banner.png"> -->
+            </div>
+        </div>
+
+    </header>
+    <a class="headerAlert" href="https://www.langren15.com/">
+        <p class="">本软件包含成人内容，部分下载或杀毒提示风险软件，大家可放心，狼人出品必属绿色，绝无恶意代码！
+        </p>
+    </a><br>
+    <div class="main">
+        <!-- 内容cont -->
+
+        <div class="container">
+            <div class="m-nav">
+                <a href="./virus/Virus.html">
+                    <p class="virus-attention" style="
+				color: red;
+				text-align: center;
+				font-weight: bold;
+			"> 狼人通知：点击查看为什么杀毒软件提示狼人APP是病毒和解决方式！
+                    </p>
+                </a>
+                <ul>
+                    <li>
+                        <p class="gw1Img">
+                            <a href="http://www.langren57.com/app/res/langren_v1.0.1.apk">
+                                <span id="gwxl1"></span></a>
+                        </p>
+                        <p class="ljAs"><a href="http://www.langren57.com/app/res/langren_v1.0.1.apk">安卓版下载</a></p>
+                    </li>
+                    <!-- <li>
+                        <p class="gw2Img">
+                            <a href="./res/langren_v1.0.1.apk">
+                                <span id="gwxl2"></span></a>
+                        </p>
+                        <p class="ljAs"><a href="./res/langren_v1.0.1.apk">安卓版下载2</a></p>
+                    </li> -->
+                    <li>
+                        <p class="pgbImg">
+                            <a href="javascript:void(0)" onclick="iosDown();">
+                                <span id="pgb"></span></a>
+                        </p>
+                        <p class="ljAs"><a href="javascript:void(0)" onclick="iosDown();">苹果版下载</a></p>
+                    </li>
+                    <li class="copyBtn" data-clipboard-text="5qf4" onclick="changeURL('https://pan.baidu.com/s/1v2JR_IQQgJuAL-Z_M418Mg', '5qf4')">
+                        <p class="bdImg">
+                            <a href="JavaScript:;" target="_blank">
+                                <span id="bdwp"></span></a>
+                        </p>
+                        <p class="ljAs"><a href="JavaScript:;" target="_blank">分享密码：5qf4</a></p>
+                    </li>
+                    <li class="copyBtn" data-clipboard-text="DHQ3" onclick="changeURL('http://vdisk.weibo.com/lc/Cn5voivMLjtappTxUOF', 'DHQ3')">
+                        <p class="wbImg">
+                            <a href="JavaScript:;" target="_blank">
+                                <span id="wbyp"></span></a>
+                        </p>
+                        <p class="ljAs"><a href="JavaScript:;" target="_blank">分享密码：DHQ3</a></p>
+                    </li>
+                    <li class="copyBtn" data-clipboard-text="rjg4n8" onclick="changeURL('https://share.weiyun.com/5mn4DOs', 'rjg4n8')">
+                        <p class="wypImg">
+                            <a href="JavaScript:;" target="_blank">
+                                <span id="wyp"></span></a>
+                        </p>
+                        <p class="ljAs"><a href="JavaScript:;" target="_blank">分享密码：rjg4n8</a></p>
+                    </li>
+
+                    <li>
+                        <p class="wybImg">
+                            <a href="https://www.langren25.com/" target="_blank">
+                                <span id="wyb"></span></a>
+                        </p>
+                        <p class="ljAs"><a href="https://www.langren25.com/" target="_blank">直接点击进入</a></p>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- <div class="midImg">
+            <img src="./res/middle.png">
+        </div> -->
+
+    </div>
+
+    <footer>
+        <!-- 底部信息 -->
+        <div class="footer">
+            <div class="btmImg">
+                <img src="./res/banquan.png">
+            </div>
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+<script>
+    // function iosDown() {
+    //     window.location.href = ""
+    // }
+</script>
+
+</html>

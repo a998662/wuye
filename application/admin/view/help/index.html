@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html class="ie9 no-focus" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+    <link rel="stylesheet" href="/static/js/plugins/bootstrap3-editable/css/bootstrap-editable.css">
+    {include file="meta"/}
+</head>
+<body>
+<!-- Page Container -->
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+    <!-- Sidebar -->
+    {include file="sidebar"/}
+    <!-- END Sidebar -->
+
+    <!-- Header -->
+    {include file="header"/}
+    <!-- END Header -->
+
+    <!-- Main Container -->
+    <main id="main-container" style="min-height: 304px;">
+        <div class="bg-gray-lighter">
+            <ol class="breadcrumb">
+                {$breadcrumb|raw}
+            </ol>
+        </div>
+        <!-- END Page Header -->
+
+        <!-- Page Content -->
+        <div class="content animated">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <div class="block-header bg-gray-lighter">
+                            <ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle"
+                                            data-action-mode="demo"><i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i
+                                            class="si si-size-fullscreen"></i></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">帮助信息</h3>
+                        </div>
+                        <div class="block-content tab-content">
+                            <div class="tab-pane active">
+                                <div class="row data-table-toolbar">
+                                    <div class="col-sm-12">
+                                        <form class="pull-right search-bar" method="get"
+                                                action="{:url('/help/index')}"
+                                                role="form">
+                                            <input type="hidden" name="search_field" id="search-field"
+                                                    value="title|tags|catName">
+                                            <div class="input-group">
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-default" id="search-btn" data-toggle="dropdown" type="button" aria-expanded="false">
+                                                        搜索 <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a tabindex="-1" href="javascript:void(0)" data-field="title|tags">搜索</a>
+                                                        </li>
+                                                        <li>
+                                                            <a tabindex="-1" href="javascript:void(0)" data-field="title">标题</a>
+                                                        </li>
+                                                        <li>
+                                                            <a tabindex="-1" href="javascript:void(0)" data-field="tags">标签</a>
+                                                        </li>
+                                                        <li>
+                                                            <a tabindex="-1" href="javascript:void(0)" data-field="catName">栏目</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <input type="text" class="form-control" value="" name="keyword" placeholder="标题/标签/栏目">
+                                            </div>
+                                        </form>
+
+                                        <div class="toolbar-btn-action">
+                                            <a title="新增" icon="fa fa-plus-circle" class="btn btn-primary" href="{:url('/help/add')}"><i class="fa fa-plus-circle"></i> 新增</a>
+                                            <a title="启用" icon="fa fa-check-circle-o" class="btn btn-success ajax-post confirm" target-form="ids" href="{:url('/help/enable',['table'=>'article'])}"><i class="fa fa-check-circle-o"></i> 启用</a>
+                                            <a title="禁用" icon="fa fa-ban" class="btn btn-warning ajax-post confirm" target-form="ids" href="{:url('/help/disable',['table'=>'article'])}"><i class="fa fa-ban"></i> 禁用</a>
+                                            <a title="删除" icon="fa fa-times-circle-o" class="btn btn-danger ajax-post confirm" target-form="ids" href="{:url('/help/del',['table'=>'article'])}"><i class="fa fa-times-circle-o"></i> 删除</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-builder table-hover table-bordered table-striped js-table-checkable">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center" style="width: 50px;">
+                                                <label class="css-input css-checkbox css-checkbox-primary remove-margin-t remove-margin-b">
+                                                    <input id="check-all" type="checkbox"><span></span>
+                                                </label>
+                                            </th>
+                                            <th width="80">ID</th>
+                                            <th width="">
+                                                标题
+                                                <!--<span class="pull-right">
+                                                    <a href="javascript:void(0);" class="field-filter" data-filter="title" data-list="" data-type="checkbox" data-options="" data-field-display="title" data-field="title" data-table="article" data-toggle="tooltip" data-original-title="筛选">
+                                                        <i class="fa fa-filter {if !strpos('&#45;&#45;'.input('_filter'),'title')}text-muted{/if}"></i>
+                                                    </a>
+                                                </span>-->
+                                            </th>
+                                            <th>类别</th>
+                                            <th width="150">添加时间
+                                                <!--<a href="" class="pull-right" data-toggle="tooltip" data-original-title="排序"><i class="fa fa-sort text-muted"></i></a>-->
+                                            </th>
+                                            <th width="60">状态</th>
+                                            <th width="90">操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {notempty name="article"}
+                                        {foreach $article as $v}
+                                        <tr class="text-c">
+                                            <td class="text-center">
+                                                <label class="css-input css-checkbox css-checkbox-primary">
+                                                    <input class="ids" name="ids[]" value="{$v.id}" type="checkbox"><span></span>
+                                                </label>
+                                            </td>
+                                            <td>{$v.id}</td>
+                                            <td class="text-l">
+                                                <a href="javascript:void(0);" >{$v.title}</a>
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0);" >{$v.name}</a>
+                                            </td>
+                                            <td>{:date('Y-m-d H:i:s',$v['insert_time'])}</td>
+                                            <td>
+                                                <label class="css-input switch switch-sm switch-primary" title="开启/关闭">
+                                                    <input data-id="{$v.id}" data-table="article" data-field="status" {if $v['status'] ==1}checked{/if} type="checkbox">
+                                                    <span></span>
+                                                </label>
+                                            </td>
+                                            <td class="f-14 td-manage">
+                                                <a title="" icon="fa fa-pencil" class="btn btn-s btn-default" href="{:url('/help/edit',['id'=>$v['id']])}" target="_self" data-toggle="tooltip" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
+                                                <a title="" icon="fa fa-times" class="btn btn-s btn-default ajax-get confirm" href="{:url('/help/del',['table'=>'article','id'=>$v['id']])}" data-toggle="tooltip" data-original-title="删除"><i class="fa fa-times"></i></a>
+                                            </td>
+                                        </tr>
+                                        {/foreach}
+                                        <tr {$article->render() ? '' : 'style=display:none'}>
+                                            <td colspan="9" class="text-center">{$article->render()|raw}</td>
+                                        </tr>
+                                        {else}
+                                        <tr class="table-empty">
+                                            <td class="text-center empty-info" colspan="10">
+                                                <i class="fa fa-database"></i> 暂无数据<br>
+                                            </td>
+                                        </tr>
+                                        {/notempty}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+    <!-- Footer -->
+    <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix">
+        <div class="pull-right">
+            Crafted with <i class="fa fa-heart text-city"></i> by <a class="font-w600" href="//97langren.com" target="_blank">97langren.com</a>
+        </div>
+        <div class="pull-left">
+            <a class="font-w600" href="//97langren.com" target="_blank">OneUI 3.1</a> &copy; <span class="js-year-copy"></span>
+        </div>
+    </footer>
+    <!-- END Footer -->
+</div>
+<!-- END Page Container -->
+{include file="footer"/}
+
+<script src="/static/js/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/js/plugins/bootstrap3-editable/js/bootstrap-editable.js"></script>
+<script src="/static/js/plugins/jquery-validation/additional-methods.js"></script>
+<script src="/admin/js/table.js"></script>
+</body>
+</html>

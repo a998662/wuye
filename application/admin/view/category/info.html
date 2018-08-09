@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!--[if IE 9]>         <html class="ie9 no-focus" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+    {include file="meta"/}
+    <style>
+        .form-horizontal .form-group label.control-label{text-align: left}
+    </style>
+</head>
+<body>
+<!-- Page Container -->
+<div class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+    <!-- Main Container -->
+    <main id="main-container" style="min-height: 310px; padding-top: 0">
+        <!-- Page Content -->
+        <div class="content animated">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <div class="block-header bg-gray-lighter">
+                            <ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo"><i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i class="si si-size-fullscreen"></i></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">{$action == 'add' ? '添加节点' : '编辑节点'}</h3>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <div class="block-content">
+                                    <form class="form-horizontal" action="" method="post">
+                                        <div class="form-group">
+                                            <label class="col-md-12 control-label" for="parent_id">所属栏目 <span class="text-danger">*</span></label>
+                                            <div class="col-md-12 form-control1">
+                                                <select class="js-select2 form-control" id="parent_id" name="parent_id" style="width: 100%;" data-placeholder="请选择">
+                                                    <option value="0">根栏目</option>
+                                                    {volist name="category" id="v"}
+                                                    <option {$info['parent_id'] == $v['id']?='selected'} value="{$v.id}">{$v.path}{$v.name}</option>
+                                                    {/volist}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 control-label" for="name">节点名称 <span class="text-danger">*</span></label>
+                                            <div class="col-md-12">
+                                                <input class="form-control form-control1" value="{$info.name}" type="text" id="name" name="name" placeholder="请输入节点名称">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 control-label" for="name">节点别名 <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-12">
+                                                <input class="form-control form-control1" value="{$info.alias}" type="text" id="alias" name="alias" placeholder="请输入节点别名">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 control-label" for="icon">图标 <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-12">
+                                                <div class="input-group js-icon-picker form-control1">
+                                                    <span class="input-group-addon icon" data-toggle="tooltip" data-placement="bottom" data-original-title="点击选择图标"><i class="fa fa-plus-circle"></i></span>
+                                                    <input class="form-control icon_input" value="{$info.icon}" type="text" id="icon" name="icon" value="" placeholder="请选择图标">
+                                                    <span class="input-group-addon delete-icon" data-toggle="tooltip" data-placement="bottom" data-original-title="删除图标"><i class="fa fa-times"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 control-label " for="sort">排序 <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-12">
+                                                <input class="form-control form-control1" value="{$info.sort}" type="text" id="sort" name="sort" placeholder="0">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12 control-label" for="status">状态 <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-12">
+                                                <label class="css-input switch switch-sm switch-primary">
+                                                    <input type="checkbox" id="status" name="status" {if $info['status'] || !$info['id']}checked{/if}><span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <button class="btn btn-primary submit" href="{:url('/category/edit')}" type="submit">提交</button>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="id" value="{$info.id}">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+
+{include file="footer"/}
+{include file="icons"/}
+<script src="/admin/js/form.js"></script>
+<!-- Page JS Code -->
+<script>
+    var rules = {
+        parent_id: {
+            required: true
+        },
+        name: {
+            required: true
+        }
+    };
+    var messages = {
+        parent_id: {
+            required: "请选择所属父节点"
+        },
+        name: {
+            required: "请输入节点名称"
+        }
+    };
+
+    formCheck(rules,messages);
+
+    function sub() {
+        var form = $('.form-horizontal');
+        var form_data = form.serialize();
+        pageLoader();
+        jQuery.post("{:url('/category/'.$action)}", form_data).success(function (res) {
+            pageLoader('hide');
+            msg = res.msg;
+            console.log(res);
+            if (res.code) {
+                if (res.url) {
+                    msg += "， 页面即将自动跳转~";
+                }
+                tips(msg, 'success');
+                setTimeout(function () {
+                    return res.url  ? location.href = res.url : '';
+                }, 4000);
+            } else {
+                console.log(res);
+                tips(msg, 'danger');
+            }
+        }).fail(function () {
+            pageLoader('hide');
+            tips('服务器发生错误~', 'danger');
+        });
+    }
+</script>
+</body>
+</html>

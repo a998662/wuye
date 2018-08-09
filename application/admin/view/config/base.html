@@ -1,0 +1,108 @@
+<form class="form-builder row" name="form-builder" action="{:url('/config/index/group/base')}" method="post">
+
+    <div class="form-group col-md-12 col-xs-12 " id="form_group_web_site_status">
+        <label class="col-xs-12" for="web_site_status">站点开关{:config('web_site_status')}</label>
+        <div class="col-sm-12">
+            <label class="css-input switch switch-sm switch-primary switch-rounded "
+                   title="开启/关闭">
+                <input type="checkbox" name="web_site_status" id="web_site_status"
+                       {if config('web_site_status') == 'on'}checked{/if}><span></span>
+            </label>
+            <div class="help-block">站点关闭后将不能访问，后台可正常登录</div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-xs-12 " id="form_group_web_site_title">
+        <label class="col-xs-12" for="web_site_title">站点标题</label>
+        <div class="col-sm-12">
+
+            <input class="form-control" type="text" id="web_site_title"
+                   name="web_site_title" value="{:config('web_site_title')}" placeholder="请输入站点标题">
+
+            <div class="help-block">调用方式：<code>config('web_site_title')</code></div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-xs-12 " id="form_group_web_site_slogan">
+        <label class="col-xs-12" for="web_site_slogan">站点标语</label>
+        <div class="col-sm-12">
+
+            <input class="form-control" type="text" id="web_site_slogan" name="web_site_slogan" value="{:config('web_site_slogan')}" placeholder="请输入站点标语">
+
+            <div class="help-block">站点口号，调用方式：<code>config('web_site_slogan')</code>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-xs-12 " id="form_group_web_site_logo_text">
+        <label class="col-xs-12" for="web_site_logo">站点LOGO</label>
+        <div class="col-xs-12 js-upload-image">
+            <div onclick="GetUploadify(1,'website','call_back');" style="width:100px; text-align:center; margin: 5px; display:inline-block;"
+                 class="goods_xc">
+                <button style="width:100px;" type="button" class="btn btn-primary upload-btn">
+                    <i class="Hui-iconfont Hui-iconfont-upload"></i>上传图片
+                </button>
+                <input type="hidden" value="" id="web_site_logo" name="web_site_logo">
+                <a onclick="" href="javascript:;">
+                    <img id="web_site_logo1" style="border: 1px solid" width="100" height="50" src="{:config('web_site_logo') ?: '/static/img/favicons/apple-touch-icon-144x144.png'}">
+                </a>
+                <!--<span class="c-red">（规格300*200）</span>-->
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-xs-12 " id="form_group_web_site_description">
+        <label class="col-xs-12" for="web_site_description">站点描述</label>
+        <div class="col-xs-12">
+            <textarea class="form-control" id="web_site_description" rows="7" name="web_site_description" placeholder="请输入站点描述">{:config('web_site_description')}</textarea>
+            <div class="help-block">网站描述，有利于搜索引擎抓取相关信息</div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-xs-12 " id="form_group_web_site_keywords">
+        <label class="col-xs-12" for="web_site_keywords">站点关键词</label>
+        <div class="col-sm-12">
+            <input class="form-control" type="text" id="web_site_keywords" name="web_site_keywords" value="{:config('web_site_keywords')}" placeholder="请输入站点关键词">
+            <div class="help-block">网站搜索引擎关键字</div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-xs-12 " id="form_group_web_site_copyright">
+        <label class="col-xs-12" for="web_site_copyright">版权信息</label>
+        <div class="col-sm-12">
+            <input class="form-control" type="text" id="web_site_copyright" name="web_site_copyright" value="{:config('web_site_copuright')}" placeholder="请输入版权信息">
+            <div class="help-block">调用方式：<code>config('web_site_copyright')</code></div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-xs-12 " id="form_group_web_site_icp">
+        <label class="col-xs-12" for="web_site_icp">备案信息</label>
+        <div class="col-sm-12">
+            <input class="form-control" type="text" id="web_site_icp" name="web_site_icp" value="{:config('web_site_icp')}" placeholder="请输入备案信息">
+            <div class="help-block">调用方式：<code>config('web_site_icp')</code></div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-xs-12 " id="form_group_web_site_statistics">
+        <label class="col-xs-12" for="web_site_statistics">站点统计</label>
+        <div class="col-xs-12">
+            <textarea class="form-control" id="web_site_statistics" rows="7" name="web_site_statistics" placeholder="请输入站点统计">{:config('web_site_statistics')}</textarea>
+            <div class="help-block">网站统计代码，支持百度、Google、cnzz等，调用方式：<code>config('web_site_statistics')</code>
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-md-12 col-xs-12">
+        <div class="col-xs-12">
+            <button class="btn btn-minw btn-primary ajax-post"
+                    target-form="form-builder" type="submit">
+                提交
+            </button>
+            <button class="btn btn-default" type="button"
+                    onclick="javascript:history.back(-1);return false;">
+                返回
+            </button>
+
+
+        </div>
+    </div>
+</form>

@@ -1,0 +1,15 @@
+<link href="https://10rrbb.com/home/css/comments.css" rel="stylesheet" type="text/css"/>
+
+<div id="post_content">
+    <textarea name="content" class="content" id="content" placeholder="吐个槽..."></textarea>
+    <button type="button" class="btn btn-block btn-warning post_comment">提&nbsp;&nbsp;&nbsp;交</button>
+</div>
+<div class="comment_list_group">
+    {if $comments}
+    {$comments|raw}
+    {else /}
+    <div class="comment__body1" id="border-gai0">
+        <div class="commet_color"> 暂无评论</div>
+    </div>
+    {/if}
+</div>

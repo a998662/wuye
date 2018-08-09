@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {include file="meta"/}
+</head>
+<body>
+{include file="header"/}
+<div class="container main">
+    <div class="row">
+        <div class="hy-member-user hy-layout clearfix">
+            <div class="item">
+                <div class="integral my-score">当前积分：0</div>
+                <dl class="margin-0 clearfix">
+                    <dt><span class="user"></span></dt>
+                    <dd>
+    						<span class="name my-name">{$nickname}<span>
+    						<span class="group my-group">普通会员<span>
+    					</span></span></span></span></dd>
+                </dl>
+            </div>
+        </div>
+        <div class="hy-member hy-layout clearfix">
+            <div class="hy-switch-tabs">
+                <ul class="nav nav-tabs">
+                    <a class="text-muted pull-right hidden-xs btn-logout" href="javascript:;"><i class="icon iconfont icon-setting"></i> 退出账户</a>
+                    <li class="active"><a href="/user/info.html" title="播放线路">基本资料</a></li>
+                    <li><a href="/user/favorite.html" title="我的收藏">我的收藏</a></li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane fade in active">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <ul class="user">
+                            <li><span class="text-muted">您的序号：</span><font class="my-id"></font></li>
+                            <li><span class="text-muted">您的账户：</span><font class="my-name"></font></li>
+                            <li><span class="text-muted">您的邮箱：</span><font class="my-mail"></font></li>
+                            <li><span class="text-muted">登 陆 I P：</span><font class="my-ip"></font></li>
+                            <li><span class="text-muted">用户级别：</span><font class="my-group"></font></li>
+                            <li><span class="text-muted">当前积分：</span><font class="my-score"></font></li>
+                            <!--<li><span class="text-muted">推广链接：</span>https://www.imeiju.cc/i.php?uid=8143</li>-->
+                            <!--<form action="?action=cz" method="post">
+                                <li class="cckkey">
+                                    <span class="text-muted">充值积分：</span><input type="text" name="cckkey" class="form-control" id="cckkey" placeholder="输入充值卡卡号">
+                                    <input type="submit" name="cckb" id="cckb" value="提交" class="btn btn-warning"></li>
+                            </form>-->
+                        </ul>
+                    </div>
+
+
+                </div>
+                <div class="col-md-3 col-sm-12 col-xs-12">
+                    <ul class="password">
+                        <h3 class="text-muted">修改密码</h3>
+                        <form id="f_Activation" action="/user/resetpwd" method="post">
+                            <li>
+                                <input type="password" name="oldpwd" value="" class="form-control oldpwd" placeholder="输入旧密码">
+                            </li>
+                            <li><input type="password" name="newpwd" class="form-control newpwd" placeholder="输入新密码">
+                            </li>
+                            <li><input type="password" name="newpwd2" class="form-control newpwd2" placeholder="再次确认">
+                            </li>
+                            <li>
+                                <input type="submit" name="gaimi" class="btn btn-block btn-warning btn-edit" value="确认修改">
+                            </li>
+                            <li>
+                                <a style="color: #fff" class="btn btn-block btn-warning visible-xs btn-logout" href="javascript:;"><i class="icon iconfont icon-setting"></i> 退出账户</a>
+                            </li>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="footer"/}
+
+<script>
+    jQuery(function () {
+        var user = gStorage('user');
+        if (user) {
+            $.post(api_host + '/api/getinfo', {user_id: user.id}, function (res) {
+                if (res.code == 1) {
+                    var data = res.data;
+                    $('.my-id').text(data.id);
+                    $('.my-name').text(data.nickname);
+                    $('.my-mail').text(data.username);
+                    $('.my-ip').text(data.login_ip);
+                    $('.my-group').text('普通会员');
+                    $('.my-score').text(0);
+                } else {
+                    location.href = '/user/login.html'
+                }
+            }, 'json');
+        } else {
+            location.href = '/user/login.html'
+        }
+
+
+        //提交
+        $('.btn-edit').click(function () {
+            var data = {
+                oldpwd    : $('.oldpwd').val(),
+                password  : $('.newpwd').val(),
+                repassword: $('.newpwd2').val(),
+                user_id   : user.id
+            };
+
+            $.post(api_host + '/api/resetpwd', data, function (res) {
+                if (res.code == 0) {
+                    layer.open({
+                        content: res.msg
+                        , btn  : '我知道了'
+                    });
+                } else {
+                    layer.open({
+                        content: res.msg
+                        , btn  : '我知道了'
+                    });
+                }
+            }, 'json')
+            return false;
+        })
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {include file="meta" /}
+    <style>
+        #favCanvas .overlay-content a {
+            position: absolute;
+            top: 58%;
+            left: 15%;
+            width: 70%;
+            height: 10%;
+            z-index: 999;
+        }
+
+        .container.main .news {
+            height: 3rem;
+            background-color: #333;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+            margin: 15px -15px 0;
+            padding: 0 15px;
+            line-height: 3rem;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .container.main .news {
+                margin: 0px -30px 10px;
+            }
+        }
+
+        .container.main .news .row {
+            margin-left: 0;
+            height: 3rem;
+            overflow: hidden;
+        }
+
+        .container.main .news .box {
+            position: relative;
+        }
+
+        .container.main .news .box1, .container.main .news .box2 {
+            position: absolute;
+        }
+
+        .container.main .news a {
+            float: left;
+        }
+
+        .container.main .news .box1 a, .container.main .news .box2 a {
+            padding: 0 5px;
+            word-break: keep-all; /* 不换行 */
+            white-space: nowrap; /* 不换行 */
+        }
+
+    </style>
+    <script>
+        /*$.get(api_host+'/api/tadyhost',function (res) {
+            var thishsot = document.domain;
+            if('https://'+thishsot != res){
+                location.href = res;
+            }
+        })*/
+    </script>
+</head>
+<body><!--百度熊掌号改造-->
+{include file="header" /}
+<div class="container main">
+    <!--<div class="news">
+        <div style="width: 100%;overflow: inherit;">
+            <div class="row">
+                <div class="box" id="box">
+                    <div class="box1" id="box1">
+                        <a>2018年7月25日 重要更新： 1. 视频在线播放开启双线路，解决大部分卡顿问题。  2. 狼人版APP 即将上线，请大家收藏域名，进行关注。2018年7月25日 重要更新： 1. 视频在线播放开启双线路，解决大部分卡顿问题。  2. 狼人版APP 即将上线，请大家收藏域名，进行关注</a>
+                    </div>
+                    <div class="box2" id="box2">
+                        <a>2018年7月25日 重要更新： 1. 视频在线播放开启双线路，解决大部分卡顿问题。  2. 狼人版APP 即将上线，请大家收藏域名，进行关注。2018年7月25日 重要更新： 1. 视频在线播放开启双线路，解决大部分卡顿问题。  2. 狼人版APP 即将上线，请大家收藏域名，进行关注</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <div class="row">
+        <div class="hy-layout clearfix">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <div class="swiper-container hy-slide">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="hy-video-slide">
+                                <a class="videopic app_down" href="#" title="" style="padding-top: 60%;
+                                    background: url(https://img.alicdn.com/imgextra/i4/4028991139/TB2SC99lYArBKNjSZFLXXc_dVXa_!!0-martrix_bbs.jpg)  no-repeat; background-position:50% 50%; background-size: cover;">
+                                    <!--<span class="title">脉冲第一季</span>-->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="hy-video-slide">
+                                <a class="videopic" href="#" title="" style="padding-top: 60%;
+                                    background: url(https://img.alicdn.com/imgextra/i3/4028991139/TB2Z8LXX6fguuRjSspkXXXchpXa_!!0-martrix_bbs.jpg)  no-repeat; background-position:50% 50%; background-size: cover;">
+                                    <!--<span class="title">脉冲第一季</span>-->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="hy-video-slide">
+                                <a class="videopic" href="#" title="" style="padding-top: 60%;
+                                    background: url(https://img.alicdn.com/imgextra/i2/4028991139/TB2vfFazyCYBuNkHFCcXXcHtVXa_!!0-martrix_bbs.jpg)  no-repeat; background-position:50% 50%; background-size: cover;">
+                                    <!--<span class="title">脉冲第一季</span>-->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="hy-video-slide">
+                                <a class="videopic" href="#" title="" style="padding-top: 60%;
+                                    background: url(https://img.alicdn.com/imgextra/i3/4028991139/TB2rrCXzxuTBuNkHFNRXXc9qpXa_!!0-martrix_bbs.jpg)  no-repeat; background-position:50% 50%; background-size: cover;">
+                                    <!--<span class="title">脉冲第一季</span>-->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="hy-video-slide">
+                                <a class="videopic" href="#" title="" style="padding-top: 60%;
+                                    background: url(https://img.alicdn.com/imgextra/i3/4028991139/TB2hlh8HeuSBuNjSsziXXbq8pXa_!!0-martrix_bbs.jpg)  no-repeat; background-position:50% 50%; background-size: cover;">
+                                    <!--<span class="title">脉冲第一季</span>-->
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-next hidden-xs"><i class="icon iconfont icon-right"></i></div>
+                    <div class="swiper-button-prev hidden-xs"><i class="icon iconfont icon-back"></i></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12 padding-0">
+                <div class="hy-index-menu clearfix">
+                    <div class="item">
+                        <ul class="clearfix">
+                            <li class="hidden-sm hidden-xs"><a href="/shipin/list.html" title="全部影片"><i class="icon iconfont icon-menu1 text-color"></i><span>全部影片</span></a></li>
+                            <li><a href="/shipin/list.html" title="影片排行"><i class="icon iconfont icon-ic_mymatch_ranking text-color"></i><span>影片排行</span></a></li>
+                            <li><a href="/shipin/list.html" title="最近更新"><i class="icon iconfont icon-update text-color"></i><span>最近更新</span></a></li>
+                            <li><a href="/gonggao/list.html" title="公告信息"><i class="icon iconfont icon-icon_special text-color"></i><span>公告信息</span></a></li>
+                            <li class="visible-sm visible-xs"><a href="/user/info.html" title="个人中心"><i class="icon iconfont icon-member1 text-color"></i><span>个人中心</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="hy-index-tags hidden-md clearfix">
+                    <div class="item">
+                        <ul class="clearfix user_status">
+                            <li><a class="text-overflow" href="/shipin/list.html">日韩•欧美</a></li>
+                            <li><a class="text-overflow" href="/xiazai/list.html">自拍•偷拍</a></li>
+                            <li><a class="text-overflow" href="/xiazai/list.html">制服•丝袜</a></li>
+                            <li><a class="text-overflow" href="/meinv/list.html">美女•写真</a></li>
+                            <li><a class="text-overflow" href="/meinv/list.html">网红•主播</a></li>
+                            <li><a class="text-overflow" href="/shipin/list.html">卡通•动漫</a></li>
+                            <li><a class="text-overflow" href="/xiazai/list.html">巨奶•波霸</a></li>
+                            <li><a class="text-overflow" href="/meinv/list.html">写真•校花</a></li>
+                            <li><a class="text-overflow" href="/tupian/list.html">空姐•美女</a></li>
+                            <li><a class="text-overflow" href="/shipin/list.html">清纯•校花</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="hy-right-qrcode hidden-sm hidden-xs">
+                    <div class="item">
+                        <img src="https://img.alicdn.com/imgextra/i1/4028991139/TB28Z65ziCYBuNkHFCcXXcHtVXa_!!1-martrix_bbs.gif" width="100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--推荐视频 -->
+        <div class="hy-layout clearfix">
+            <div class="hy-video-head">
+                <ul class="pull-right">
+                    <!--<li class="text-muted hidden-md hidden-sm hidden-xs"><a href="search.php?searchtype=5&tid=13" class="text-muted border-right">科幻•动作</a>/</li><li class="text-muted hidden-md hidden-sm hidden-xs"><a href="search.php?searchtype=5&tid=14" class="text-muted border-right">悬疑•烧脑</a>/</li><li class="text-muted hidden-md hidden-sm hidden-xs"><a href="search.php?searchtype=5&tid=15" class="text-muted border-right">喜剧•青春</a>/</li><li class="text-muted hidden-md hidden-sm hidden-xs"><a href="search.php?searchtype=5&tid=16" class="text-muted border-right">精英•文艺</a>/</li><li class="text-muted hidden-md hidden-sm hidden-xs"><a href="search.php?searchtype=5&tid=3" class="text-muted border-right">动漫•卡通</a>/</li><li class="text-muted hidden-md hidden-sm hidden-xs"><a href="search.php?searchtype=5&tid=4" class="text-muted border-right">综艺•选秀</a>/</li>-->
+                    <li class="active"><a href="/shipin/list.html" class="text-muted" title="查看更多">更多<i
+                            class="icon iconfont icon-right"></i></a></li>
+                </ul>
+                <h3 class="margin-0"><i class="icon iconfont icon-show text-color"></i> 推荐视频</h3></div>
+            <div class="clearfix">
+                <div class="col-md-5 col-sm-12 col-xs-12 padding-0">
+                    <div class="hidden-sm hidden-xs clearfix">
+                        <div class="clearfix">
+                            <div class="col-lg-6 col-md-4">
+                                <div class="hy-video-list">
+                                    <div class="item">
+                                        <a class="videopic" target="_self" href="/shipin/{$spphb[0]['id']}.html" title="{$spphb[0]['title']}"
+                                                style="background: url(https://img.alicdn.com/imgextra/i4/4028991139/TB2abrNb4tnkeRjSZSgXXXAuXXa_!!0-martrix_bbs.jpg) no-repeat; background-position:50% 50%; background-size: cover;">
+                                            <span class="play hidden-xs"></span>
+                                            <span class="note textbg"><h5 class="text-overflow">{$spphb[0]['title']}</h5></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-8 padding-0">
+                                <div class="hy-video-ranking clearfix" style="padding:0 10px 10px;">
+                                    <div class="item">
+                                        <ul class="clearfix">
+                                            {foreach $spphb as $k=>$v}
+                                            <li class="text-overflow ">
+                                                <span class="pull-right text-color">{:number_format($v.score,1)}</span>
+                                                <a target="_self" href="/{$v.channel}/{$v.id}.html" title="{$v.title}">
+                                                    <em class="number {if $k<3}active{/if}">{$k+1}</em>
+                                                    {$v.title}
+                                                </a>
+                                            </li>
+                                            {/foreach}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix">
+                        <div class="col-xs-12">
+                            <div class="swiper-container hy-slide">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <div class="hy-video-slide">
+                                            <a class="videopic" href="#" title="" style="padding-top: 60%;
+                                    background: url(https://img.alicdn.com/imgextra/i4/4028991139/TB2T92llYsrBKNjSZFpXXcXhFXa_!!0-martrix_bbs.jpg)  no-repeat; background-position:50% 50%; background-size: cover;">
+                                                <!--<span class="title">脉冲第一季</span>-->
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="hy-video-slide">
+                                            <a class="videopic" href="#" title="" style="padding-top: 60%;
+                                    background: url(https://img.alicdn.com/imgextra/i2/4028991139/TB2GyyjHbSYBuNjSspfXXcZCpXa_!!0-martrix_bbs.jpg)  no-repeat; background-position:50% 50%; background-size: cover;">
+                                                <!--<span class="title">脉冲第一季</span>-->
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="hy-video-slide">
+                                            <a class="videopic" href="#" title="" style="padding-top: 60%;
+                                    background: url(https://img.alicdn.com/imgextra/i1/4028991139/TB2HUF3HeuSBuNjSsziXXbq8pXa_!!0-martrix_bbs.jpg)  no-repeat; background-position:50% 50%; background-size: cover;">
+                                                <!--<span class="title">脉冲第一季</span>-->
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="hy-video-slide">
+                                            <a class="videopic" href="#" title="" style="padding-top: 60%;
+                                    background: url(https://img.alicdn.com/imgextra/i3/4028991139/TB2tXsGG7KWBuNjy1zjXXcOypXa_!!0-martrix_bbs.jpg)  no-repeat; background-position:50% 50%; background-size: cover;">
+                                                <!--<span class="title">脉冲第一季</span>-->
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="swiper-button-next hidden-xs"><i class="icon iconfont icon-right"></i></div>
+                                <div class="swiper-button-prev hidden-xs"><i class="icon iconfont icon-back"></i></div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 padding-0">
+                            <div class="hy-index-tags active hidden-md clearfix">
+                                <div class="item">
+                                    <div class="hy-video-min-head hidden-xs">
+                                        <a href="/shipin/list.html" class="pull-right text-muted" title="查看更多">更多
+                                            <i class="icon iconfont icon-right"></i>
+                                        </a>
+                                        <h4><i class="icon iconfont icon-top text-color"></i> 热门标签</h4>
+                                    </div>
+                                    <ul class="clearfix">
+                                        <li><a class="text-overflow" href="/shipin/list.html">在线电影</a></li>
+                                        <li><a class="text-overflow" href="/shipin/list.html">手机播放</a></li>
+                                        <li><a class="text-overflow" href="/shipin/list.html">中文配音</a></li>
+                                        <li><a class="text-overflow" href="/shipin/list.html">中文电影</a></li>
+                                        <li><a class="text-overflow" href="/shipin/list.html">丝袜诱惑</a></li>
+                                        <li><a class="text-overflow" href="/shipin/list.html">美臀美颜</a></li>
+                                        <li><a class="text-overflow" href="/shipin/list.html">萝莉写真</a></li>
+                                        <li><a class="text-overflow" href="/shipin/list.html">长腿丝袜</a></li>
+                                        <li><a class="text-overflow" href="/shipin/list.html">动漫卡通</a></li>
+                                        <li><a class="text-overflow" href="/shipin/list.html">亚洲视频</a></li>
+                                        <li><a class="text-overflow" href="/shipin/list.html">欧美精品</a></li>
+                                        <li><a class="text-overflow" href="/shipin/list.html">美女主播</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 col-sm-12 col-xs-12 padding-0">
+                    <div class="hy-video-list clearfix">
+                        <div class="item clearfix">
+                            {foreach $shipin as $k=>$v}
+                            {if $k<6}
+                            <div class="col-md-4 col-sm-3 col-xs-4 ">
+                                <a class="videopic lazy" target="_self" href="/{$v.channel}/{$v.id}.html" title="{$v.id}" data-original="{$v.thumb}" style="background: url(https://langren16.com/load.png) no-repeat; background-position:50% 50%; background-size: cover;">
+                                    <span class="play hidden-xs"></span><span class="score">{:number_format($v.score,1)}</span>
+                                    <span class="note textbg">{$v.tags}</span>
+                                </a>
+                                <div class="title"><h5 class="text-overflow">
+                                    <a target="_self" href="/{$v.channel}/{$v.id}.html" title="{$v.title}">{$v.title}</a>
+                                </h5>
+                                </div>
+                            </div>
+                            {/if}
+                            {/foreach}
+                        </div>
+                    </div>
+                    <div class="hy-video-hit hidden-md hidden-sm hidden-xs clearfix">
+                        <div class="item">
+                            <ul class="clearfix">
+                                {foreach $shipin as $k=>$v}
+                                {if $k>8}
+                                <li>
+                                    <a target="_self" href="/shipin/{$v.id}.html">
+                                        <span class="text-overflow" style="display: block;height: 25px;width: 100%;">
+                                            <i class="icon iconfont icon-show text-muted"></i> {$v.title}
+                                        </span>
+                                        <p class="text-muted">{$v.tags}</p>
+                                    </a>
+                                </li>
+                                {/if}
+                                {/foreach}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hy-video-footer visible-xs clearfix">
+                <a href="/shipin/list.html" class="text-muted">查看更多<i class="icon iconfont icon-right pull-right"></i></a>
+            </div>
+        </div><!--end 美剧 -->
+
+        <!--最新下载-->
+        <div class="hy-layout clearfix">
+            <div class="hy-video-head"><h3 class="margin-0"><i class="icon iconfont icon-download text-color"></i>最新下载
+            </h3>
+                <ul class="pull-right">
+                    <li class="active"><a href="/xiazai/list.html" class="text-muted">更多<i
+                            class="icon iconfont icon-right"></i></a></li>
+                </ul>
+            </div>
+            <div class="clearfix">
+
+                <div class="col-md-12 col-sm-12 col-xs-12 padding-0">
+                    <div class="hy-video-list clearfix">
+                        <div class="item clearfix">
+                            {foreach $xiazai as $k=>$v}
+                            {if $k<6}
+                            <div class="col-md-2 col-sm-3 col-xs-4 ">
+                                <a class="videopic lazy" target="_self" href="/{$v.channel}/{$v.id}.html" title="{$v.id}" data-original="{$v.thumb}" style="background: url(https://langren16.com/load.png) no-repeat; background-position:50% 50%; background-size: cover;">
+                                    <span class="play hidden-xs"></span><span class="score">{:number_format($v.score,1)}</span><span class="note textbg"></span>
+                                </a>
+                                <div class="title"><h5 class="text-overflow">
+                                    <a href="/{$v.channel}/{$v.id}.html" target="_self" title="{$v.title}">{$v.title}</a>
+                                </h5></div>
+                                <div class="subtitle text-muted text-muted text-overflow hidden-xs">{$v.tags}</div>
+                            </div>
+                            {/if}
+                            {/foreach}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hy-video-text-list hidden-xs clearfix">
+                <div class="item">
+                    <ul class="clearfix">
+                        {foreach $xiazai as $k=>$v}
+                        {if $k>5}
+                        <li>
+                            <div class="title text-overflow">
+                                <a target="_self" href="/{$v.channel}/{$v.id}.html" title="{$v.title}"><span
+                                        class="pull-right"><i class="icon iconfont icon-right text-muted"></i></span>{$v.title}</a>
+                            </div>
+                        </li>
+                        {/if}
+                        {/foreach}
+                    </ul>
+                </div>
+            </div>
+            <div class="hy-video-footer visible-xs clearfix">
+                <a href="/xiazai/list.html" class="text-muted" title="查看更多">查看更多<i
+                        class="icon iconfont icon-right pull-right"></i></a></div>
+        </div><!--end 最新下载-->
+
+        <!--福利图片-->
+        <div class="hy-layout clearfix">
+            <div class="hy-video-head">
+                <h3 class="margin-0"><i class="icon iconfont icon-mallanimation text-color"></i>福利图片</h3>
+                <ul class="pull-right">
+                    <li class="active">
+                        <a href="/tupian/list.html" class="text-muted" title="查看更多">更多<i class="icon iconfont icon-right"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix">
+                <div class="col-md-12 col-sm-12 col-xs-12 padding-0">
+                    <div class="hy-video-list clearfix">
+                        <div class="item clearfix">
+                            {foreach $tupian as $v}
+                            <div class="col-md-2 col-sm-3 col-xs-4 ">
+                                <a class="videopic lazy" target="_self" href="/tupian/{$v.id}.html" title="{$v.title}" data-original="{$v.thumb}"
+                                        style="background: url(https://langren16.com/load.png) no-repeat; background-position:50% 50%; background-size: cover;">
+                                    <span class="play hidden-xs"></span><span class="score">{:number_format($v.score,1)}</span><span class="note textbg"></span>
+                                    <span class="note textbg">{$v.tags}</span>
+                                </a>
+                                <div class="title"><h5 class="text-overflow">
+                                    <a target="_self" href="/tupian/{$v.id}.html" title="{$v.title}">{$v.title}</a>
+                                </h5>
+                                </div>
+                            </div>
+                            {/foreach}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hy-video-footer visible-xs clearfix">
+                <a href="/tupian/list.html" class="text-muted" title="查看更多">查看更多<i class="icon iconfont icon-right pull-right"></i></a>
+            </div>
+        </div><!--end 福利图片-->
+
+        <!--极品美女-->
+        <div class="hy-layout clearfix">
+            <div class="hy-video-head">
+                <h3 class="margin-0"><i class="icon iconfont icon-mallanimation text-color"></i>极品美女</h3>
+                <ul class="pull-right">
+                    <li class="active">
+                        <a href="/meinv/list.html" class="text-muted" title="查看更多">更多<i class="icon iconfont icon-right"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix">
+                <div class="col-md-12 col-sm-12 col-xs-12 padding-0">
+                    <div class="hy-video-list clearfix">
+                        <div class="item clearfix">
+                            {foreach $meinv as $v}
+                            <div class="col-md-2 col-sm-3 col-xs-4 ">
+                                <a class="videopic lazy" target="_self" href="/meinv/{$v.id}.html" title="{$v.title}" data-original="{$v.thumb}"
+                                        style="background: url(https://langren16.com/load.png) no-repeat; background-position:50% 50%; background-size: cover;">
+                                    <span class="play hidden-xs"></span><span class="score">{:number_format($v.score,1)}</span><span class="note textbg"></span>
+                                    <span class="note textbg">{$v.tags}</span>
+                                </a>
+                                <div class="title"><h5 class="text-overflow">
+                                    <a target="_self" href="/meinv/{$v.id}.html title=" {$v.title}">{$v.title}</a></h5>
+                                </div>
+                            </div>
+                            {/foreach}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hy-video-footer visible-xs clearfix">
+                <a href="/meinv/list.html" class="text-muted" title="查看更多">查看更多<i
+                        class="icon iconfont icon-right pull-right"></i></a></div>
+        </div><!--end 极品美女-->
+
+        <div class="hy-layout clearfix">
+            <div class="hy-video-head"><h3 class="margin-0"><i class="icon iconfont icon-comment text-color"></i>激情小说
+            </h3>
+                <ul class="pull-right">
+                    <li class="active"><a href="/xiaoshuo/list.html" class="text-muted">更多<i
+                            class="icon iconfont icon-right"></i></a></li>
+                </ul>
+            </div>
+            <div class="hy-video-list clearfix">
+                <div class=" item">
+                    <ul class="clearfix">
+                        {foreach $xiaoshuo as $k=>$v}
+                        <li class="col-md-3 col-sm-6 col-xs-6">
+                            <div class="title text-overflow">
+                                <a href="/{$v.channel}/{$v.id}.html" target="_self" title="{$v.title}"><span
+                                        class="pull-right"><i class="icon iconfont icon-right text-muted"></i></span>{$v.title}</a>
+                            </div>
+                        </li>
+                        {/foreach}
+                    </ul>
+                </div>
+            </div>
+            <div class="hy-video-footer visible-xs clearfix">
+                <a href="/xiaoshuo/list.html" class="text-muted" title="查看更多">查看更多<i class="icon iconfont icon-right pull-right"></i></a>
+            </div>
+        </div>
+
+
+        <!--激情小说、有声小说-->
+        <div class="hy-layout clearfix">
+            <div class="hy-video-head"><h3 class="margin-0"><i class="icon iconfont icon-comment text-color"></i>有声小说
+            </h3>
+                <ul class="pull-right">
+                    <li class="active"><a href="/mp3/list.html" class="text-muted">更多<i
+                            class="icon iconfont icon-right"></i></a></li>
+                </ul>
+            </div>
+            <div class="hy-video-list clearfix">
+                <div class=" item">
+                    <ul class="clearfix">
+                        {foreach $yousheng as $k=>$v}
+                        <li class="col-md-3 col-sm-6 col-xs-6">
+                            <div class="title text-overflow">
+                                <a target="_self" href="/{$v.channel}/{$v.id}.html" title="{$v.title}"><span
+                                        class="pull-right"><i class="icon iconfont icon-right text-muted"></i></span>{$v.title}</a>
+                            </div>
+                        </li>
+                        {/foreach}
+                    </ul>
+                </div>
+            </div>
+            <div class="hy-video-footer visible-xs clearfix">
+                <a href="/mp3/list.html" class="text-muted" title="查看更多">查看更多<i class="icon iconfont icon-right pull-right"></i></a>
+            </div>
+        </div><!--end 综艺•选秀-->
+
+        <!--友链-->
+        <div class="hy-layout hidden-sm hidden-xs clearfix">
+            <div class="hy-video-head"><h3 class="margin-0">友情链接</h3></div>
+            <div class="hy-footer-link">
+                <div class="item clearfix">
+                    <ul class="hy-video-text-list clearfix">
+                        <!--<li><a class="text-color-999" href="http://www.imeiju.cc" title="爱美剧" target="_self">爱美剧</a></li>-->
+                    </ul>
+                </div>
+            </div>
+        </div><!--end 友链 --></div>
+</div>
+
+<div class="app_ad">
+    <a href="/app/index.html" title="点击下载狼人APP"><img src="https://img.alicdn.com/imgextra/i4/4028991139/TB2N7X4Hf5TBuNjSspmXXaDRVXa_!!0-martrix_bbs.jpg"></a>
+    <btn class="btn-close" href="javascript:;">x</btn>
+</div>
+{include file="footer" /}
+
+<script>
+    jQuery(function () {
+        var ua = navigator.userAgent.toLowerCase()
+        if (!ua.match(/lrapp/i)) {
+            $('.app_down').attr('href','https://langren70.com');
+            openFav();
+        }else {
+            $('.app_ad').hide();
+        }
+    })
+
+
+    //信息框
+    layer.open({
+        shadeClose: false,
+        content   : '2018年7月28日 重要更新：<br>1. 在线视频全屏按钮回归底部右侧<br>2. 备用线路三已开通, 在出现卡顿时请手动切换<br>3. 反馈系统开启 衷心聆听狼友的声音 为您带来更好的福利<br>4. 狼人app 已全面上线 欢迎您下载使用'
+        , btn     : '我知道了'
+    });
+    $('.btn-close').click(function () {
+        $('.app_ad').hide();
+    })
+    /*window.onload = function () {
+        var width = $('.container.main .news .box1 a').width() + 10;
+        var num   = $('.container.main .news .box1 a').length;
+        console.log(width)
+        width = width * num;
+
+        $('.container.main .news .row,.container.main .news .box,.container.main .news .box1,.container.main .news .box2').css('width', width + 'px');
+        $('.container.main .news .box2').css('left', width + 'px')
+
+        var _box1 = document.getElementById("box1");
+        var _box2 = document.getElementById("box2");
+        var x     = 0;
+        var fun   = function () {
+            _box1.style.left = x + 'px';
+            _box2.style.left = (x + width) + 'px';
+            x--;
+            if ((x + width) == 0) {
+                x = 0;
+            }
+        }
+        setTimeout(function () {
+            setInterval(fun, 10)
+        }, 3000)
+    }*/
+    sessionStorage.setItem('open_share_time', 1);
+</script>
+</body>
+</html>

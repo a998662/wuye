@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html class="ie9 no-focus" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+    <link rel="stylesheet" href="/static/js/plugins/fullcalendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="/static/js/plugins/artDialog/css/ui-dialog.css">
+    <link rel="stylesheet" href="/static/js/plugins/wickedpicker/dist/wickedpicker.min.css">
+    {include file="meta"/}
+    <style>
+        input, textarea, .uneditable-input {
+            margin-left: 0;
+        }
+        textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+            -webkit-transition: border linear .2s,box-shadow linear .2s;
+            -moz-transition: border linear .2s,box-shadow linear .2s;
+            -o-transition: border linear .2s,box-shadow linear .2s;
+            transition: border linear .2s,box-shadow linear .2s;
+        }
+        textarea {
+            height: auto;
+        }
+        select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+            display: inline-block;
+            border-radius: 4px;
+        }
+        select, input[type="file"] {
+            height: 30px;
+            line-height: 30px;
+        }
+        .taxt{
+            width:440px;
+            height: 100px;
+        }
+        .time{
+            width:100px;
+        }
+        .sear{
+            width:85px;
+        }
+        .select{
+            width:150px;
+        }
+        .textarea{
+            width:300px;
+        }
+        .check{
+            padding:8px;
+        }
+        .slidertext{
+            padding-top:40px;
+        }
+        .timepicki{
+            position:relative;
+            z-index: 999;
+        }
+        #edit{
+            position:relative;
+            width:300px;
+        }
+        #edittitle{
+            padding-bottom:10px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        #edittype{
+            position:absolute;
+            top:5px;
+            right:5px;
+            width:80px;
+        }
+    </style>
+</head>
+<body>
+<!-- Page Container -->
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+    <!-- Sidebar -->
+    {include file="sidebar"/}
+    <!-- END Sidebar -->
+
+    <!-- Header -->
+    {include file="header"/}
+    <!-- END Header -->
+
+    <!-- Main Container -->
+    <main id="main-container" style="min-height: 304px;">
+        <!-- Page Header -->
+        <div class="bg-gray-lighter">
+            <ol class="breadcrumb">
+                {$breadcrumb|raw}
+            </ol>
+        </div>
+        <!-- END Page Header -->
+
+        <!-- Page Content -->
+        <div class="content bg-white">
+            <!-- Dashboard Charts -->
+            <!-- Calendar and Events functionality (initialized in js/pages/base_comp_calendar.js), for more info and examples you can check out http://fullcalendar.io/ -->
+            <div class="row items-push">
+                <div class="col-md-12">
+                    <!-- Calendar Container -->
+                    <div id="calendar" class="js-calendar"></div>
+                    <div id="set" style="display:none" class="taxt">
+                        <div id="slider"></div>
+                        <div style="text-align: center" class="slidertext">
+                            <input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold; text-align: center; font-size: 16px;">
+                        </div>
+                    </div>
+                    <div id="dialog-form" style="display:none">
+                        <form class="form-inline">
+                            <p>
+                                <label>事务标题：</label>
+                                <input type="text" class="form-control" id="calendar_title">
+                            </p>
+                            <p>
+                                <label>事务内容：</label>
+                                <textarea class="textarea" rows="4" placeholder="内容" id="calendar_detail"></textarea>
+                            </p>
+                            <p>
+                                <label>事务类型：</label>
+                                <select id="type" name="type" class="select">
+                                    <option value="1">工作事务</option>
+                                    <option value="2">个人事务</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label>事务状态：</label>
+                                <select id="status">
+                                    <option value="1">未进行</option>
+                                    <option value="2">进行中</option>
+                                    <option value="3">已完成</option>
+                                    <option value="4">已超时</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label>开始时间：</label>
+                                <input type="text" class="time datepicker" id="startdate">
+                                <input type="text" class="time timepicki" id="starttime">
+                            </p>
+                            <p style="display:none" id="enddate">
+                                <label>结束时间：</label>
+                                <input type="text" class="time datepicker" id="stopdate">
+                                <input type="text" class="time timepicki" id="endtime">
+                            </p>
+                            <p class="checkbox check">
+                                <label class="checkbox-inline"><input name="isallday" type="radio" id="isallday">全天</label>
+                                <label class="checkbox-inline"><input name="isallday" type="radio" id="end">结束时间</label>
+                                <!--<label class="checkbox-inline"><input type="checkbox" id="repeat">重复</label>-->
+                            </p>
+                            <!--<p id="repeattype" style="display: none">
+                                <label>重复类型：</label>
+                                <select name="repeat_type" class="select" id="repeatselect">
+                                    <option value="1">按天重复</option>
+                                    <option value="2">按周重复</option>
+                                    <option value="3">按月重复</option>
+                                </select>
+                            </p>
+                            <p id="repeattime" style="display: none">
+                                <label>重复时间：</label>
+                                <select class="time repeat_date" id="repeatday" style="display:none">
+                                    <?php list($start,$end) = \think\helper\Time::month();  for($i=1;$i<=date('d',$end);$i++){ ?>
+                                    <option value="{$i}日">{$i}日</option>
+                                    <?php }?>
+                                </select>
+                                <select class="time repeat_date" id="repeatweek" style="display:none">
+                                    <option value="星期一">星期一</option>
+                                    <option value="星期二">星期二</option>
+                                    <option value="星期三">星期三</option>
+                                    <option value="星期四">星期四</option>
+                                    <option value="星期五">星期五</option>
+                                    <option value="星期六">星期六</option>
+                                    <option value="星期日">星期日</option>
+                                </select>
+                                <input type="text" class="time timepicki repeat_time" id="repeatclock">
+                            </p>-->
+                            <!--<p>
+                                <label>&nbsp;&nbsp;&nbsp;参与者：</label>
+                                <textarea id="partake" rows="3"></textarea>
+                            </p>-->
+                            <p></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- END Calendar -->
+        </div>
+        <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+    <!-- Footer -->
+    <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix">
+        <div class="pull-right">
+            Crafted with <i class="fa fa-heart text-city"></i> by
+            <a class="font-w600" href="//97langren.com" target="_blank">97langren.com</a>
+        </div>
+        <div class="pull-left">
+            <a class="font-w600" href="//97langren.com" target="_blank">OneUI 3.1</a> &copy;
+            <span class="js-year-copy"></span>
+        </div>
+    </footer>
+    <!-- END Footer -->
+</div>
+<!-- END Page Container -->
+
+{include file="footer"/}
+
+<!-- Page Plugins -->
+<script src="/static/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/static/js/plugins/fullcalendar/moment.min.js"></script>
+<script src="/static/js/plugins/fullcalendar/fullcalendar.js"></script>
+<script src="/static/js/plugins/fullcalendar/gcal.min.js"></script>
+<script src="/static/js/plugins/fullcalendar/locale-all.js"></script>
+<script src="/static/js/plugins/artDialog/dist/dialog-min.js"></script>
+<script src="/static/js/plugins/wickedpicker/dist/wickedpicker.min.js"></script>
+<script src="/static/js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script src="/static/js/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+<!-- Page JS Code -->
+
+<script>
+    jQuery(function () {
+        // Init page helpers (Appear + CountTo + Magnific Popup plugins)
+        App.initHelpers(['magnific-popup']);
+    });
+    var add_url = "{:url('/calendar/add')}";
+    var edit_url = "{:url('/calendar/edit')}";
+    var list_url = "{:url('/calendar/getdata')}";
+    var del_url = "{:url('/calendar/del')}";
+</script>
+<script src="/admin/js/base_comp_calendar.js"></script>
+</body>
+</html>

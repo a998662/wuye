@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html class="ie9 no-focus" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+    <link rel="stylesheet" href="/static/js/plugins/jquery-tags-input/jquery.tagsinput.css">
+    {include file="meta"/}
+    <style>
+        .col-md-7 label {
+            font-weight: 200;
+            margin-right: 10px;
+            line-height: 20px;
+            margin-bottom: 0
+        }
+
+        .col-md-7 a {
+            font-weight: 200;
+            margin-right: 10px;
+            line-height: 20px;
+            margin-bottom: 0
+        }
+
+        .am-table1 th {
+            list-style: none;
+            text-align: right;
+            width: 50px;
+        }
+
+        .am-table1 td {
+            padding: 1px;
+        }
+
+        .am-table1 tr .first-child {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<!-- Page Container -->
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+    <!-- Sidebar -->
+    {include file="sidebar"/}
+    <!-- END Sidebar -->
+
+    <!-- Header -->
+    {include file="header"/}
+    <!-- END Header -->
+
+    <!-- Main Container -->
+    <main id="main-container" style="min-height: 310px;">
+        <!-- Page Header -->
+
+        <div class="bg-gray-lighter">
+            <ol class="breadcrumb">
+                {$breadcrumb|raw}
+            </ol>
+        </div>
+
+        <!-- END Page Header -->
+
+        <!-- Page Content -->
+        <div class="content animated">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <div class="block-header bg-gray-lighter">
+                            <ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle" data-action-mode="demo">
+                                        <i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="fullscreen_toggle">
+                                        <i class="si si-size-fullscreen"></i></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">{$action == 'add' ? '添加视频' : '编辑视频'}</h3>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+                                <div class="block-content">
+                                    <form class="form-horizontal" action="" method="post">
+                                        <input value="{$info.id}" type="hidden" name="id">
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" for="title">文章标题
+                                                <span class="text-danger">*</span></label>
+                                            <div class="col-md-7">
+                                                <input class="form-control form-control1" value="{$info.title}" type="text" id="title" name="title" placeholder="请输入文章标题">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label" for="cat_id">所属栏目
+                                                <span class="text-danger">*</span></label>
+                                            <div class="col-md-7 form-control1">
+                                                <select class="js-select2 form-control " id="cat_id" name="cat_id" style="width: 100%;" data-placeholder="所属栏目">
+                                                    {foreach $category as $v}
+                                                    <option {if $info[
+                                                    'cat_id'] == $v['id']}selected{/if} value="{$v.id}">{$v.path} {$v.name}</option>
+                                                    {/foreach}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label " for="keywords">关键词
+                                                <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-7">
+                                                <input class="form-control form-control1" value="{$info.keywords}" type="text" id="keywords" name="keywords" placeholder="请输入文章标题">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="form_group_upload_file_ext">
+                                            <label class="col-md-1 control-label" for="tag">TAG标签</label>
+                                            <div class="col-md-7">
+                                                <input class="js-tags-input form-control" type="text" id="tag" placeholder="添加标签" name="tag" value="{$info['tag']}" data-default="添加标签">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label ">缩略图
+                                                <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-7">
+                                                <div onclick="GetUploadify(1,'news','call_back',530,150,380,286);" style="width:150px; text-align:center; margin: 5px; display:inline-block;" class="goods_xc">
+                                                    <button style="width:150px;" type="button" class="btn btn-primary upload-btn form-control1">
+                                                        <i class="Hui-iconfont Hui-iconfont-upload"></i>上传图片
+                                                    </button>
+                                                    <input type="hidden" value="{$info.thumb}" id="thumb" name="thumb">
+                                                    <a onclick="" href="javascript:void(0);"><img id="thumb2" width="150" src="{$info['thumb'] ? $info['thumb'] : '/admin/img/noImg.jpg'}"></a>
+                                                    <span class="c-red">（380*286）</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label">属性
+                                                <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-7 flag" style="line-height: 30px">
+                                                <label class="css-input css-radio css-radio-primary">
+                                                    <input id="radio-1" name="flag" {if $info.flag == 1}checked{/if} type="radio" value="1"><span></span> 置顶[1]
+                                                </label>
+                                                <label class="css-input css-radio css-radio-primary">
+                                                    <input id="radio-2" name="flag" {if $info.flag == 2}checked{/if} type="radio" value="2" ><span></span> 头条[2]
+                                                </label>
+                                                <label class="css-input css-radio css-radio-primary">
+                                                    <input id="radio-3" name="flag" {if $info.flag == 3}checked{/if} type="radio" value="3" ><span></span> 特荐[3]
+                                                </label>
+                                                <label class="css-input css-radio css-radio-primary">
+                                                    <input id="radio-4" name="flag" {if $info.flag == 4}checked{/if} type="radio" value="4"><span></span> 推荐[4]
+                                                </label>
+                                                <label class="css-input css-radio css-radio-primary">
+                                                    <input id="radio-5" name="flag" {if $info.flag == 5}checked{/if} type="radio" value="5"><span></span> 热点[5]
+                                                </label>
+                                                <label class="css-input css-radio css-radio-primary">
+                                                    <input id="radio-6" name="flag" {if $info.flag == 6}checked{/if} type="radio" value="6"><span></span> 幻灯[6]
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label " for="click">浏览数
+                                                <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control form-control1" id="click" name="click" value="{$info.click}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label " for="good">点赞数
+                                                <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control form-control1" name="good" id="good" value="{$info.good}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label " for="bad">点踩数
+                                                <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control form-control1" id="bad" name="bad" value="{$info.bad}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label " for="author">发布人
+                                                <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-4">
+                                                <input class="form-control form-control1" value="{$info.author}" type="text" id="author" name="author">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label">播放地址
+                                                <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-7">
+                                                <table class="am-table1 view-url col-md-12">
+                                                    {foreach $info['view_url'] as $k=>$v}
+                                                    <tr>
+                                                        <th>章节/集</th>
+                                                        <td class="first-child">
+                                                            <input class="form-control form-control1 tits" value="{$v.tit}">
+                                                        </td>
+                                                        <th>URL</th>
+                                                        <td>
+                                                            <input class="form-control form-control1 urls" value="{$v.url}">
+                                                        </td>
+                                                        <td>
+                                                            {if $k==0}
+                                                            <botton onclick="addElem('.view-url')" class="btn btn-sm btn-success "><i class="fa fa-plus-circle"></i></botton>
+                                                            {else /}
+                                                            <botton onclick="rmElem(this)" class="btn btn-sm btn-danger "><i class="fa fa-times-circle-o"></i></botton>
+                                                            {/if}
+                                                        </td>
+                                                    </tr>
+                                                    {/foreach}
+                                                    {if !count($info['view_url'])}
+                                                    <tr>
+                                                        <th>章节/集</th>
+                                                        <td class="first-child">
+                                                            <input class="form-control form-control1 tits">
+                                                        </td>
+                                                        <th>URL</th>
+                                                        <td>
+                                                            <input class="form-control form-control1 urls">
+                                                        </td>
+                                                        <td>
+                                                            <botton onclick="addElem('.view-url')" class="btn btn-sm btn-success">
+                                                                <i class="fa fa-plus-circle"></i></botton>
+                                                        </td>
+                                                    </tr>
+                                                    {/if}
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-1 control-label ">内容简介
+                                                <span class="text-danger">&nbsp;</span></label>
+                                            <div class="col-md-9">
+                                                <textarea id="editor" style="width:100%;height:200px;">{$info.content}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-7 col-md-offset-1">
+                                                <button class="btn btn-primary submit" href="{:url('add')}" type="submit">提交</button>
+                                                <button class="btn btn-danger submit" type="reset">取消</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+    <!-- Footer -->
+    <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix">
+        <div class="pull-right">
+            Crafted with <i class="fa fa-heart text-city"></i> by
+            <a class="font-w600" href="//97langren.com" target="_blank">97langren.com</a>
+        </div>
+        <div class="pull-left">
+            <a class="font-w600" href="//97langren.com" target="_blank">OneUI 3.1</a> &copy;
+            <span class="js-year-copy"></span>
+        </div>
+    </footer>
+    <!-- END Footer -->
+</div>
+<!-- END Page Container -->
+{include file="footer"/}
+<script type="text/javascript" src="/static/js/plugins/jquery-tags-input/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/uploadify/api-uploadify.js"></script>
+<script type="text/javascript" src="/static/js/plugins/ueditor/1.4.3/umeditor.config.js"></script>
+<script type="text/javascript" src="/static/js/plugins/ueditor/1.4.3/ueditor.all.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="/static/js/plugins/layer/laydate/laydate.js"></script>
+<script type="application/javascript">
+    /***实例化ueditor*/
+    var ue = UE.getEditor('editor');
+    jQuery(function () {
+        App.initHelpers(["tags-inputs", 'ckeditor-inline']);
+    });
+
+    /**
+     * 以下是图片上传方法
+     */
+    // 上传商品图片成功回调函数
+    function call_back(fileurl_tmp) {
+        $("#thumb").val(fileurl_tmp);
+        $("#thumb2").attr('src', fileurl_tmp);
+    }
+
+    /**
+     * 上传之后删除组图input
+     * @access   public
+     * @val      string  删除的图片input
+     */
+    function ClearPicArr2(obj, path) {
+        $.ajax({
+            type   : 'GET',
+            url    : "{:url('/upload/delupload')}",
+            data   : {action: "del", filename: path},
+            success: function () {
+                $(obj).parent().remove(); // 删除完服务器的, 再删除 html上的图片
+            }
+        });
+        // 删除数据库记录
+        $.ajax({
+            type   : 'GET',
+            url    : "{:url('/article/del_goods_images')}",
+            data   : {filename: path},
+            success: function () {
+                //
+            }
+        });
+    }
+
+    var rules = {
+        title   : {
+            required: true
+        },
+        keywords: {
+            required: true
+        },
+        /* password : {
+             required: true
+         },
+         role_id  : {
+             required: true
+         },
+         email    : {
+             required: true
+         }*/
+    };
+    var messages = {
+        title   : {
+            required: "标题不能为空."
+        },
+        keywords: {
+            required: "关键词不能为空."
+        },
+        /* password : {
+             required: "密码不能为空."
+         },
+         role_id  : {
+             required: "角色不能为空."
+         },
+         email    : {
+             required: "邮箱不能为空."
+         }*/
+    };
+
+    formCheck(rules, messages);
+
+
+    function sub() {
+        var view_urls = {};
+        var obj2 = $('.view-url').find('tr');
+        for (var i = 0; i < obj2.length; i++) {
+            $(obj1[i]).find('.urls').val()
+            view_urls[i] = {'tit': $(obj2[i]).find('.tits').val(), 'url': $(obj2[i]).find('.urls').val()};
+        }
+
+        var data = {};
+        data['id'] = $('#id').val();
+        data['title'] = $('#title').val();
+        data['cat_id'] = $('#cat_id').val();
+        data['keywords'] = $('#keywords').val();
+        data['tag'] = $('#tag').val();
+        data['thumb'] = $('#thumb').val();
+        data['year'] = $('#year').val();
+        $.each($('.flag input:radio:checked'), function () {
+            data['flag'] = $(this).val();
+        });
+        data['click'] = $('#click').val();
+        data['good'] = $('#good').val();
+        data['bad'] = $('#bad').val();
+        data['author'] = $('#author').val();
+        view_urls ? data['view_url'] = view_urls : {};
+        data['content'] = ue.getContent();
+
+
+        console.log(data);
+
+        pageLoader();
+        jQuery.post("{:url($action)}", data).success(function (res) {
+            pageLoader('hide');
+            var msg = res.msg;
+            console.log(res);
+
+            if (res.code) {
+                if (res.url) {
+                    msg += "， 页面即将自动跳转~";
+                }
+                tips(msg, 'success');
+                setTimeout(function () {
+                    return res.url ? location.href = res.url : '';
+                }, 4000);
+            } else {
+                console.log(res);
+                tips(msg, 'danger');
+            }
+        }).fail(function () {
+            pageLoader('hide');
+            tips('服务器发生错误~', 'danger');
+            self.attr("autocomplete", "on").prop("disabled", false);
+        });
+    }
+
+    function addElem(t) {
+        var length = $(t+' tr').length +1;
+        $elem =
+            '<tr>' +
+            '<th>章节/集</th>' +
+            '<td class="first-child"><input class="form-control form-control1 tit" value="'+length+'"></td>' +
+            '<th>URL</th>' +
+            '<td><input class="form-control form-control1 url"></td>' +
+            '<td><botton onclick="rmElem(this)" class="btn btn-sm btn-danger"><i class="fa fa-times-circle-o"></i></botton></td>' +
+            '</tr>';
+        $(t).append($elem);
+    }
+
+    function rmElem(t) {
+        $(t).parent().parent().remove();
+    }
+</script>
+</body>
+</html>

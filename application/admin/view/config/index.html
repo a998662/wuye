@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<!--[if IE 9]>
+<html class="ie9 no-focus" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-focus" lang="en"> <!--<![endif]-->
+<head>
+    <link rel="stylesheet" href="/static/js/plugins/jquery-tags-input/jquery.tagsinput.css">
+    {include file="meta"/}
+</head>
+<body>
+<!-- Page Container -->
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+    <!-- Sidebar -->
+    {include file="sidebar"/}
+    <!-- END Sidebar -->
+
+    <!-- Header -->
+    {include file="header"/}
+    <!-- END Header -->
+
+    <!-- Main Container -->
+    <main id="main-container" style="min-height: 304px;">
+        <div class="bg-gray-lighter">
+            <ol class="breadcrumb">
+                {$breadcrumb|raw}
+            </ol>
+        </div>
+        <!-- END Page Header -->
+
+        <!-- Page Content -->
+        <div class="content animated">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <!--<div class="block-header bg-gray-lighter">
+                            <ul class="block-options">
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="refresh_toggle"
+                                            data-action-mode="demo"><i class="si si-refresh"></i></button>
+                                </li>
+                                <li>
+                                    <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i
+                                            class="si si-size-fullscreen"></i></button>
+                                </li>
+                            </ul>
+                            <h3 class="block-title">节点管理</h3>
+                        </div>-->
+                        <ul class="nav nav-tabs">
+
+                            <li class="{if $group == 'base'}active{/if}">
+                                <a href="{:url('/config/index/group/base')}">基本</a>
+                            </li>
+                            <li class="{if $group == 'system'}active{/if}">
+                                <a href="{:url('/config/index/group/system')}">系统</a>
+                            </li>
+                            <li class="{if $group == 'upload'}active{/if}">
+                                <a href="{:url('/config/index/group/upload')}">上传</a>
+                            </li>
+                            <li class="{if $group == 'database'}active{/if}">
+                                <a href="{:url('/config/index/group/database')}">数据库</a>
+                            </li>
+                            <li class="{if $group == 'email'}active{/if}">
+                                <a href="{:url('/config/index/group/email')}">邮箱</a>
+                            </li>
+                            <li class="{if $group == 'develop'}active{/if}">
+                                <a href="{:url('/config/index/group/develop')}">开发</a>
+                            </li>
+
+
+                            <li class="pull-right">
+                                <ul class="block-options push-10-t push-10-r">
+                                    <li>
+                                        <button type="button" data-toggle="block-option"
+                                                data-action="fullscreen_toggle"><i class="si si-size-fullscreen"></i>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button type="button" data-toggle="block-option" data-action="refresh_toggle"
+                                                data-action-mode="demo"><i class="si si-refresh"></i></button>
+                                    </li>
+                                    <li>
+                                        <button type="button" data-toggle="block-option" data-action="content_toggle"><i
+                                                class="si si-arrow-up"></i></button>
+                                    </li>
+                                    <li>
+                                        <button type="button" data-toggle="block-option" data-action="close"><i
+                                                class="si si-close"></i></button>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <div class="block-content tab-content">
+                            <div class="tab-pane active">
+                            {switch $group}
+                                {case base}{include file="config/base"}{/case}
+                                {case upload}{include file="config/upload"}{/case}
+                                {case database}{include file="config/database"}{/case}
+                                {case system}{include file="config/system"}{/case}
+                                {case email}{include file="config/email"}{/case}
+                                {case develop}{include file="config/develop"}{/case}
+                            {/switch}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Page Content -->
+    </main>
+    <!-- END Main Container -->
+    <!-- Footer -->
+    <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix">
+        <div class="pull-right">
+            Crafted with <i class="fa fa-heart text-city"></i> by <a class="font-w600" href="//97langren.com" target="_blank">97langren.com</a>
+        </div>
+        <div class="pull-left">
+            <a class="font-w600" href="//97langren.com" target="_blank">OneUI 3.1</a> &copy; <span class="js-year-copy"></span>
+        </div>
+    </footer>
+    <!-- END Footer -->
+</div>
+<!-- END Page Container -->
+
+
+{include file="footer"/}
+
+    <script type="text/javascript" src="/static/js/plugins/uploadify/api-uploadify.js"></script>
+    <script type="text/javascript" src="/static/js/plugins/jquery-tags-input/jquery.tagsinput.min.js"></script>
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript">
+
+    jQuery(function () {
+        App.initHelpers(["tags-inputs", 'ckeditor-inline']);
+    });
+
+    function set_link() {
+        $('#url').toggle();
+    }
+
+    /**
+     * 以下是图片上传方法
+     */
+    // 上传图片成功回调函数 upload_thumb_water_pic1
+    function call_back(fileurl_tmp) {
+        $("#web_site_logo").val(fileurl_tmp);
+        $("#web_site_logo1").attr('src', fileurl_tmp);
+    }
+    function call_back1(fileurl_tmp) {
+        $("#upload_thumb_water_pic").val(fileurl_tmp);
+        $("#upload_thumb_water_pic1").attr('src', fileurl_tmp);
+    }
+
+    // 上传商品相册回调函数
+    /*function call_back2(paths){
+     var  last_div = $(".goods_xc:last").prop("outerHTML");
+     for (i=0;i<paths.length ;i++ )
+     {
+     $(".goods_xc:eq(0)").before(last_div);	// 插入一个 新图片
+     $(".goods_xc:eq(0)").find('a:eq(0)').attr('href',paths[i]).attr('onclick','').attr('target', "_blank");// 修改他的链接地址
+     $(".goods_xc:eq(0)").find('img').attr('src',paths[i]);// 修改他的图片路径
+     $(".goods_xc:eq(0)").find('a:eq(1)').attr('onclick',"ClearPicArr2(this,'"+paths[i]+"')").text('删除');
+     $(".goods_xc:eq(0)").find('input').val(paths[i]); // 设置隐藏域 要提交的值
+     }
+     }*/
+    /**
+     * 上传之后删除组图input
+     * @access   public
+     * @val      string  删除的图片input
+     */
+    function ClearPicArr2(obj, path) {
+        $.ajax({
+            type: 'GET',
+            url: "{:url('/upload/delupload')}",
+            data: {action: "del", filename: path},
+            success: function () {
+                $(obj).parent().remove(); // 删除完服务器的, 再删除 html上的图片
+            }
+        });
+        // 删除数据库记录
+        $.ajax({
+            type: 'GET',
+            url: "{:url('/article/del_goods_images')}",
+            data: {filename: path},
+            success: function () {
+                //
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

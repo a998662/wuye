@@ -1,0 +1,229 @@
+.container .top {
+    color: #F00;
+}
+.containt a{
+    color: #fe4159;
+}
+.container .no {
+    color: #00F;
+    font-size: 20px;
+    text-align: left;
+    padding: 20px;
+}
+
+.container .p {
+    color: #00F;
+    font-size: 14px;
+    text-align: left;
+}
+
+.container .p1 {
+    color: #FF0000;
+    font-size: 14px;
+    text-align: left;
+}
+
+.container .aa {
+    color: #F00;
+}
+
+.container .no222 {
+    color: #FF0000;
+    font-size: 12px;
+}
+
+.container .error {}
+
+.container .error p strong {
+    color: #00F;
+}
+
+td {
+    padding: 20px;
+}
+
+@media (min-width:738px) {
+    .header {
+        width: 100%;
+        height: 45px;
+        line-height: 45px;
+        text-align: center;
+        font-size: 30px;
+        font-weight: 900;
+        margin: 15px 0 0 0;
+    }
+}
+
+.containt {}
+
+.text1 {
+    background: rgb(58, 58, 58);
+    /*width: 62vw;*/
+    margin: 2vw 3vw 0 3vw;
+    text-align: center;
+    min-height: 59px;
+    line-height: 59px;
+}
+
+.text1-header {
+    font-size: 22px;
+}
+
+.text1-body {
+    font-size: 18px;
+    text-decoration: underline;
+    margin-bottom: 1vw;
+}
+
+.text2 {
+    background: rgb(58, 58, 58);
+    /*width: 62vw;*/
+   margin: 2vw 3vw 0 3vw;
+    text-align: center;
+    min-height: 59px;
+    line-height: 59px;
+}
+
+.text2-header {
+    font-size: 22px;
+}
+
+.text2-body {
+    font-size: 18px;
+    margin-bottom: 1vw;
+}
+
+.text2-body img {
+    width: 60%;
+    height: auto;
+    /* margin-bottom: 1vw; */
+}
+
+.text3 {
+    background: rgb(58, 58, 58);
+    /*width: 62vw;*/
+   margin: 2vw 3vw 0 3vw;
+    text-align: center;
+    min-height: 59px;
+    line-height: 59px;
+}
+
+.text3-header {
+    font-size: 22px;
+}
+
+.text3-body {
+    font-size: 18px;
+    margin-bottom: 1vw;
+}
+
+.text3-header img {
+    width: 60%;
+    height: auto;
+    margin: 0 0 2vw 0%;
+}
+
+.text4 {
+    background: rgb(58, 58, 58);
+    /*width: 62vw;*/
+   margin: 2vw 3vw 0 3vw;
+    text-align: center;
+    min-height: 59px;
+    line-height: 29px;
+    padding: 0 0 0 10px;
+    color: rgb(180, 176, 73);
+}
+
+.center {
+    /* color: white; */
+    font-size: 16px;
+    width: 90%;
+    text-align: center;
+    margin: 0 5% 0 5%;
+}
+
+.no22 {
+    padding: 0 5% 0 5%;
+}
+
+@media (max-width:738px) {
+    body {
+        margin: 0px;
+    }
+    .center {
+        font-size: 12px;
+    }
+    .header {
+        min-height: 25px;
+        line-height: 20px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 900;
+        padding: 0 5% 0 5%;
+    }
+    .text2 {
+        background: rgb(58, 58, 58);
+        /*width: 90vw;*/
+        margin: 2vw 3vw 0 3vw;
+        text-align: center;
+        min-height: 20px;
+        line-height: 20px;
+    }
+    .text2-header {
+        font-size: 14px;
+        padding: 1vw 0 1vw 0;
+        color: #fe4159;
+    }
+    .text3 {
+        background: rgb(58, 58, 58);
+        /*width: 90vw;*/
+        margin: 2vw 3vw 0 3vw;
+        text-align: center;
+        min-height: 20px;
+        line-height: 20px;
+    }
+    .text3-header {
+        font-size: 12px;
+    }
+    .text2-body img {
+        width: 100%;
+        height: auto;
+        /* margin-bottom: 1vw; */
+    }
+    .text3-header img {
+        width: 100%;
+        height: auto;
+        margin: 0 0 2vw 0%;
+    }
+    .text1 {
+        background: rgb(58, 58, 58);
+        /*width: 90vw;*/
+        margin: 2vw 3vw 0 3vw;
+        text-align: center;
+        min-height: 29px;
+        line-height: 29px;
+        padding: 1vw 0 1vw 0;
+    }
+    .text1-header {
+        font-size: 12px;
+    }
+    .text1-body {
+        font-size: 14px;
+        text-decoration: underline;
+        margin-bottom: 1vw;
+    }
+    .text4 {
+        padding: 2vw 5% 2vw 5%;
+        background: rgb(58, 58, 58);
+        /*width: 80vw;*/
+        margin: 2vw 3vw 0 3vw;
+        text-align: center;
+        min-height: 29px;
+        line-height: 19px;
+        text-align: left;
+    }
+    .no22 {
+        padding: 0 5% 0 5%;
+        line-height: 20px;
+    }
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {include file="meta"/}
+    <script>var id = '{$id}', alias = '{$alias}';</script>
+</head>
+<body><!--百度熊掌号改造-->
+{include file="header"/}
+<div class="container main">
+    <div class="row">
+        <div class="col-md-9 col-sm-12 hy-main-content">
+            <div class="hy-video-details clearfix">
+                <div class="item clearfix">
+                    <dl class="content">
+                        <dt>
+                            <a class="videopic lazy" href="javascript:;" title="{$title}" style="background: url({$thumb})  no-repeat; background-position:50% 50%; background-size: cover;" data-original="{$thumb}" >
+                                </span><span class="note textbg">{$tags}</span>
+                            </a>
+                        </dt>
+                        <dd class="clearfix">
+                            <div class="head">
+                                <h3>{$title}</h3></div>
+                            <div class="score"><!--<script type="text/javascript">markVideo(16,0,0,0,10,1);markVideo2(16,1,10);</script>-->
+                                <div class="star"><span class="star-cur" id="score"></span></div>
+                                <span class="branch">{:number_format($score,1)}</span>
+                                <script type="text/javascript">
+                                    var str                                      = "{:number_format($score,1)}%"
+                                    document.getElementById("score").style.width = (str.replace(".", ""))
+                                </script>
+                            </div>
+                            <ul>
+                                <li class="">
+                                    <span class="text-muted">类型：</span><a href="/{$alias}/list-{$tags}}.html" title="{$tags}">{$tags}</a>
+                                </li>
+                                <li class=""><span class="text-muted">时间：</span>{:date('Y-m-d H:i:s',$insert_time)}</li>
+                                <li class="pull-bottom">
+                                    <a class="btn btn-sm btn-default clickGood" href="javascript:;">
+                                        <i class="icon iconfont icon-agree"></i> 点赞
+                                    </a>
+                                    <a class="btn btn-sm btn-default addFav {$active}" href="javascript:;">
+                                        <i class="icon iconfont icon-collection"></i> 收藏</a>
+                                    <a class="btn btn-sm btn-default btn-share" href="javascript:;">
+                                        <i class="icon iconfont icon-share"></i> 分享</a>
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+            </div><!-- 内容相关提示begin -->
+            <div class="hy-layout active clearfix">
+                <div class="hy-switch-tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#list1" data-toggle="tab" title="图片列表"><i class="icon iconfont icon-cion3"></i> 图片列表</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+
+                    <style>
+                        .playlist {
+                            text-align: center;
+                        }
+
+                        .playlist img {
+                            margin: 5px auto;
+                        }
+                    </style>
+                    <div class="hy-play-list tab-pane fade in active" id="list1">
+                        <div class="item tyui" id="playlist">
+                            <div class="panel clearfix">
+                                <div id="playlist4" class="playlist collapse in">
+                                    {foreach $content as $v}
+                                    <img src="/home/load.png" style="width: 100%;height: 100%" title="{$title} {$i+1}}" originalSrc="{$v}">
+                                    {/foreach}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--相关-->
+
+
+            <div class="hy-layout clearfix">
+                <div class="hy-video-head"><h3 class="margin-0"><i class="icon iconfont icon-comment text-color"></i>影片评论
+                </h3></div>
+                <div id="comment_list"></div>
+            </div><!--end 评论-->
+        </div>
+        {include file="right"/}
+    </div>
+</div>
+</div>
+
+{include file="footer" /}
+<script src="/home/js/lyz.delayLoading.min.js" type="text/javascript"></script>
+<script>
+    var vid = {$id};
+    $(function () {
+        $.post(api_host+'/api/comments',{id:vid},function (res) {
+            $('#comment_list').html(res);
+        })
+    })
+    $(function () {
+        $("img").delayLoading({
+            defaultImg: "/home/load.png",           // 预加载前显示的图片
+            errorImg  : "/home/load.png",                        // 读取图片错误时替换图片(默认：与defaultImg一样)
+            imgSrcAttr: "originalSrc",           // 记录图片路径的属性(默认：originalSrc，页面img的src属性也要替换为originalSrc)
+            beforehand: 0,                       // 预先提前多少像素加载图片(默认：0)
+            event     : "scroll",                     // 触发加载图片事件(默认：scroll)
+            duration  : "normal",                  // 三种预定淡出(入)速度之一的字符串("slow", "normal", or "fast")或表示动画时长的毫秒数值(如：1000),默认:"normal"
+            container : window,                   // 对象加载的位置容器(默认：window)
+            success   : function (imgObj) {
+            },      // 加载图片成功后的回调函数(默认：不执行任何操作)
+            error     : function (imgObj) {
+            }         // 加载图片失败后的回调函数(默认：不执行任何操作)
+        });
+    });
+</script>
+
+</body>
+</html>

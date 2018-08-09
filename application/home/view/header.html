@@ -1,0 +1,41 @@
+<div class="hy-head-menu navbar-fixed-top">
+    <div class="header-long">
+        <div class="header-long-left"> 今日域名:
+            <font id="host" style="color:#fe4159"></font>
+            <script>var host = document.domain.replace('www.','');$('#host').html(host)</script>
+        </div>
+        <div class="header-long-right">
+            <div class="header-long-right-text">
+                现在就凑齐100个域名吧，即可召唤狼人 现在就凑齐100个域名吧，即可召唤狼人 现在就凑齐100个域名吧，即可召唤狼人 现在就凑齐100个域名吧，即可召唤狼人
+            </div>
+            <div class="header-long-right-text">
+                现在就凑齐100个域名吧，即可召唤狼人 现在就凑齐100个域名吧，即可召唤狼人 现在就凑齐100个域名吧，即可召唤狼人 现在就凑齐100个域名吧，即可召唤狼人
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="item">
+                <div class="logo hidden-xs">
+                    <a class="hidden-sm hidden-xs" href="/"><img src="/logo.png"><font id="this-host"></font></a>
+                </div>
+                <div class="search col-md-12 col-sm-12 col-xs-12 ">
+                    <form name="formsearch" id="formsearch" action='/search.html' method="get" autocomplete="off">
+                        <input class="form-control" placeholder="请输入标题" name="kw" type="text" id="keyword" value="{$kw}" required="">
+                        <input type="submit" id="searchbutton" value="" class="hide">
+                        <a href="javascript:" class="btns" title="搜索" onClick="checkwd()"><i class="icon iconfont icon-search"></i></a>
+                    </form>
+                    <span class="btn btn-sm visible-xs back-btn" style="position:absolute;right:10px;top:2px; padding: 6px 10px;background: #444"><a href="javascript:history.back(-1);" title="返回上一页">返回</a></span>
+                </div>
+                <ul class="menulist hidden-xs">
+                    <li><a class="{if 'index' == $alias}active{/if}" href="/">首页</a></li>
+                    {foreach $channel as $v}
+                    <li><a class="{if $v.alias == $alias}active{/if}" href="/{$v.alias}/list.html">{$v.name}</a></li>
+                    {/foreach}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div><!--main-->
+<div id="ad_div" class="header-top-a-img container main">
+</div>

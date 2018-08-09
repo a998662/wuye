@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {include file="meta" /}
+</head>
+<body><!--百度熊掌号改造-->
+{include file="header"/}
+<div class="container main">
+    <div class="row">
+        <div class="hy-login reg">
+            <div class="head"><h3 class="text-center">
+                <a href="/"><img src="https://10rrbb.com/logo.png"/></a></h3>
+                <p class="text-muted text-center">用户注册</p></div>
+            <ul>
+                <form id="f_Activation" action="" method="post">
+                    <li><input type="input" name="username" class="form-control username" placeholder="邮箱"/></li>
+                    <li><input type="text" name="nickname" class="form-control nickname" placeholder="昵称长度为2~6个汉字"/>
+                    </li>
+                    <li><input type="password" name="password" class="form-control password" placeholder="密码"/></li>
+                    <li><input type="password" name="repassword" class="form-control repassword" placeholder="确认密码"/>
+                    </li>
+                    <!--<li>
+                        <font id="tt_code" onclick="re_code()"></font>
+                        <input name="verify" type="text" placeholder="验证码" class="form-control verify"/>
+                    </li>-->
+                    <li>
+                        <button type="submit" class="btn btn-block btn-warning">注册</button>
+                    </li>
+                    <li class="text-center"><a class="text-muted a-link" href="javascript:;">已有账号，直接登录？</a></li>
+                </form>
+            </ul>
+        </div>
+    </div>
+</div>
+{include file="footer" /}
+
+<script>
+    var ref = getQueryString('ref');
+    $('.a-link').click(function () {
+        location.href = '/user/login.html?ref=' + ref;
+    })
+    //提交注册
+    $('#f_Activation').submit(function () {
+        var data = {
+            username  : $('.username').val(),
+            nickname  : $('.nickname').val(),
+            password  : $('.password').val(),
+            repassword: $('.repassword').val(),
+            ref       : ref,
+        };
+
+        $.post(api_host + '/api/register', data, function (res) {
+            if (res.code == 0) {
+                layer.open({
+                    content: res.msg
+                    , btn  : '我知道了'
+                });
+                $('.verify').val('');
+                re_code();
+            } else {
+                location.href = res.href ? res.href : '/'
+            }
+        }, 'json')
+        return false;
+    })
+</script>
+</body>
+</html>

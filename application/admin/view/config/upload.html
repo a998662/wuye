@@ -1,0 +1,180 @@
+<form class="form-builder row" name="form-builder"
+      action="{:url('/config/index',['group'=>'upload'])}"
+      method="post">
+
+    <div class="form-group col-md-12 col-xs-12 " id="form_group_upload_file_size">
+        <label class="col-xs-12" for="upload_file_size">文件上传大小限制</label>
+        <div class="col-sm-12">
+
+            <input class="form-control" type="text" id="upload_file_size"
+                   name="upload_file_size" value="{:config('upload_file_size')}" placeholder="请输入文件上传大小限制">
+
+            <div class="help-block">0为不限制大小，单位：kb</div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-xs-12 " id="form_group_upload_file_ext">
+        <label class="col-xs-12" for="upload_file_ext">允许上传的文件后缀</label>
+        <div class="col-xs-12">
+            <input class="js-tags-input form-control" type="text" id="upload_file_ext" placeholder="添加标签" name="upload_file_ext" value="{:implode(',',config('upload_file_ext'))}" data-default="添加标签">
+            <div class="help-block">多个后缀用逗号隔开，不填写则不限制类型</div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-xs-12 " id="form_group_upload_image_size">
+        <label class="col-xs-12" for="upload_image_size">图片上传大小限制</label>
+        <div class="col-sm-12">
+
+            <input class="form-control" type="text" id="upload_image_size"
+                   name="upload_image_size" value="{:config('upload_image_size')}" placeholder="请输入图片上传大小限制">
+
+            <div class="help-block">0为不限制大小，单位：kb</div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-xs-12 " id="form_group_upload_image_ext">
+        <label class="col-xs-12" for="upload_image_ext">允许上传的图片后缀</label>
+        <div class="col-xs-12">
+            <input class="js-tags-input form-control" type="text" id="upload_image_ext" placeholder="添加标签" name="upload_image_ext" value="{:implode(',',config('upload_image_ext'))}">
+
+            <div class="help-block">多个后缀用逗号隔开，不填写则不限制类型</div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-xs-12 " id="form_group_upload_image_thumb">
+        <label class="col-xs-12" for="upload_image_thumb">缩略图尺寸</label>
+        <div class="col-sm-12">
+
+            <input class="form-control" type="text" id="upload_image_thumb"
+                   name="upload_image_thumb" value="{:config('upload_image_thumb')}" placeholder="请输入缩略图尺寸">
+
+            <div class="help-block">不填写则不生成缩略图，如需生成 <code>300x300</code> 的缩略图，则填写 <code>300,300</code>
+                ，请注意，逗号必须是英文逗号
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-xs-12 "
+         id="form_group_upload_image_thumb_type">
+        <label class="col-xs-12">缩略图裁剪类型</label>
+        <div class="col-xs-12">
+            <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                <input type="radio" name="upload_image_thumb_type"
+                       id="upload_image_thumb_type1" value="1" {if config('upload_image_thumb_type') == 1 }checked{/if}>
+                <span></span> 等比例缩放 </label>
+            <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                <input type="radio" name="upload_image_thumb_type"
+                       id="upload_image_thumb_type2" value="2" {if config('upload_image_thumb_type') == 2 }checked{/if}>
+                <span></span> 缩放后填充 </label>
+            <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                <input type="radio" name="upload_image_thumb_type"
+                       id="upload_image_thumb_type3" value="3" {if config('upload_image_thumb_type') == 3 }checked{/if}>
+                <span></span> 居中裁剪 </label>
+            <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                <input type="radio" name="upload_image_thumb_type"
+                       id="upload_image_thumb_type4" value="4" {if config('upload_image_thumb_type') == 4 }checked{/if}>
+                <span></span> 左上角裁剪 </label>
+            <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                <input type="radio" name="upload_image_thumb_type"
+                       id="upload_image_thumb_type5" value="5" {if config('upload_image_thumb_type') == 5 }checked{/if}>
+                <span></span> 右下角裁剪 </label>
+            <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                <input type="radio" name="upload_image_thumb_type"
+                       id="upload_image_thumb_type6" value="6" {if config('upload_image_thumb_type') == 6 }checked{/if}>
+                <span></span> 固定尺寸缩放 </label>
+            <div class="help-block">该项配置只有在启用生成缩略图时才生效</div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-xs-12 " id="form_group_upload_thumb_water">
+        <label class="col-xs-12" for="upload_thumb_water">添加水印</label>
+        <div class="col-sm-12">
+            <label class="css-input switch switch-sm switch-primary switch-rounded " title="开启/关闭">
+                <input type="checkbox" name="upload_thumb_water" id="upload_thumb_water" {if config('upload_thumb_water')}checked{/if}><span></span>
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-xs-12 " id="form_group_upload_thumb_water_pic">
+        <label class="col-xs-12" for="upload_thumb_water_pic">水印图片</label>
+        <div class="col-xs-12 js-upload-image">
+            <div onclick="GetUploadify(1,'website','call_back1');" style="width:100px; text-align:center; margin: 5px; display:inline-block;"
+                 class="goods_xc">
+                <button style="width:100px;" type="button" class="btn btn-primary upload-btn">
+                    <i class="Hui-iconfont Hui-iconfont-upload"></i>上传图片
+                </button>
+                <input type="hidden" value="" id="upload_thumb_water_pic" name="upload_thumb_water_pic">
+                <a onclick="" href="javascript:;">
+                    <img id="upload_thumb_water_pic1" style="border: 1px solid" width="100" height="50" src="{:config('upload_thumb_water_pic') ?: '/static/img/favicons/apple-touch-icon-144x144.png'}">
+                </a>
+                <!--<span class="c-red">（规格300*200）</span>-->
+            </div>
+            <div class="help-block">只有开启水印功能才生效</div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-xs-12 "
+         id="form_group_upload_thumb_water_position">
+        <label class="col-xs-12">水印位置</label>
+        <div class="col-xs-12">
+            <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                <input type="radio" name="upload_thumb_water_position"
+                       id="upload_thumb_water_position1" value="1" {if config('upload_thumb_water_position') == 1 }checked{/if}>
+                <span></span> 左上角 </label>
+            <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                <input type="radio" name="upload_thumb_water_position"
+                       id="upload_thumb_water_position2" value="2" {if config('upload_thumb_water_position') == 2 }checked{/if}>
+                <span></span> 上居中 </label>
+            <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                <input type="radio" name="upload_thumb_water_position"
+                       id="upload_thumb_water_position3" value="3" {if config('upload_thumb_water_position') == 3 }checked{/if}>
+                <span></span> 右上角 </label>
+            <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                <input type="radio" name="upload_thumb_water_position"
+                       id="upload_thumb_water_position4" value="4" {if config('upload_thumb_water_position') == 4 }checked{/if}>
+                <span></span> 左居中 </label>
+            <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                <input type="radio" name="upload_thumb_water_position"
+                       id="upload_thumb_water_position5" value="5" {if config('upload_thumb_water_position') == 5 }checked{/if}>
+                <span></span> 居中 </label>
+            <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                <input type="radio" name="upload_thumb_water_position"
+                       id="upload_thumb_water_position6" value="6" {if config('upload_thumb_water_position') == 6 }checked{/if}>
+                <span></span> 右居中 </label>
+            <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                <input type="radio" name="upload_thumb_water_position"
+                       id="upload_thumb_water_position7" value="7" {if config('upload_thumb_water_position') == 7 }checked{/if}>
+                <span></span> 左下角 </label>
+            <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                <input type="radio" name="upload_thumb_water_position"
+                       id="upload_thumb_water_position8" value="8" {if config('upload_thumb_water_position') == 8 }checked{/if}>
+                <span></span> 下居中 </label>
+            <label class="css-input css-radio css-radio-primary css-radio-sm push-10-r  ">
+                <input type="radio" name="upload_thumb_water_position"
+                       id="upload_thumb_water_position9" value="9" {if config('upload_thumb_water_position') == 9 }checked{/if}>
+                <span></span> 右下角 </label>
+            <div class="help-block">只有开启水印功能才生效</div>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12 col-xs-12 "
+         id="form_group_upload_thumb_water_alpha">
+        <label class="col-xs-12" for="upload_thumb_water_alpha">水印透明度</label>
+        <div class="col-sm-12">
+            <input class="form-control" type="text" id="upload_thumb_water_alpha" name="upload_thumb_water_alpha" value="{:config('upload_thumb_water_alpha')}" placeholder="请输入水印透明度">
+            <div class="help-block">请输入0~100之间的数字，数字越小，透明度越高</div>
+        </div>
+    </div>
+    <div class="form-group col-md-12 col-xs-12">
+        <div class="col-xs-12">
+            <button class="btn btn-minw btn-primary ajax-post"
+                    target-form="form-builder" type="submit">
+                提交
+            </button>
+            <button class="btn btn-default" type="button"
+                    onclick="javascript:history.back(-1);return false;">
+                返回
+            </button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    {include file="meta" /}
+</head>
+<body class="apptop"><!--百度熊掌号改造-->
+{include file="header"/}
+<div class="container main">
+    <div class="row">
+        <div class="hy-layout clearfix" style="margin-top: 10px;">
+            <div class="hy-switch-tabs active clearfix">
+                <span class="text-muted pull-right hidden-xs">
+                    共有<span class="text-color">“{$list->total()}”</span>条数据,当前第<span class="text-color">“{$list->currentPage()}”</span>页
+                </span>
+                <ul class="nav nav-tabs">
+                    <li class="{$order == 'insert_time' ?= 'active'}">
+                        <a href="/mp3list/{$id}-insert_time.html" title="按时间">按时间</a>
+                    </li>
+                    <li class="{$order == 'play' ?= 'active'}">
+                        <a href="/mp3list/{$id}-play.html" title="按人气">按人气</a>
+                    </li>
+                    <li class="{$order == 'score' ?= 'active'}">
+                        <a href="/mp3list/{$id}-score.html" title="按评分">按评分</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="hy-video-list">
+                <div class="item">
+                    <ul class="clearfix">
+                        {foreach $list as $v}
+                        <li class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="title">
+                                <h5 class="text-overflow" title="{$v.title}">
+                                    <span class="pull-right text-color">{:number_format($v.score,1)}</span>
+                                    <a target="_self" href="/{$v.channel}/{$v.id}.html">{$v.title}</a>
+                                </h5>
+                            </div>
+                        </li>
+                        {/foreach}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hy-page clearfix">
+                {$list->render()|raw}
+            </div>
+        </div>
+    </div>
+</div>
+<!--<script type="text/javascript">
+    var w = document.documentElement ? document.documentElement.clientWidth : document.body.clientWidth;
+    if (w > 640) {
+        $(".collapse").addClass("in");
+    }
+</script>-->
+{include file="footer" /}
+</body>
+</html>

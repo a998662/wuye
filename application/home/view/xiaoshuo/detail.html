@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <script>var id = '{$id}', alias = '{$alias}';</script>
+    {include file="meta"/}
+</head>
+<body><!--百度熊掌号改造-->
+ {include file="header"/}
+<div class="container main">
+    <div class="row">
+        <div class="col-md-9 col-sm-12 hy-main-content">
+            <div class="hy-video-details clearfix">
+                <div class="item clearfix">
+                    <dl class="content">
+                        <dt>
+                            <a class="videopic" href="javascript:;" title="{$title}" style="background: url(/home/img/1.jpg)  no-repeat; background-position:50% 50%; background-size: cover;">
+                                </span><span class="note textbg">{$tags}</span>
+                            </a>
+                        </dt>
+                        <dd class="clearfix">
+                            <div class="head">
+                                <h3>{$title}</h3></div>
+                            <div class="score"><!--<script type="text/javascript">markVideo(16,0,0,0,10,1);markVideo2(16,1,10);</script>-->
+                                <div class="star"><span class="star-cur" id="score"></span></div>
+                                <span class="branch">{:number_format($score,1)}</span>
+                                <script type="text/javascript">
+                                    var str = "{:number_format($score,1)}%"
+                                    document.getElementById("score").style.width = (str.replace(".", ""))
+                                </script>
+                            </div>
+                            <ul>
+                                <li class="">
+                                    <span class="text-muted">类型：</span><a href="/{$alias}/list-{$tags}}.html" title="{$tags}">{$tags}</a>
+                                </li>
+                                <li class=""><span class="text-muted">时间：</span>{:date('Y-m-d H:i:s',$insert_time)}</li>
+                                <li class="pull-bottom">
+                                    <a class="btn btn-sm btn-default clickGood" href="javascript:;">
+                                        <i class="icon iconfont icon-agree"></i> 点赞
+                                    </a>
+                                    <a class="btn btn-sm btn-default addFav {$active}" href="javascript:;"> <i class="icon iconfont icon-collection"></i> 收藏</a>
+                                    <a class="btn btn-sm btn-default btn-share" href="javascript:;"> <i class="icon iconfont icon-share"></i> 分享</a>
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </div>
+            </div><!-- 内容相关提示begin -->
+            <div class="hy-layout active clearfix">
+                <div class="hy-switch-tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#list1" data-toggle="tab" title="图片列表"><i class="icon iconfont icon-cion3"></i> 文章内容</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="hy-play-list tab-pane fade in active" id="list1">
+                        <div class="item tyui" id="playlist">
+                            <div class="panel clearfix">
+                                <div id="playlist4" class="playlist collapse in">
+                                    <h1 style="margin-top: 10px">{$title}</h1>
+                                    {$content|raw}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--相关-->
+
+
+            <!--评论-->
+            <div class="hy-layout clearfix">
+                <div class="hy-video-head"><h3 class="margin-0"><i class="icon iconfont icon-comment text-color"></i>影片评论</h3></div>
+                <div id="comment_list"></div>
+            </div><!--end 评论-->
+        </div>
+        {include file="right"  /}
+    </div>
+</div>
+</div>
+<script src="/home/js/jquery.min.js"></script>
+<script>
+    var vid = {$id};
+    $(function () {
+        $.post(api_host+'/api/comments',{id:vid},function (res) {
+            $('#comment_list').html(res);
+        })
+    })
+</script>
+{include file="footer" /}
+</body>
+</html>
